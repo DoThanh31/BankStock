@@ -1,0 +1,42 @@
+# .NET build
+bin/
+obj/
+*.user
+*.suo
+*.userprefs
+.vs/
+.vscode/
+.idea/
+*.log
+
+# Packages / publish
+packages/
+publish/
+*.nupkg
+
+# Secrets & local config
+appsettings.Production.json
+appsettings.Local.json
+secrets.json
+.env
+*.pfx
+
+# Local database
+*.mdf
+*.ldf
+*.db
+*.db-shm
+*.db-wal
+
+# Front-end
+node_modules/
+wwwroot/lib/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# AI guidance - khong day len GitHub
+.agents/
+docs/
+README.md
