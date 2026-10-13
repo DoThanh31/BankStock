@@ -1,0 +1,14 @@
+@model (int TotalCount, int First, int Last, bool HasFilters)
+@* Dòng tóm tắt đầu bảng: "Hiển thị x–y / z" và nhãn đang lọc. *@
+<div class="stock-card-header">
+    <div class="small text-secondary">
+        @if (Model.TotalCount > 0)
+        {
+            @Localizer["ShowingRange", Model.First, Model.Last, Model.TotalCount]
+        }
+    </div>
+    @if (Model.HasFilters)
+    {
+        <span class="badge bg-primary-subtle text-primary-emphasis"><i class="bi bi-funnel-fill me-1"></i>@Localizer["FiltersActive"]</span>
+    }
+</div>

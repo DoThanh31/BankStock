@@ -1,0 +1,55 @@
+@model PagedListViewModel<WalletListItem, PagedListQuery>
+@{
+    var items = Model.Items;
+}
+
+<div class="stock-card">
+    <partial name="_ListHeader" model="@((items.TotalCount, items.FirstItemNumber, items.LastItemNumber, Model.Query.HasFilters))" />
+
+    <div class="table-responsive">
+        <table class="fintech-table">
+            <thead>
+                <tr>
+                    <th class="ps-3">@Localizer["AdminInvestor"]</th>
+                    <th class="text-end">@Localizer["AdminCashBalance"]</th>
+                    <th class="text-end d-none d-md-table-cell">@Localizer["AdminBlockedBalance"]</th>
+                    <th class="text-end">@Localizer["AdminWalletTotal"]</th>
+                    <th class="text-center d-none d-lg-table-cell">@Localizer["AdminTxCount"]</th>
+                    <th class="d-none d-lg-table-cell">@Localizer["AdminLastUpdated"]</th>
+                    <th class="text-end pe-3">@Localizer["ThAction"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var wallet in items.Items)
+                {
+                    <tr>
+                        <td class="ps-3">
+                            <div class="fw-semibold">@wallet.FullName</div>
+                            <div class="small text-secondary">@wallet.Email</div>
+                        </td>
+                        <td class="text-end stock-num">@wallet.Balance.ToString("N0")</td>
+                        <td class="text-end stock-num text-secondary d-none d-md-table-cell">@wallet.BlockedBalance.ToString("N0")</td>
+                        <td class="text-end stock-num fw-bold">@wallet.Total.ToString("N0")</td>
+                        <td class="text-center stock-num d-none d-lg-table-cell">@wallet.TransactionCount</td>
+                        <td class="small text-secondary d-none d-lg-table-cell">@wallet.LastUpdatedAt.ToLocalTime().ToString("g")</td>
+                        <td class="text-end pe-3">
+                            <button type="button" class="btn btn-outline-primary btn-sm py-0 px-2" title="@Localizer["AdminViewTransactions"]"
+                                    data-modal-url="@Url.Action("Transactions", new { id = wallet.WalletId })">
+                                <i class="bi bi-list-ul"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+                @if (items.TotalCount == 0)
+                {
+                    <partial name="_EmptyRow" model="7" />
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 px-3 py-3">
+        <span class="small text-secondary">@Localizer["AdminUnitVnd"]</span>
+        <partial name="_Pagination" model="@(new PagerViewModel(items.PageIndex, items.TotalPages, page => Url.Action("Index", Model.Query.ToRouteValues(page))))" />
+    </div>
+</div>

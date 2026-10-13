@@ -1,0 +1,8 @@
+@model int
+@* Dòng thông báo khi danh sách rỗng; model = số cột của bảng. *@
+<tr>
+    <td colspan="@Model" class="text-center py-4 text-muted">
+        <i class="bi bi-inbox fs-3 d-block mb-2"></i>
+        @Localizer["AdminNoData"]
+    </td>
+</tr>

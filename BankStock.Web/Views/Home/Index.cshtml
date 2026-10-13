@@ -1,0 +1,222 @@
+@model BankStock.Web.ViewModels.HomeIndexViewModel
+@{
+    ViewData["Title"] = Localizer["StockBoardTitle"];
+}
+
+<!-- Market Overview Ticker Bar -->
+<div class="market-ticker-bar">
+    <div class="row g-3 align-items-center">
+        <!-- VN-Bank Index -->
+        <div class="col-xl-3 col-lg-4 col-sm-6 col-12 border-end-sm">
+            <div class="ticker-item">
+                <span class="ticker-label"><i class="bi bi-graph-up me-1"></i>@Localizer["BankIndex"] <span class="fw-normal text-secondary font-monospace" style="font-size: 0.72rem; text-transform: none;">@Localizer["SimulatedLabel"]</span></span>
+                <div class="d-flex align-items-baseline gap-2">
+                    <span class="ticker-value @Model.MarketOverview.IndexStatusClass">@Model.MarketOverview.BankIndex.ToString("N2")</span>
+                    <span class="small fw-semibold @Model.MarketOverview.IndexStatusClass num-font">@Model.MarketOverview.IndexChangeDisplay</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Volume -->
+        <div class="col-xl-3 col-lg-4 col-sm-6 col-12 border-end-lg">
+            <div class="ticker-item">
+                <span class="ticker-label"><i class="bi bi-bar-chart-fill me-1"></i>@Localizer["TotalTradingVolume"]</span>
+                <div class="d-flex align-items-baseline gap-1">
+                    <span class="ticker-value text-primary-emphasis">@Model.MarketOverview.TotalVolume.ToString("N0")</span>
+                    <span class="small text-secondary">@Localizer["SharesUnit"]</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Market Breadth (Gainers, Losers, Ceilings, Floors, Ref) -->
+        <div class="col-xl-6 col-lg-4 col-12">
+            <span class="ticker-label d-block mb-2">@Localizer["MarketOverview"] (@Model.MarketOverview.TotalListedStocks @Localizer["ActiveStocksCount"])</span>
+            <div class="d-flex flex-wrap align-items-center gap-2">
+                <span class="badge badge-ceil px-2 py-1 rounded-pill num-font">
+                    <i class="bi bi-arrow-up-circle-fill me-1"></i>@Model.MarketOverview.CeilingCount @Localizer["CeilingCount"]
+                </span>
+                <span class="badge badge-up px-2 py-1 rounded-pill num-font">
+                    <i class="bi bi-arrow-up me-1"></i>@Model.MarketOverview.GainersCount @Localizer["GainersCount"]
+                </span>
+                <span class="badge badge-ref px-2 py-1 rounded-pill num-font">
+                    <i class="bi bi-dash me-1"></i>@Model.MarketOverview.UnchangedCount @Localizer["UnchangedCount"]
+                </span>
+                <span class="badge badge-down px-2 py-1 rounded-pill num-font">
+                    <i class="bi bi-arrow-down me-1"></i>@Model.MarketOverview.LosersCount @Localizer["LosersCount"]
+                </span>
+                <span class="badge badge-floor px-2 py-1 rounded-pill num-font">
+                    <i class="bi bi-arrow-down-circle-fill me-1"></i>@Model.MarketOverview.FloorCount @Localizer["FloorCount"]
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Price Board Card -->
+<div class="stock-card">
+    <div class="stock-card-header">
+        <div>
+            <h5 class="fw-bold mb-1">
+                <i class="bi bi-table text-primary me-2"></i>@Localizer["StockBoardTitle"]
+            </h5>
+            <p class="text-secondary small mb-0">@Localizer["StockBoardSubtitle"]</p>
+        </div>
+
+        <!-- Toolbar: Filters and Search -->
+        <div class="d-flex flex-wrap align-items-center gap-2">
+            <!-- Bank Group Filter -->
+            <div class="btn-group filter-btn-group" role="group">
+                <button type="button" class="btn btn-outline-secondary active" data-group-filter="all">@Localizer["FilterAll"]</button>
+                <button type="button" class="btn btn-outline-secondary" data-group-filter="Big4">@Localizer["FilterBig4"]</button>
+                <button type="button" class="btn btn-outline-secondary" data-group-filter="PrivateJSC">@Localizer["FilterPrivate"]</button>
+            </div>
+
+            <!-- Search Input -->
+            <div class="position-relative">
+                <input type="text" id="stockSearchInput" class="fintech-search-input" placeholder="@Localizer["SearchPlaceholder"]" style="min-width: 250px;" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Responsive Table -->
+    <div class="table-responsive">
+        <table class="fintech-table" id="stockBoardTable">
+            <thead>
+                <tr>
+                    <th class="ps-3">@Localizer["ThStockCode"]</th>
+                    <th>@Localizer["ThBankName"]</th>
+                    <th>@Localizer["ThExchange"]</th>
+                    <th class="text-end stock-ref">@Localizer["ThRef"]</th>
+                    <th class="text-end stock-ceil">@Localizer["ThCeiling"]</th>
+                    <th class="text-end stock-floor">@Localizer["ThFloor"]</th>
+                    <th class="text-end">@Localizer["ThMatchPrice"]</th>
+                    <th class="text-end">@Localizer["ThChange"]</th>
+                    <th class="text-end">@Localizer["ThChangePercent"]</th>
+                    <th class="text-end">@Localizer["ThVolume"]</th>
+                    <th class="text-end d-none d-md-table-cell">@Localizer["ThHigh"]</th>
+                    <th class="text-end d-none d-md-table-cell">@Localizer["ThLow"]</th>
+                    <th class="text-center pe-3">@Localizer["ThAction"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var stock in Model.Stocks)
+                {
+                    <tr data-stock-row="true" 
+                        data-stock-code="@stock.StockCode" 
+                        data-bank-name="@stock.BankName @stock.BankShortName" 
+                        data-bank-group="@stock.BankGroup">
+                        <!-- Mã CK -->
+                        <td class="ps-3">
+                            <span class="stock-code-badge @stock.StatusClass">@stock.StockCode</span>
+                        </td>
+
+                        <!-- Tên ngân hàng -->
+                        <td>
+                            <div class="fw-semibold">@stock.BankShortName</div>
+                            <div class="text-secondary small d-none d-sm-block">@stock.BankName</div>
+                        </td>
+
+                        <!-- Sàn -->
+                        <td>
+                            <span class="badge bg-secondary-subtle text-secondary font-monospace" style="font-size: 0.72rem;">@stock.Exchange</span>
+                        </td>
+
+                        <!-- Giá tham chiếu (Vàng) -->
+                        <td class="text-end stock-num stock-ref">
+                            @stock.RefPrice.ToString("N0")
+                        </td>
+
+                        <!-- Giá trần (Tím) -->
+                        <td class="text-end stock-num stock-ceil">
+                            @stock.CeilingPrice.ToString("N0")
+                        </td>
+
+                        <!-- Giá sàn (Xanh lơ) -->
+                        <td class="text-end stock-num stock-floor">
+                            @stock.FloorPrice.ToString("N0")
+                        </td>
+
+                        <!-- Giá khớp hiện tại -->
+                        <td class="text-end stock-num @stock.StatusClass fw-bold" style="font-size: 0.95rem;">
+                            @stock.CurrentPrice.ToString("N0")
+                        </td>
+
+                        <!-- Biến động +/- -->
+                        <td class="text-end stock-num @stock.StatusClass">
+                            @stock.ChangeDisplay
+                        </td>
+
+                        <!-- Biến động % -->
+                        <td class="text-end stock-num @stock.StatusClass">
+                            @stock.ChangePercentDisplay
+                        </td>
+
+                        <!-- Khối lượng khớp -->
+                        <td class="text-end stock-num text-secondary">
+                            @stock.Volume.ToString("N0")
+                        </td>
+
+                        <!-- Giá cao trong phiên -->
+                        <td class="text-end stock-num text-secondary d-none d-md-table-cell">
+                            @stock.High.ToString("N0")
+                        </td>
+
+                        <!-- Giá thấp trong phiên -->
+                        <td class="text-end stock-num text-secondary d-none d-md-table-cell">
+                            @stock.Low.ToString("N0")
+                        </td>
+
+                        <!-- Thao tác -->
+                        <td class="text-center pe-3">
+                            <div class="btn-group btn-group-sm">
+                                <a asp-controller="Stocks" asp-action="Details" asp-route-code="@stock.StockCode" class="btn btn-outline-primary btn-sm py-0 px-2" title="@Localizer["BtnDetail"]">
+                                    <i class="bi bi-graph-up"></i>
+                                </a>
+                                <a href="#" class="btn btn-outline-success btn-sm py-0 px-2" title="TODO: Phase 5 (Đặt lệnh)">
+                                    <i class="bi bi-cart-plus"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+                <!-- Empty state row -->
+                <tr id="stockNoDataRow" style="display: none;">
+                    <td colspan="13" class="text-center py-4 text-muted">
+                        <i class="bi bi-search fs-3 d-block mb-2"></i>
+                        @Localizer["NoStockFound"]
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Stock Market Color Convention Legend -->
+<div class="stock-legend">
+    <span class="fw-semibold text-primary-emphasis me-2"><i class="bi bi-palette me-1"></i>Quy ước màu sàn VN:</span>
+    <span class="legend-chip">
+        <span class="legend-dot" style="background-color: var(--stock-ceil);"></span>
+        <span class="stock-ceil">@Localizer["LegendCeiling"]</span>
+    </span>
+    <span class="legend-chip">
+        <span class="legend-dot" style="background-color: var(--stock-floor);"></span>
+        <span class="stock-floor">@Localizer["LegendFloor"]</span>
+    </span>
+    <span class="legend-chip">
+        <span class="legend-dot" style="background-color: var(--stock-up);"></span>
+        <span class="stock-up">@Localizer["LegendUp"]</span>
+    </span>
+    <span class="legend-chip">
+        <span class="legend-dot" style="background-color: var(--stock-down);"></span>
+        <span class="stock-down">@Localizer["LegendDown"]</span>
+    </span>
+    <span class="legend-chip">
+        <span class="legend-dot" style="background-color: var(--stock-ref);"></span>
+        <span class="stock-ref">@Localizer["LegendRef"]</span>
+    </span>
+</div>
+
+@section Scripts {
+    <script src="~/js/stock-board.js" asp-append-version="true"></script>
+}

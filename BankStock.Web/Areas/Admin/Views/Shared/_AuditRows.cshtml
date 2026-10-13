@@ -1,0 +1,20 @@
+@model IReadOnlyList<AuditLogListItem>
+@* Các dòng audit log (dùng ở trang Nhật ký và Dashboard). *@
+@foreach (var log in Model)
+{
+    var badge = log.Action switch
+    {
+        var a when a.StartsWith("Delete") || a.StartsWith("Lock") || a.StartsWith("LoginFailed") || a.StartsWith("LoginLocked") || a.StartsWith("LoginBlocked") => "bg-danger-subtle text-danger",
+        var a when a.StartsWith("Create") || a == "Register" || a.StartsWith("Unlock") => "bg-success-subtle text-success",
+        var a when a.StartsWith("Update") || a.StartsWith("Adjust") => "bg-warning-subtle text-warning-emphasis",
+        _ => "bg-secondary-subtle text-secondary"
+    };
+    <tr>
+        <td class="ps-3 small text-secondary text-nowrap">@log.CreatedAt.ToLocalTime().ToString("g")</td>
+        <td><span class="badge @badge">@log.Action</span></td>
+        <td class="small">@(log.UserEmail ?? "—")</td>
+        <td class="small text-secondary d-none d-md-table-cell">@log.Entity@(log.EntityId is null ? "" : " #" + log.EntityId)</td>
+        <td class="small d-none d-lg-table-cell admin-audit-detail" title="@log.Detail">@log.Detail</td>
+        <td class="small text-secondary d-none d-xl-table-cell pe-3">@log.IpAddress</td>
+    </tr>
+}

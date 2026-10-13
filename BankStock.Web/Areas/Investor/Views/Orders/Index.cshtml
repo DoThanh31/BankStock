@@ -1,0 +1,30 @@
+@model PagedListViewModel<OrderListItem, OrderListQuery>
+@{
+    ViewData["Title"] = Localizer["NavOrders"];
+}
+
+<partial name="_InvestorNav" />
+
+<div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-3">
+    <div>
+        <h4 class="fw-bold mb-1"><i class="bi bi-journal-text text-primary me-2"></i>@Localizer["OrderHistoryTitle"]</h4>
+        <p class="text-secondary small mb-0">@Localizer["OrderHistorySubtitle"]</p>
+    </div>
+    <a asp-controller="Trade" asp-action="Index" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg me-1"></i>@Localizer["NavTrade"]</a>
+</div>
+
+<form id="listFilterForm" class="stock-card filter-panel mb-3" method="get" asp-action="Index" role="search">
+    <div class="row g-3 align-items-end">
+        <partial name="_OrderFilterFields" model="@((Model.Query, Model.StockOptions))" />
+        <div class="col-lg-3 d-none d-lg-block"></div>
+        <partial name="_FilterActions" model="Model.Query" />
+    </div>
+</form>
+
+<div id="listResults" aria-live="polite">
+    <partial name="_List" model="Model" />
+</div>
+
+@section Scripts {
+    <script src="~/js/ajax-list.js" asp-append-version="true"></script>
+}

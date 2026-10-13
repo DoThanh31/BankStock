@@ -1,0 +1,15 @@
+@* Chuỗi đa ngôn ngữ cho JavaScript (ui-common.js đọc qua jQuery .data()) + token antiforgery cho POST AJAX. *@
+<div id="jsI18n" hidden
+     data-confirm-title="@Localizer["ConfirmTitle"]"
+     data-confirm-yes="@Localizer["ConfirmYes"]"
+     data-cancel="@Localizer["BtnCancel"]"
+     data-error-title="@Localizer["ErrorTitle"]"
+     data-error-generic="@Localizer["AdminOperationFailed"]"
+     data-band-missing="@Localizer["AdminBandMissingInput"]"
+     data-watchlist-added="@Localizer["WatchlistAdded"]"
+     data-watchlist-removed="@Localizer["WatchlistRemoved"]"
+     data-val-min="@Localizer["JsValMin", "{0}"]"
+     data-val-max="@Localizer["JsValMax", "{0}"]"
+     data-val-step="@Localizer["JsValStep", "{0}"]"
+     data-val-number="@Localizer["JsValNumber"]"></div>
+<div id="jsAntiForgery" hidden>@Html.AntiForgeryToken()</div>

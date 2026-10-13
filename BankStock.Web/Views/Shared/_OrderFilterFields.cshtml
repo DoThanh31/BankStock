@@ -1,0 +1,36 @@
+@using BankStock.Web.ViewModels.Investor
+@model (OrderListQuery Query, IReadOnlyList<StockOptionItem> StockOptions)
+@* Ô lọc mã / trạng thái / loại lệnh dùng chung cho sổ lệnh Admin và lịch sử lệnh Investor. *@
+@{
+    var q = Model.Query;
+}
+<div class="col-lg-2 col-md-6 col-6">
+    <label for="filterStock" class="form-label small text-secondary">@Localizer["FieldStockCode"]</label>
+    <select id="filterStock" name="stockId" class="form-select form-select-sm">
+        <option value="" selected="@(q.StockId is null)">@Localizer["FilterAll"]</option>
+        @foreach (var stock in Model.StockOptions)
+        {
+            <option value="@stock.Id" selected="@(q.StockId == stock.Id)">@stock.StockCode</option>
+        }
+    </select>
+</div>
+<div class="col-lg-2 col-md-3 col-6">
+    <label for="filterStatus" class="form-label small text-secondary">@Localizer["FieldStatus"]</label>
+    <select id="filterStatus" name="status" class="form-select form-select-sm">
+        <option value="" selected="@(q.Status is null)">@Localizer["FilterAll"]</option>
+        @foreach (var status in Enum.GetValues<OrderStatus>())
+        {
+            <option value="@status" selected="@(q.Status == status)">@Localizer["OrderStatus" + status]</option>
+        }
+    </select>
+</div>
+<div class="col-lg-1 col-md-3 col-6">
+    <label for="filterType" class="form-label small text-secondary">@Localizer["FieldOrderType"]</label>
+    <select id="filterType" name="type" class="form-select form-select-sm">
+        <option value="" selected="@(q.Type is null)">@Localizer["FilterAll"]</option>
+        @foreach (var type in Enum.GetValues<OrderType>())
+        {
+            <option value="@type" selected="@(q.Type == type)">@Localizer["OrderType" + type]</option>
+        }
+    </select>
+</div>

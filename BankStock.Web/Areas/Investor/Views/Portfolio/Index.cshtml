@@ -1,0 +1,109 @@
+@model PortfolioSummaryDto
+@{
+    ViewData["Title"] = Localizer["NavPortfolio"];
+    string PnlClass(decimal value) => value > 0 ? "stock-up" : value < 0 ? "stock-down" : "stock-ref";
+    string Signed(decimal value, string format) => (value > 0 ? "+" : "") + value.ToString(format);
+}
+
+<partial name="_InvestorNav" />
+
+<div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-3">
+    <div>
+        <h4 class="fw-bold mb-1"><i class="bi bi-pie-chart text-primary me-2"></i>@Localizer["PortfolioTitle"]</h4>
+        <p class="text-secondary small mb-0">@Localizer["PortfolioSubtitle"]</p>
+    </div>
+    <a asp-controller="Trade" asp-action="Index" class="btn btn-primary btn-sm"><i class="bi bi-arrow-left-right me-1"></i>@Localizer["NavTrade"]</a>
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-xl-3 col-md-6">
+        <div class="stock-card p-3 h-100">
+            <div class="small text-secondary">@Localizer["PortfolioTotalAssets"]</div>
+            <div class="fs-4 fw-bold num-font">@Model.TotalAssets.ToString("N0")</div>
+            <div class="small @PnlClass(Model.TotalReturn)">@Localizer["PortfolioTotalReturn"]: <span class="num-font">@Signed(Model.TotalReturn, "N0") (@Signed(Model.TotalReturnPercent, "0.00")%)</span></div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="stock-card p-3 h-100">
+            <div class="small text-secondary">@Localizer["PortfolioStockValue"]</div>
+            <div class="fs-4 fw-bold num-font">@Model.StockValue.ToString("N0")</div>
+            <div class="small text-secondary">@Localizer["PortfolioCostValue"]: <span class="num-font">@Model.CostValue.ToString("N0")</span></div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="stock-card p-3 h-100">
+            <div class="small text-secondary">@Localizer["PortfolioUnrealizedPnl"]</div>
+            <div class="fs-4 fw-bold num-font @PnlClass(Model.UnrealizedPnl)">@Signed(Model.UnrealizedPnl, "N0")</div>
+            <div class="small num-font @PnlClass(Model.UnrealizedPnl)">@Signed(Model.UnrealizedPnlPercent, "0.00")%</div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="stock-card p-3 h-100">
+            <div class="small text-secondary">@Localizer["AdminCashBalance"]</div>
+            <div class="fs-4 fw-bold num-font">@Model.CashBalance.ToString("N0")</div>
+            <div class="small text-secondary">@Localizer["AdminBlockedBalance"]: <span class="num-font">@Model.BlockedCash.ToString("N0")</span> · @Localizer["AdminPendingOrders"]: @Model.PendingOrders</div>
+        </div>
+    </div>
+</div>
+
+<div class="stock-card">
+    <div class="stock-card-header">
+        <div class="fw-bold"><i class="bi bi-briefcase text-primary me-2"></i>@Localizer["PortfolioHoldings"]</div>
+        <span class="small text-secondary">@Localizer["AdminUnitVnd"]</span>
+    </div>
+    <div class="table-responsive">
+        <table class="fintech-table">
+            <thead>
+                <tr>
+                    <th class="ps-3">@Localizer["ThStockCode"]</th>
+                    <th class="text-end">@Localizer["PortfolioQuantity"]</th>
+                    <th class="text-end d-none d-md-table-cell">@Localizer["PortfolioAvailableQty"]</th>
+                    <th class="text-end">@Localizer["PortfolioAvgCost"]</th>
+                    <th class="text-end">@Localizer["ThMatchPrice"]</th>
+                    <th class="text-end d-none d-lg-table-cell">@Localizer["PortfolioMarketValue"]</th>
+                    <th class="text-end">@Localizer["PortfolioUnrealizedPnl"]</th>
+                    <th class="text-end d-none d-md-table-cell">@Localizer["PortfolioWeight"]</th>
+                    <th class="text-end pe-3"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var holding in Model.Holdings)
+                {
+                    var weight = Model.TotalAssets > 0 ? holding.MarketValue / Model.TotalAssets * 100 : 0;
+                    <tr>
+                        <td class="ps-3">
+                            <a asp-area="" asp-controller="Stocks" asp-action="Details" asp-route-code="@holding.StockCode" class="stock-code-badge stock-ref text-decoration-none">@holding.StockCode</a>
+                            <div class="small text-secondary">@holding.BankShortName</div>
+                        </td>
+                        <td class="text-end stock-num">@holding.TotalQuantity.ToString("N0")</td>
+                        <td class="text-end stock-num d-none d-md-table-cell">@holding.Quantity.ToString("N0")</td>
+                        <td class="text-end stock-num">@holding.AvgCost.ToString("N0")</td>
+                        <td class="text-end stock-num">
+                            <div>@holding.MarketPrice.ToString("N0")</div>
+                            <div class="small @PnlClass(holding.ChangePercent)">@Signed(holding.ChangePercent, "0.00")%</div>
+                        </td>
+                        <td class="text-end stock-num d-none d-lg-table-cell">@holding.MarketValue.ToString("N0")</td>
+                        <td class="text-end stock-num @PnlClass(holding.UnrealizedPnl)">
+                            <div class="fw-semibold">@Signed(holding.UnrealizedPnl, "N0")</div>
+                            <div class="small">@Signed(holding.UnrealizedPnlPercent, "0.00")%</div>
+                        </td>
+                        <td class="text-end stock-num d-none d-md-table-cell">@weight.ToString("0.0")%</td>
+                        <td class="text-end pe-3 text-nowrap">
+                            <a asp-controller="Trade" asp-action="Index" asp-route-code="@holding.StockCode" asp-route-side="Buy" class="btn btn-outline-success btn-sm py-0 px-2">@Localizer["OrderTypeBuy"]</a>
+                            <a asp-controller="Trade" asp-action="Index" asp-route-code="@holding.StockCode" asp-route-side="Sell" class="btn btn-outline-danger btn-sm py-0 px-2">@Localizer["OrderTypeSell"]</a>
+                        </td>
+                    </tr>
+                }
+                @if (Model.Holdings.Count == 0)
+                {
+                    <tr>
+                        <td colspan="9" class="text-center py-4 text-muted">
+                            <i class="bi bi-briefcase fs-3 d-block mb-2"></i>@Localizer["PortfolioEmpty"]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="px-3 py-2 small text-secondary">@Localizer["PortfolioNote"]</div>
+</div>

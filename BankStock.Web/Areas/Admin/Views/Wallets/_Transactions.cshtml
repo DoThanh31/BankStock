@@ -1,0 +1,52 @@
+@model WalletTransactionsViewModel
+
+<div class="modal-header">
+    <h5 class="modal-title"><i class="bi bi-list-ul text-primary me-2"></i>@Localizer["AdminRecentTransactions"]</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@Localizer["Close"]"></button>
+</div>
+<div class="modal-body">
+    <div class="d-flex flex-wrap justify-content-between gap-2 mb-3">
+        <div>
+            <div class="fw-semibold">@Model.FullName</div>
+            <div class="small text-secondary">@Model.Email</div>
+        </div>
+        <div class="text-end small">
+            <div>@Localizer["AdminCashBalance"]: <span class="num-font fw-bold">@Model.Balance.ToString("N0")</span></div>
+            <div class="text-secondary">@Localizer["AdminBlockedBalance"]: <span class="num-font">@Model.BlockedBalance.ToString("N0")</span></div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="fintech-table">
+            <thead>
+                <tr>
+                    <th class="ps-2">@Localizer["AdminTime"]</th>
+                    <th>@Localizer["AdminTxType"]</th>
+                    <th class="text-end">@Localizer["AdminAmount"]</th>
+                    <th class="text-end d-none d-sm-table-cell">@Localizer["AdminBalanceAfter"]</th>
+                    <th class="d-none d-md-table-cell">@Localizer["FieldDescription"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var tx in Model.Items)
+                {
+                    <tr>
+                        <td class="ps-2 small text-secondary text-nowrap">@tx.CreatedAt.ToLocalTime().ToString("g")</td>
+                        <td><span class="badge bg-secondary-subtle text-secondary">@Localizer["Tx" + tx.Type]</span></td>
+                        <td class="text-end stock-num @(tx.Amount >= 0 ? "stock-up" : "stock-down")">@tx.Amount.ToString("N0")</td>
+                        <td class="text-end stock-num d-none d-sm-table-cell">@tx.BalanceAfter.ToString("N0")</td>
+                        <td class="small text-secondary d-none d-md-table-cell">@tx.Description</td>
+                    </tr>
+                }
+                @if (Model.Items.Count == 0)
+                {
+                    <partial name="_EmptyRow" model="5" />
+                }
+            </tbody>
+        </table>
+    </div>
+    <p class="form-text small mt-2 mb-0">@Localizer["AdminRecentTransactionsNote", WalletTransactionsViewModel.MaxItems]</p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">@Localizer["Close"]</button>
+</div>

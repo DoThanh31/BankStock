@@ -1,0 +1,61 @@
+@model PagedListViewModel<FinancialReportListItem, FinancialReportListQuery>
+@{
+    var items = Model.Items;
+    const decimal billion = FinancialReportFormViewModel.Billion;
+}
+
+<div class="stock-card">
+    <partial name="_ListHeader" model="@((items.TotalCount, items.FirstItemNumber, items.LastItemNumber, Model.Query.HasFilters))" />
+
+    <div class="table-responsive">
+        <table class="fintech-table">
+            <thead>
+                <tr>
+                    <th class="ps-3">@Localizer["ThPeriod"]</th>
+                    <th>@Localizer["ThStockCode"]</th>
+                    <th class="text-end">@Localizer["ThRevenue"]</th>
+                    <th class="text-end">@Localizer["ThNetProfit"]</th>
+                    <th class="text-end d-none d-md-table-cell">@Localizer["ThTotalAssets"]</th>
+                    <th class="text-end d-none d-lg-table-cell">@Localizer["ThTotalLiabilities"]</th>
+                    <th class="text-end d-none d-md-table-cell">@Localizer["ThEquity"]</th>
+                    <th class="text-end pe-3">@Localizer["ThAction"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var report in items.Items)
+                {
+                    <tr>
+                        <td class="ps-3 fw-semibold">Q@(report.Quarter)/@report.Year</td>
+                        <td><span class="stock-code-badge stock-ref">@report.StockCode</span></td>
+                        <td class="text-end stock-num">@((report.Revenue / billion).ToString("N0"))</td>
+                        <td class="text-end stock-num @(report.NetProfit >= 0 ? "stock-up" : "stock-down")">@((report.NetProfit / billion).ToString("N0"))</td>
+                        <td class="text-end stock-num d-none d-md-table-cell">@((report.TotalAssets / billion).ToString("N0"))</td>
+                        <td class="text-end stock-num d-none d-lg-table-cell">@((report.TotalLiabilities / billion).ToString("N0"))</td>
+                        <td class="text-end stock-num d-none d-md-table-cell">@((report.Equity / billion).ToString("N0"))</td>
+                        <td class="text-end pe-3 text-nowrap">
+                            <button type="button" class="btn btn-outline-primary btn-sm py-0 px-2" title="@Localizer["BtnEdit"]"
+                                    data-modal-url="@Url.Action("Edit", new { id = report.Id })">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-danger btn-sm py-0 px-2" title="@Localizer["BtnDelete"]"
+                                    data-confirm-post="@Url.Action("Delete", new { id = report.Id })"
+                                    data-confirm-text="@Localizer["ConfirmDeleteReport", report.StockCode, report.Quarter, report.Year]"
+                                    data-confirm-button="@Localizer["BtnDelete"]">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+                @if (items.TotalCount == 0)
+                {
+                    <partial name="_EmptyRow" model="8" />
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 px-3 py-3">
+        <span class="small text-secondary">@Localizer["UnitBillionNote"]</span>
+        <partial name="_Pagination" model="@(new PagerViewModel(items.PageIndex, items.TotalPages, page => Url.Action("Index", Model.Query.ToRouteValues(page))))" />
+    </div>
+</div>

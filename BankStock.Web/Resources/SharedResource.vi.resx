@@ -1,0 +1,1545 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="0" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- Brand & Navigation -->
+  <data name="BrandName" xml:space="preserve">
+    <value>BankStock</value>
+  </data>
+  <data name="BrandSlogan" xml:space="preserve">
+    <value>Sàn mô phỏng cổ phiếu Ngân hàng Việt Nam</value>
+  </data>
+  <data name="NavPriceBoard" xml:space="preserve">
+    <value>Bảng giá</value>
+  </data>
+  <data name="NavBanks" xml:space="preserve">
+    <value>Ngân hàng</value>
+  </data>
+  <data name="NavAbout" xml:space="preserve">
+    <value>Giới thiệu</value>
+  </data>
+  <data name="NavWatchlist" xml:space="preserve">
+    <value>Watchlist</value>
+  </data>
+  <data name="NavPortfolio" xml:space="preserve">
+    <value>Danh mục</value>
+  </data>
+  <data name="NavOrders" xml:space="preserve">
+    <value>Sổ lệnh</value>
+  </data>
+  <data name="NavWallet" xml:space="preserve">
+    <value>Ví đầu tư</value>
+  </data>
+  <data name="NavAdmin" xml:space="preserve">
+    <value>Quản trị</value>
+  </data>
+  <data name="NavLogin" xml:space="preserve">
+    <value>Đăng nhập</value>
+  </data>
+  <data name="NavRegister" xml:space="preserve">
+    <value>Đăng ký</value>
+  </data>
+  <data name="NavLogout" xml:space="preserve">
+    <value>Đăng xuất</value>
+  </data>
+  <data name="NavThemeToggle" xml:space="preserve">
+    <value>Giao diện</value>
+  </data>
+  <data name="NavLanguage" xml:space="preserve">
+    <value>Ngôn ngữ</value>
+  </data>
+  <data name="LanguageVi" xml:space="preserve">
+    <value>Tiếng Việt</value>
+  </data>
+  <data name="LanguageEn" xml:space="preserve">
+    <value>English</value>
+  </data>
+
+  <!-- Market Overview & Ticker -->
+  <data name="MarketOverview" xml:space="preserve">
+    <value>Tổng quan thị trường</value>
+  </data>
+  <data name="BankIndex" xml:space="preserve">
+    <value>VN-Bank Index</value>
+  </data>
+  <data name="SimulatedLabel" xml:space="preserve">
+    <value>(mô phỏng)</value>
+  </data>
+  <data name="TotalTradingVolume" xml:space="preserve">
+    <value>Tổng khối lượng GD</value>
+  </data>
+  <data name="GainersCount" xml:space="preserve">
+    <value>Mã tăng</value>
+  </data>
+  <data name="LosersCount" xml:space="preserve">
+    <value>Mã giảm</value>
+  </data>
+  <data name="UnchangedCount" xml:space="preserve">
+    <value>Đứng giá</value>
+  </data>
+  <data name="CeilingCount" xml:space="preserve">
+    <value>Tăng trần</value>
+  </data>
+  <data name="FloorCount" xml:space="preserve">
+    <value>Giảm sàn</value>
+  </data>
+  <data name="ActiveStocksCount" xml:space="preserve">
+    <value>Mã niêm yết</value>
+  </data>
+
+  <!-- Price Board Table -->
+  <data name="StockBoardTitle" xml:space="preserve">
+    <value>Bảng giá trực tuyến Ngân hàng</value>
+  </data>
+  <data name="StockBoardSubtitle" xml:space="preserve">
+    <value>Dữ liệu giao dịch khớp lệnh thực tế các cổ phiếu nhóm ngân hàng Việt Nam</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Tìm mã CK hoặc tên ngân hàng (VCB, MBB, Techcombank...)</value>
+  </data>
+  <data name="FilterAll" xml:space="preserve">
+    <value>Tất cả mã</value>
+  </data>
+  <data name="FilterBig4" xml:space="preserve">
+    <value>Khối Big 4</value>
+  </data>
+  <data name="FilterPrivate" xml:space="preserve">
+    <value>TMCP Tư nhân</value>
+  </data>
+  <data name="ThStockCode" xml:space="preserve">
+    <value>Mã CK</value>
+  </data>
+  <data name="ThBankName" xml:space="preserve">
+    <value>Tên ngân hàng</value>
+  </data>
+  <data name="ThExchange" xml:space="preserve">
+    <value>Sàn</value>
+  </data>
+  <data name="ThCeiling" xml:space="preserve">
+    <value>Trần</value>
+  </data>
+  <data name="ThFloor" xml:space="preserve">
+    <value>Sàn</value>
+  </data>
+  <data name="ThRef" xml:space="preserve">
+    <value>TC</value>
+  </data>
+  <data name="ThMatchPrice" xml:space="preserve">
+    <value>Khớp lệnh</value>
+  </data>
+  <data name="ThChange" xml:space="preserve">
+    <value>+/-</value>
+  </data>
+  <data name="ThChangePercent" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="ThVolume" xml:space="preserve">
+    <value>Tổng KL</value>
+  </data>
+  <data name="ThHigh" xml:space="preserve">
+    <value>Cao</value>
+  </data>
+  <data name="ThLow" xml:space="preserve">
+    <value>Thấp</value>
+  </data>
+  <data name="ThAction" xml:space="preserve">
+    <value>Thao tác</value>
+  </data>
+  <data name="BtnTrade" xml:space="preserve">
+    <value>Đặt lệnh</value>
+  </data>
+  <data name="BtnDetail" xml:space="preserve">
+    <value>Chi tiết</value>
+  </data>
+  <data name="LegendCeiling" xml:space="preserve">
+    <value>Trần (Ceiling)</value>
+  </data>
+  <data name="LegendFloor" xml:space="preserve">
+    <value>Sàn (Floor)</value>
+  </data>
+  <data name="LegendUp" xml:space="preserve">
+    <value>Tăng (Up)</value>
+  </data>
+  <data name="LegendDown" xml:space="preserve">
+    <value>Giảm (Down)</value>
+  </data>
+  <data name="LegendRef" xml:space="preserve">
+    <value>Tham chiếu (Reference)</value>
+  </data>
+  <data name="NoStockFound" xml:space="preserve">
+    <value>Không tìm thấy mã cổ phiếu nào phù hợp với bộ lọc.</value>
+  </data>
+  <data name="UnitVND" xml:space="preserve">
+    <value>VNĐ</value>
+  </data>
+  <data name="SharesUnit" xml:space="preserve">
+    <value>cổ phiếu</value>
+  </data>
+
+  <!-- About Page -->
+  <data name="AboutTitle" xml:space="preserve">
+    <value>Về BankStock</value>
+  </data>
+  <data name="AboutSubtitle" xml:space="preserve">
+    <value>Nền tảng giao dịch mô phỏng và phân tích chuyên sâu cổ phiếu ngân hàng hàng đầu Việt Nam</value>
+  </data>
+  <data name="AboutMissionTitle" xml:space="preserve">
+    <value>Sứ mệnh của chúng tôi</value>
+  </data>
+  <data name="AboutMissionDesc" xml:space="preserve">
+    <value>BankStock được thiết kế nhằm mang lại một môi trường đầu tư chứng khoán mô phỏng chân thực, trực quan và hiện đại nhất cho các nhà đầu tư quan tâm đến nhóm ngành ngân hàng - xương sống của thị trường tài chính Việt Nam.</value>
+  </data>
+  <data name="AboutFeature1Title" xml:space="preserve">
+    <value>Bảng giá chuẩn TradingView</value>
+  </data>
+  <data name="AboutFeature1Desc" xml:space="preserve">
+    <value>Giao diện tối chuẩn Fintech, màu sắc theo đúng quy chuẩn thị trường Việt Nam (Xanh lá, Đỏ, Vàng, Tím, Xanh lơ) với khả năng phản hồi tức thì.</value>
+  </data>
+  <data name="AboutFeature2Title" xml:space="preserve">
+    <value>Ví đầu tư 500 Triệu VNĐ</value>
+  </data>
+  <data name="AboutFeature2Desc" xml:space="preserve">
+    <value>Mỗi tài khoản nhà đầu tư mới được cấp sẵn 500.000.000 VNĐ tiền ảo để thoải mái trải nghiệm, thử nghiệm các chiến lược mua bán mà không rủi ro tài chính.</value>
+  </data>
+  <data name="AboutFeature3Title" xml:space="preserve">
+    <value>Bộ chỉ số chuyên ngành Ngân hàng</value>
+  </data>
+  <data name="AboutFeature3Desc" xml:space="preserve">
+    <value>Phân tích các chỉ số đặc thù: tỷ lệ tiền gửi không kỳ hạn CASA, tỷ lệ nợ xấu NPL, định giá P/E, P/B, EPS và báo cáo tài chính định kỳ theo quý.</value>
+  </data>
+  <data name="AboutBanksTitle" xml:space="preserve">
+    <value>10 Ngân hàng niêm yết tiêu biểu</value>
+  </data>
+  <data name="AboutBanksDesc" xml:space="preserve">
+    <value>Hệ thống hỗ trợ theo dõi đầy đủ cả nhóm Ngân hàng Quốc doanh Big 4 (VCB, BID, CTG) và các Ngân hàng TMCP tư nhân năng động (TCB, MBB, VPB, ACB, STB, HDB, TPB).</value>
+  </data>
+  <data name="AboutTechTitle" xml:space="preserve">
+    <value>Công nghệ &amp; Kiến trúc</value>
+  </data>
+  <data name="AboutTechDesc" xml:space="preserve">
+    <value>Phát triển trên nền tảng .NET 8, ASP.NET Core MVC, Entity Framework Core 8, kiến trúc đa tầng (N-tier), bảo mật Identity với phân quyền chặt chẽ.</value>
+  </data>
+
+  <!-- Error Pages -->
+  <data name="Error404Title" xml:space="preserve">
+    <value>404 - Không tìm thấy trang</value>
+  </data>
+  <data name="Error404Message" xml:space="preserve">
+    <value>Địa chỉ bạn yêu cầu không tồn tại, đã bị xóa hoặc tạm thời không khả dụng.</value>
+  </data>
+  <data name="Error500Title" xml:space="preserve">
+    <value>500 - Lỗi hệ thống máy chủ</value>
+  </data>
+  <data name="Error500Message" xml:space="preserve">
+    <value>Hệ thống đang gặp sự cố gián đoạn tạm thời. Đội ngũ kỹ thuật đã được thông báo và đang tiến hành khắc phục.</value>
+  </data>
+  <data name="ErrorDefaultTitle" xml:space="preserve">
+    <value>Đã xảy ra sự cố</value>
+  </data>
+  <data name="ErrorDefaultMessage" xml:space="preserve">
+    <value>Yêu cầu của bạn không thể hoàn thành lúc này. Vui lòng thử lại sau.</value>
+  </data>
+  <data name="ErrorRequestId" xml:space="preserve">
+    <value>Mã yêu cầu (Request ID)</value>
+  </data>
+  <data name="BtnBackHome" xml:space="preserve">
+    <value>Về Trang chủ</value>
+  </data>
+  <data name="BtnBackBoard" xml:space="preserve">
+    <value>Xem Bảng giá</value>
+  </data>
+
+  <!-- Footer -->
+  <data name="FooterAbout" xml:space="preserve">
+    <value>Về BankStock</value>
+  </data>
+  <data name="FooterAboutDesc" xml:space="preserve">
+    <value>Nền tảng giao dịch mô phỏng chứng khoán ngân hàng Việt Nam. Giúp nhà đầu tư trải nghiệm đặt lệnh, quản lý danh mục và phân tích báo cáo tài chính chuyên sâu.</value>
+  </data>
+  <data name="FooterQuickLinks" xml:space="preserve">
+    <value>Liên kết nhanh</value>
+  </data>
+  <data name="FooterDisclaimer" xml:space="preserve">
+    <value>Cảnh báo &amp; Quy định</value>
+  </data>
+  <data name="FooterDisclaimerDesc" xml:space="preserve">
+    <value>Hệ thống chỉ phục vụ mục đích học tập và mô phỏng giao dịch. Mọi số liệu tài chính không cấu thành lời khuyên đầu tư thực tế.</value>
+  </data>
+  <data name="FooterContact" xml:space="preserve">
+    <value>Liên hệ &amp; Hỗ trợ</value>
+  </data>
+  <data name="FooterCopyright" xml:space="preserve">
+    <value>© 2026 BankStock. Tất cả quyền được bảo lưu.</value>
+  </data>
+  <data name="FooterPrivacy" xml:space="preserve">
+    <value>Chính sách bảo mật</value>
+  </data>
+  <data name="FooterTerms" xml:space="preserve">
+    <value>Điều khoản sử dụng</value>
+  </data>
+
+  <!-- Admin Area Layout & Dashboard -->
+  <data name="AdminDashboard" xml:space="preserve">
+    <value>Bảng điều khiển Quản trị</value>
+  </data>
+  <data name="AdminSidebarCore" xml:space="preserve">
+    <value>TỔNG QUAN</value>
+  </data>
+  <data name="AdminSidebarData" xml:space="preserve">
+    <value>QUẢN LÝ DỮ LIỆU</value>
+  </data>
+  <data name="AdminSidebarUsers" xml:space="preserve">
+    <value>NGƯỜI DÙNG &amp; GIAO DỊCH</value>
+  </data>
+  <data name="AdminSidebarSystem" xml:space="preserve">
+    <value>HỆ THỐNG</value>
+  </data>
+  <data name="AdminNavDashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="AdminNavBanks" xml:space="preserve">
+    <value>Ngân hàng (Banks)</value>
+  </data>
+  <data name="AdminNavStocks" xml:space="preserve">
+    <value>Cổ phiếu (Stocks)</value>
+  </data>
+  <data name="AdminNavPriceHistory" xml:space="preserve">
+    <value>Lịch sử giá &amp; Chỉnh giá</value>
+  </data>
+  <data name="AdminNavReports" xml:space="preserve">
+    <value>Báo cáo tài chính</value>
+  </data>
+  <data name="AdminNavUsers" xml:space="preserve">
+    <value>Quản lý User</value>
+  </data>
+  <data name="AdminNavWallets" xml:space="preserve">
+    <value>Thống kê Ví</value>
+  </data>
+  <data name="AdminNavOrders" xml:space="preserve">
+    <value>Toàn bộ Lệnh sàn</value>
+  </data>
+  <data name="AdminNavAudit" xml:space="preserve">
+    <value>Nhật ký Audit Log</value>
+  </data>
+  <data name="AdminNavBackToMarket" xml:space="preserve">
+    <value>Quay lại Sàn giao dịch</value>
+  </data>
+  <data name="AdminStatBanks" xml:space="preserve">
+    <value>Tổng Ngân hàng</value>
+  </data>
+  <data name="AdminStatStocks" xml:space="preserve">
+    <value>Mã Cổ phiếu Niêm yết</value>
+  </data>
+  <data name="AdminStatUsers" xml:space="preserve">
+    <value>Nhà đầu tư kích hoạt</value>
+  </data>
+  <data name="AdminStatVolume" xml:space="preserve">
+    <value>Tổng KL GD Phiên gần nhất</value>
+  </data>
+  <data name="AdminRecentUpdates" xml:space="preserve">
+    <value>Cập nhật giá gần nhất</value>
+  </data>
+  <data name="AdminQuickActions" xml:space="preserve">
+    <value>Thao tác nhanh</value>
+  </data>
+  <data name="AdminSystemStatus" xml:space="preserve">
+    <value>Trạng thái máy chủ</value>
+  </data>
+  <data name="AdminSystemNormal" xml:space="preserve">
+    <value>Hoạt động bình thường</value>
+  </data>
+  <!-- Phase 3: Stocks, Account -->
+  <data name="NavStocks" xml:space="preserve">
+    <value>Cổ phiếu</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Đóng</value>
+  </data>
+  <data name="PaginationLabel" xml:space="preserve">
+    <value>Phân trang</value>
+  </data>
+  <data name="PaginationPrevious" xml:space="preserve">
+    <value>Trang trước</value>
+  </data>
+  <data name="PaginationNext" xml:space="preserve">
+    <value>Trang sau</value>
+  </data>
+  <data name="RecentlyViewed" xml:space="preserve">
+    <value>Đã xem gần đây</value>
+  </data>
+  <data name="StockListTitle" xml:space="preserve">
+    <value>Danh sách cổ phiếu ngân hàng</value>
+  </data>
+  <data name="StockListSubtitle" xml:space="preserve">
+    <value>Lọc theo nhóm ngân hàng, định giá P/E, tỷ lệ CASA và tỷ suất cổ tức. Dữ liệu được lọc, sắp xếp và phân trang phía máy chủ.</value>
+  </data>
+  <data name="FieldSearch" xml:space="preserve">
+    <value>Tìm kiếm</value>
+  </data>
+  <data name="FieldBankGroup" xml:space="preserve">
+    <value>Nhóm ngân hàng</value>
+  </data>
+  <data name="FilterMinDividend" xml:space="preserve">
+    <value>Tỷ suất cổ tức</value>
+  </data>
+  <data name="FilterAny" xml:space="preserve">
+    <value>Bất kỳ</value>
+  </data>
+  <data name="FilterValuation" xml:space="preserve">
+    <value>Chỉ số</value>
+  </data>
+  <data name="FilterPeUnder10" xml:space="preserve">
+    <value>P/E &lt; 10</value>
+  </data>
+  <data name="FilterCasaOver30" xml:space="preserve">
+    <value>CASA &gt; 30%</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Sắp xếp</value>
+  </data>
+  <data name="SortCode" xml:space="preserve">
+    <value>Mã CK</value>
+  </data>
+  <data name="SortPrice" xml:space="preserve">
+    <value>Giá khớp</value>
+  </data>
+  <data name="SortChange" xml:space="preserve">
+    <value>% thay đổi</value>
+  </data>
+  <data name="SortVolume" xml:space="preserve">
+    <value>Khối lượng</value>
+  </data>
+  <data name="SortPE" xml:space="preserve">
+    <value>P/E</value>
+  </data>
+  <data name="SortCASA" xml:space="preserve">
+    <value>CASA</value>
+  </data>
+  <data name="SortDividend" xml:space="preserve">
+    <value>Cổ tức</value>
+  </data>
+  <data name="SortMarketCap" xml:space="preserve">
+    <value>Vốn hóa</value>
+  </data>
+  <data name="SortDirection" xml:space="preserve">
+    <value>Thứ tự</value>
+  </data>
+  <data name="SortAsc" xml:space="preserve">
+    <value>Tăng dần</value>
+  </data>
+  <data name="SortDesc" xml:space="preserve">
+    <value>Giảm dần</value>
+  </data>
+  <data name="PageSize" xml:space="preserve">
+    <value>Số dòng</value>
+  </data>
+  <data name="FilterReset" xml:space="preserve">
+    <value>Xóa bộ lọc</value>
+  </data>
+  <data name="FilterApply" xml:space="preserve">
+    <value>Áp dụng</value>
+  </data>
+  <data name="ShowingRange" xml:space="preserve">
+    <value>Hiển thị {0}–{1} trên tổng {2} mã</value>
+  </data>
+  <data name="FiltersActive" xml:space="preserve">
+    <value>Đang lọc</value>
+  </data>
+  <data name="ThDividend" xml:space="preserve">
+    <value>Cổ tức</value>
+  </data>
+  <data name="ThMarketCap" xml:space="preserve">
+    <value>Vốn hóa (tỷ)</value>
+  </data>
+  <data name="MarketCapNote" xml:space="preserve">
+    <value>Vốn hóa = số CP niêm yết × giá khớp, đơn vị tỷ VNĐ. Chỉ số tài chính là dữ liệu mô phỏng.</value>
+  </data>
+  <data name="LastSession" xml:space="preserve">
+    <value>Phiên gần nhất</value>
+  </data>
+  <data name="PriceChartTitle" xml:space="preserve">
+    <value>Biểu đồ giá</value>
+  </data>
+  <data name="ChartNoData" xml:space="preserve">
+    <value>Chưa có dữ liệu giá cho khoảng thời gian này.</value>
+  </data>
+  <data name="ChartLoadError" xml:space="preserve">
+    <value>Không tải được dữ liệu biểu đồ. Vui lòng thử lại.</value>
+  </data>
+  <data name="KeyMetrics" xml:space="preserve">
+    <value>Chỉ số cơ bản</value>
+  </data>
+  <data name="MetricNpl" xml:space="preserve">
+    <value>Nợ xấu (NPL)</value>
+  </data>
+  <data name="MetricListedShares" xml:space="preserve">
+    <value>CP niêm yết</value>
+  </data>
+  <data name="MetricCharterCapital" xml:space="preserve">
+    <value>Vốn điều lệ (tỷ)</value>
+  </data>
+  <data name="MetricFaceValue" xml:space="preserve">
+    <value>Mệnh giá</value>
+  </data>
+  <data name="UnitBillionNote" xml:space="preserve">
+    <value>Đơn vị: tỷ VNĐ</value>
+  </data>
+  <data name="FinancialReportsTitle" xml:space="preserve">
+    <value>Báo cáo tài chính theo quý</value>
+  </data>
+  <data name="NoFinancialReports" xml:space="preserve">
+    <value>Chưa có báo cáo tài chính.</value>
+  </data>
+  <data name="ThPeriod" xml:space="preserve">
+    <value>Kỳ</value>
+  </data>
+  <data name="ThRevenue" xml:space="preserve">
+    <value>Doanh thu</value>
+  </data>
+  <data name="ThNetProfit" xml:space="preserve">
+    <value>Lợi nhuận ròng</value>
+  </data>
+  <data name="ThTotalAssets" xml:space="preserve">
+    <value>Tổng tài sản</value>
+  </data>
+  <data name="ThEquity" xml:space="preserve">
+    <value>Vốn chủ sở hữu</value>
+  </data>
+  <data name="BankProfile" xml:space="preserve">
+    <value>Thông tin ngân hàng</value>
+  </data>
+  <data name="BankFounded" xml:space="preserve">
+    <value>Năm thành lập</value>
+  </data>
+  <data name="BankHeadquarters" xml:space="preserve">
+    <value>Trụ sở</value>
+  </data>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>Đăng nhập</value>
+  </data>
+  <data name="LoginSubtitle" xml:space="preserve">
+    <value>Đăng nhập để quản lý ví, danh mục và đặt lệnh.</value>
+  </data>
+  <data name="ForgotPasswordLink" xml:space="preserve">
+    <value>Quên mật khẩu?</value>
+  </data>
+  <data name="NoAccountYet" xml:space="preserve">
+    <value>Chưa có tài khoản?</value>
+  </data>
+  <data name="HaveAccount" xml:space="preserve">
+    <value>Đã có tài khoản?</value>
+  </data>
+  <data name="RegisterTitle" xml:space="preserve">
+    <value>Đăng ký nhà đầu tư</value>
+  </data>
+  <data name="RegisterSubtitle" xml:space="preserve">
+    <value>Tạo tài khoản miễn phí để trải nghiệm giao dịch mô phỏng.</value>
+  </data>
+  <data name="RegisterGrantNotice" xml:space="preserve">
+    <value>Tài khoản mới được cấp sẵn 500.000.000 VNĐ tiền ảo trong ví đầu tư.</value>
+  </data>
+  <data name="RegisterSuccess" xml:space="preserve">
+    <value>Đăng ký thành công! Ví của bạn đã được cấp 500.000.000 VNĐ tiền ảo.</value>
+  </data>
+  <data name="PasswordHint" xml:space="preserve">
+    <value>Tối thiểu 8 ký tự, gồm chữ hoa, chữ thường và chữ số.</value>
+  </data>
+  <data name="ForgotPasswordTitle" xml:space="preserve">
+    <value>Quên mật khẩu</value>
+  </data>
+  <data name="ForgotPasswordSubtitle" xml:space="preserve">
+    <value>Nhập email đã đăng ký, chúng tôi sẽ gửi liên kết đặt lại mật khẩu.</value>
+  </data>
+  <data name="ForgotPasswordSubmit" xml:space="preserve">
+    <value>Gửi liên kết</value>
+  </data>
+  <data name="BackToLogin" xml:space="preserve">
+    <value>Quay lại đăng nhập</value>
+  </data>
+  <data name="ForgotPasswordConfirmTitle" xml:space="preserve">
+    <value>Kiểm tra email của bạn</value>
+  </data>
+  <data name="ForgotPasswordConfirmMessage" xml:space="preserve">
+    <value>Nếu email tồn tại trong hệ thống, một liên kết đặt lại mật khẩu đã được gửi tới bạn.</value>
+  </data>
+  <data name="DevResetLinkNotice" xml:space="preserve">
+    <value>Môi trường Development (không có SMTP) — liên kết đặt lại:</value>
+  </data>
+  <data name="ResetPasswordTitle" xml:space="preserve">
+    <value>Đặt lại mật khẩu</value>
+  </data>
+  <data name="ResetPasswordSubmit" xml:space="preserve">
+    <value>Đặt lại mật khẩu</value>
+  </data>
+  <data name="ResetPasswordDoneTitle" xml:space="preserve">
+    <value>Đã đặt lại mật khẩu</value>
+  </data>
+  <data name="ResetPasswordDoneMessage" xml:space="preserve">
+    <value>Mật khẩu của bạn đã được cập nhật. Hãy đăng nhập bằng mật khẩu mới.</value>
+  </data>
+  <data name="ResetPasswordInvalidToken" xml:space="preserve">
+    <value>Liên kết đặt lại mật khẩu không hợp lệ hoặc đã hết hạn.</value>
+  </data>
+  <data name="ResetPasswordEmailSubject" xml:space="preserve">
+    <value>[BankStock] Đặt lại mật khẩu</value>
+  </data>
+  <data name="ResetPasswordEmailBody" xml:space="preserve">
+    <value>Nhấn vào liên kết sau để đặt lại mật khẩu:</value>
+  </data>
+  <data name="AccessDeniedTitle" xml:space="preserve">
+    <value>Không có quyền truy cập</value>
+  </data>
+  <data name="AccessDeniedMessage" xml:space="preserve">
+    <value>Tài khoản của bạn không có quyền truy cập trang này.</value>
+  </data>
+  <data name="LoginInvalid" xml:space="preserve">
+    <value>Email hoặc mật khẩu không đúng.</value>
+  </data>
+  <data name="LoginDisabled" xml:space="preserve">
+    <value>Tài khoản đã bị vô hiệu hóa. Vui lòng liên hệ quản trị viên.</value>
+  </data>
+  <data name="LoginLockedOut" xml:space="preserve">
+    <value>Tài khoản tạm khóa 15 phút do đăng nhập sai quá 5 lần.</value>
+  </data>
+  <data name="EmailTaken" xml:space="preserve">
+    <value>Email này đã được đăng ký.</value>
+  </data>
+  <data name="FieldEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="FieldPassword" xml:space="preserve">
+    <value>Mật khẩu</value>
+  </data>
+  <data name="FieldNewPassword" xml:space="preserve">
+    <value>Mật khẩu mới</value>
+  </data>
+  <data name="FieldConfirmPassword" xml:space="preserve">
+    <value>Xác nhận mật khẩu</value>
+  </data>
+  <data name="FieldRememberMe" xml:space="preserve">
+    <value>Ghi nhớ đăng nhập</value>
+  </data>
+  <data name="FieldFullName" xml:space="preserve">
+    <value>Họ và tên</value>
+  </data>
+  <data name="ValRequired" xml:space="preserve">
+    <value>{0} là bắt buộc.</value>
+  </data>
+  <data name="ValEmail" xml:space="preserve">
+    <value>{0} không đúng định dạng email.</value>
+  </data>
+  <data name="ValMaxLength" xml:space="preserve">
+    <value>{0} tối đa {1} ký tự.</value>
+  </data>
+  <data name="ValStringLength" xml:space="preserve">
+    <value>{0} phải từ {2} đến {1} ký tự.</value>
+  </data>
+  <data name="ValPasswordComplexity" xml:space="preserve">
+    <value>Mật khẩu phải có ít nhất 8 ký tự, gồm chữ hoa, chữ thường và chữ số.</value>
+  </data>
+  <data name="ValPasswordMismatch" xml:space="preserve">
+    <value>Mật khẩu xác nhận không khớp.</value>
+  </data>
+  <data name="AdminNoData" xml:space="preserve">
+    <value>Không có dữ liệu.</value>
+  </data>
+  <data name="AdminNotFound" xml:space="preserve">
+    <value>Không tìm thấy dữ liệu (có thể đã bị xóa).</value>
+  </data>
+  <data name="AdminOperationFailed" xml:space="preserve">
+    <value>Thao tác không thành công. Vui lòng thử lại.</value>
+  </data>
+  <data name="AdminDeleted" xml:space="preserve">
+    <value>Đã xóa thành công.</value>
+  </data>
+  <data name="AdminViewAll" xml:space="preserve">
+    <value>Xem tất cả</value>
+  </data>
+  <data name="AdminTime" xml:space="preserve">
+    <value>Thời gian</value>
+  </data>
+  <data name="AdminCreatedAt" xml:space="preserve">
+    <value>Ngày tạo</value>
+  </data>
+  <data name="AdminLastUpdated" xml:space="preserve">
+    <value>Cập nhật lần cuối</value>
+  </data>
+  <data name="AdminSectionGeneral" xml:space="preserve">
+    <value>Thông tin chung</value>
+  </data>
+  <data name="AdminUnitVnd" xml:space="preserve">
+    <value>Đơn vị: VNĐ</value>
+  </data>
+  <data name="UnitBillionShort" xml:space="preserve">
+    <value>tỷ</value>
+  </data>
+  <data name="BtnCancel" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="BtnSave" xml:space="preserve">
+    <value>Lưu</value>
+  </data>
+  <data name="BtnEdit" xml:space="preserve">
+    <value>Sửa</value>
+  </data>
+  <data name="BtnDelete" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="ConfirmTitle" xml:space="preserve">
+    <value>Bạn chắc chắn?</value>
+  </data>
+  <data name="ConfirmYes" xml:space="preserve">
+    <value>Đồng ý</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Có lỗi xảy ra</value>
+  </data>
+  <data name="SelectPlaceholder" xml:space="preserve">
+    <value>Chọn</value>
+  </data>
+  <data name="FieldStatus" xml:space="preserve">
+    <value>Trạng thái</value>
+  </data>
+  <data name="FieldDescription" xml:space="preserve">
+    <value>Mô tả</value>
+  </data>
+  <data name="FieldFromDate" xml:space="preserve">
+    <value>Từ ngày</value>
+  </data>
+  <data name="FieldToDate" xml:space="preserve">
+    <value>Đến ngày</value>
+  </data>
+  <data name="StatusTrading" xml:space="preserve">
+    <value>Đang giao dịch</value>
+  </data>
+  <data name="StatusSuspended" xml:space="preserve">
+    <value>Ngừng giao dịch</value>
+  </data>
+  <data name="ValRange" xml:space="preserve">
+    <value>{0} phải trong khoảng {1} đến {2}.</value>
+  </data>
+  <data name="ValSelectRequired" xml:space="preserve">
+    <value>Vui lòng chọn {0}.</value>
+  </data>
+  <data name="ValUrl" xml:space="preserve">
+    <value>{0} phải là URL hợp lệ (http/https).</value>
+  </data>
+  <data name="ValBankCode" xml:space="preserve">
+    <value>{0} gồm 2–20 ký tự chữ in hoa hoặc số.</value>
+  </data>
+  <data name="ValStockCode" xml:space="preserve">
+    <value>{0} phải gồm đúng 3 chữ cái in hoa (vd. VCB).</value>
+  </data>
+  <data name="ValExchange" xml:space="preserve">
+    <value>{0} phải là HOSE, HNX hoặc UPCOM.</value>
+  </data>
+  <data name="ValNumber" xml:space="preserve">
+    <value>{0} phải là số.</value>
+  </data>
+  <data name="ValInvalidValue" xml:space="preserve">
+    <value>Giá trị "{0}" không hợp lệ cho {1}.</value>
+  </data>
+  <data name="ValValueRequired" xml:space="preserve">
+    <value>Vui lòng nhập giá trị.</value>
+  </data>
+  <data name="ValFloorAboveRef" xml:space="preserve">
+    <value>Giá sàn không được lớn hơn giá tham chiếu.</value>
+  </data>
+  <data name="ValCeilingBelowRef" xml:space="preserve">
+    <value>Giá trần không được nhỏ hơn giá tham chiếu.</value>
+  </data>
+  <data name="ValHighTooLow" xml:space="preserve">
+    <value>Giá cao nhất phải ≥ giá mở cửa, đóng cửa và thấp nhất.</value>
+  </data>
+  <data name="ValLowTooHigh" xml:space="preserve">
+    <value>Giá thấp nhất phải ≤ giá mở cửa và đóng cửa.</value>
+  </data>
+  <data name="ValPriceOutOfBand" xml:space="preserve">
+    <value>Giá cao nhất / thấp nhất phải nằm trong khoảng sàn – trần.</value>
+  </data>
+  <data name="ValMatchOutOfBand" xml:space="preserve">
+    <value>Giá khớp phải nằm trong khoảng giá sàn – giá trần.</value>
+  </data>
+  <data name="AdminDashboardSubtitle" xml:space="preserve">
+    <value>Giám sát toàn sàn, giao dịch giả lập, ví ảo và nhật ký hệ thống.</value>
+  </data>
+  <data name="AdminTopTraded" xml:space="preserve">
+    <value>Mã giao dịch nhiều nhất ({0} ngày)</value>
+  </data>
+  <data name="AdminPeriodVolume" xml:space="preserve">
+    <value>Tổng khối lượng kỳ</value>
+  </data>
+  <data name="AdminPeriodValue" xml:space="preserve">
+    <value>Tổng giá trị kỳ</value>
+  </data>
+  <data name="AdminInternalTrading" xml:space="preserve">
+    <value>Giao dịch giả lập trên hệ thống</value>
+  </data>
+  <data name="AdminTradeCount" xml:space="preserve">
+    <value>Số lệnh khớp</value>
+  </data>
+  <data name="AdminTradeQuantity" xml:space="preserve">
+    <value>Khối lượng khớp</value>
+  </data>
+  <data name="AdminTradeValue" xml:space="preserve">
+    <value>Giá trị khớp (VNĐ)</value>
+  </data>
+  <data name="AdminPendingOrders" xml:space="preserve">
+    <value>Lệnh chờ khớp</value>
+  </data>
+  <data name="AdminQuickStocks" xml:space="preserve">
+    <value>Quản lý mã cổ phiếu</value>
+  </data>
+  <data name="AdminQuickPrices" xml:space="preserve">
+    <value>Điều chỉnh giá / lịch sử giá</value>
+  </data>
+  <data name="AdminQuickUsers" xml:space="preserve">
+    <value>Quản lý tài khoản &amp; phân quyền</value>
+  </data>
+  <data name="AdminQuickReports" xml:space="preserve">
+    <value>Nhập báo cáo tài chính</value>
+  </data>
+  <data name="AdminRecentAudit" xml:space="preserve">
+    <value>Hoạt động gần đây</value>
+  </data>
+  <data name="AdminBanksSubtitle" xml:space="preserve">
+    <value>Thêm, sửa, xóa thông tin ngân hàng niêm yết.</value>
+  </data>
+  <data name="AdminAddBank" xml:space="preserve">
+    <value>Thêm ngân hàng</value>
+  </data>
+  <data name="AdminEditBank" xml:space="preserve">
+    <value>Sửa ngân hàng {0}</value>
+  </data>
+  <data name="AdminBankSearchPlaceholder" xml:space="preserve">
+    <value>Mã, tên ngân hàng...</value>
+  </data>
+  <data name="AdminStockCount" xml:space="preserve">
+    <value>Số mã CK</value>
+  </data>
+  <data name="AdminSavedBank" xml:space="preserve">
+    <value>Đã lưu ngân hàng {0}.</value>
+  </data>
+  <data name="FieldBankCode" xml:space="preserve">
+    <value>Mã ngân hàng</value>
+  </data>
+  <data name="FieldBankFullName" xml:space="preserve">
+    <value>Tên đầy đủ</value>
+  </data>
+  <data name="FieldBankShortName" xml:space="preserve">
+    <value>Tên viết tắt</value>
+  </data>
+  <data name="FieldWebsite" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="FieldLogoUrl" xml:space="preserve">
+    <value>URL logo</value>
+  </data>
+  <data name="BankCodeTaken" xml:space="preserve">
+    <value>Mã ngân hàng {0} đã tồn tại.</value>
+  </data>
+  <data name="BankDeleteHasStocks" xml:space="preserve">
+    <value>Không thể xóa ngân hàng {0} vì còn {1} mã cổ phiếu. Hãy xóa hoặc chuyển các mã này trước.</value>
+  </data>
+  <data name="ConfirmDeleteBank" xml:space="preserve">
+    <value>Xóa ngân hàng {0}? Thao tác không thể hoàn tác.</value>
+  </data>
+  <data name="AdminStocksSubtitle" xml:space="preserve">
+    <value>Quản lý mã cổ phiếu, chỉ số cơ bản và trạng thái giao dịch.</value>
+  </data>
+  <data name="AdminAddStock" xml:space="preserve">
+    <value>Thêm mã cổ phiếu</value>
+  </data>
+  <data name="AdminEditStock" xml:space="preserve">
+    <value>Sửa mã {0}</value>
+  </data>
+  <data name="AdminSavedStock" xml:space="preserve">
+    <value>Đã lưu mã {0}.</value>
+  </data>
+  <data name="AdminPriceSessions" xml:space="preserve">
+    <value>Số phiên giá</value>
+  </data>
+  <data name="AdminCharterCapitalHint" xml:space="preserve">
+    <value>Để trống để tính = KL niêm yết × mệnh giá.</value>
+  </data>
+  <data name="FieldStockCode" xml:space="preserve">
+    <value>Mã cổ phiếu</value>
+  </data>
+  <data name="FieldBank" xml:space="preserve">
+    <value>Ngân hàng</value>
+  </data>
+  <data name="FieldExchange" xml:space="preserve">
+    <value>Sàn</value>
+  </data>
+  <data name="FieldIsActive" xml:space="preserve">
+    <value>Đang giao dịch (hiển thị trên bảng giá)</value>
+  </data>
+  <data name="FieldPE" xml:space="preserve">
+    <value>P/E</value>
+  </data>
+  <data name="FieldPB" xml:space="preserve">
+    <value>P/B</value>
+  </data>
+  <data name="FieldEPS" xml:space="preserve">
+    <value>EPS (VNĐ)</value>
+  </data>
+  <data name="FieldCASA" xml:space="preserve">
+    <value>CASA (%)</value>
+  </data>
+  <data name="FieldCharterCapitalBillion" xml:space="preserve">
+    <value>Vốn điều lệ (tỷ VNĐ)</value>
+  </data>
+  <data name="StockCodeTaken" xml:space="preserve">
+    <value>Mã cổ phiếu {0} đã tồn tại.</value>
+  </data>
+  <data name="StockDeleteInUse" xml:space="preserve">
+    <value>Không thể xóa mã {0} vì đã có lệnh, giao dịch, danh mục hoặc watchlist. Hãy chuyển sang "Ngừng giao dịch".</value>
+  </data>
+  <data name="ConfirmDeleteStock" xml:space="preserve">
+    <value>Xóa mã {0}? Toàn bộ {1} phiên giá và báo cáo tài chính của mã cũng bị xóa.</value>
+  </data>
+  <data name="AdminPricesSubtitle" xml:space="preserve">
+    <value>Lịch sử giá theo phiên; điều chỉnh thủ công giá tham chiếu, trần, sàn, giá khớp.</value>
+  </data>
+  <data name="AdminAddPrice" xml:space="preserve">
+    <value>Thêm phiên giá</value>
+  </data>
+  <data name="AdminEditPrice" xml:space="preserve">
+    <value>Sửa phiên giá</value>
+  </data>
+  <data name="AdminSavedPrice" xml:space="preserve">
+    <value>Đã lưu phiên giá.</value>
+  </data>
+  <data name="AdminAdjustPrice" xml:space="preserve">
+    <value>Điều chỉnh giá</value>
+  </data>
+  <data name="AdminAdjustPriceTitle" xml:space="preserve">
+    <value>Điều chỉnh giá {0}</value>
+  </data>
+  <data name="AdminPriceAdjusted" xml:space="preserve">
+    <value>Đã cập nhật giá {0}. Khớp {1} lệnh chờ.</value>
+  </data>
+  <data name="AdminNewSessionNotice" xml:space="preserve">
+    <value>Chưa có phiên ngày này — sẽ tạo phiên mới.</value>
+  </data>
+  <data name="AdminExistingSessionNotice" xml:space="preserve">
+    <value>Đang sửa phiên đã có của ngày này.</value>
+  </data>
+  <data name="AdminAdjustHint" xml:space="preserve">
+    <value>Giá khớp là giá đóng cửa hiện tại của phiên; giá cao/thấp nhất được mở rộng theo giá khớp và giới hạn trong biên độ.</value>
+  </data>
+  <data name="AdminPriceRulesHint" xml:space="preserve">
+    <value>Ràng buộc: Sàn ≤ Tham chiếu ≤ Trần; Sàn ≤ Thấp nhất ≤ Mở cửa, Đóng cửa ≤ Cao nhất ≤ Trần.</value>
+  </data>
+  <data name="AdminCalcBand" xml:space="preserve">
+    <value>Tính trần/sàn</value>
+  </data>
+  <data name="AdminCalcBandHint" xml:space="preserve">
+    <value>Tính giá trần/sàn theo biên độ sàn (HOSE 7%, HNX 10%, UPCOM 15%)</value>
+  </data>
+  <data name="AdminBandMissingInput" xml:space="preserve">
+    <value>Chọn mã cổ phiếu và nhập giá tham chiếu trước.</value>
+  </data>
+  <data name="FieldTradeDate" xml:space="preserve">
+    <value>Ngày giao dịch</value>
+  </data>
+  <data name="ThOpen" xml:space="preserve">
+    <value>Mở cửa</value>
+  </data>
+  <data name="ThClose" xml:space="preserve">
+    <value>Đóng cửa</value>
+  </data>
+  <data name="PriceSessionExists" xml:space="preserve">
+    <value>Mã này đã có phiên giá ngày {0}.</value>
+  </data>
+  <data name="ConfirmDeletePrice" xml:space="preserve">
+    <value>Xóa phiên giá {0} ngày {1}?</value>
+  </data>
+  <data name="AdminReportsSubtitle" xml:space="preserve">
+    <value>Báo cáo tài chính định kỳ theo quý của các ngân hàng.</value>
+  </data>
+  <data name="AdminAddReport" xml:space="preserve">
+    <value>Thêm báo cáo</value>
+  </data>
+  <data name="AdminEditReport" xml:space="preserve">
+    <value>Sửa báo cáo tài chính</value>
+  </data>
+  <data name="AdminSavedReport" xml:space="preserve">
+    <value>Đã lưu báo cáo tài chính.</value>
+  </data>
+  <data name="FieldYear" xml:space="preserve">
+    <value>Năm</value>
+  </data>
+  <data name="FieldQuarter" xml:space="preserve">
+    <value>Quý</value>
+  </data>
+  <data name="FieldRevenueBillion" xml:space="preserve">
+    <value>Doanh thu (tỷ VNĐ)</value>
+  </data>
+  <data name="FieldNetProfitBillion" xml:space="preserve">
+    <value>Lợi nhuận ròng (tỷ VNĐ)</value>
+  </data>
+  <data name="FieldTotalAssetsBillion" xml:space="preserve">
+    <value>Tổng tài sản (tỷ VNĐ)</value>
+  </data>
+  <data name="FieldTotalLiabilitiesBillion" xml:space="preserve">
+    <value>Tổng nợ phải trả (tỷ VNĐ)</value>
+  </data>
+  <data name="ThTotalLiabilities" xml:space="preserve">
+    <value>Nợ phải trả</value>
+  </data>
+  <data name="ReportPeriodExists" xml:space="preserve">
+    <value>Mã này đã có báo cáo Q{0}/{1}.</value>
+  </data>
+  <data name="ConfirmDeleteReport" xml:space="preserve">
+    <value>Xóa báo cáo {0} Q{1}/{2}?</value>
+  </data>
+  <data name="AdminUsersSubtitle" xml:space="preserve">
+    <value>Khóa / mở khóa tài khoản và gán quyền Admin, Investor.</value>
+  </data>
+  <data name="AdminUserSearchPlaceholder" xml:space="preserve">
+    <value>Email, họ tên...</value>
+  </data>
+  <data name="AdminAssignRoles" xml:space="preserve">
+    <value>Phân quyền</value>
+  </data>
+  <data name="AdminLockUser" xml:space="preserve">
+    <value>Khóa</value>
+  </data>
+  <data name="AdminUnlockUser" xml:space="preserve">
+    <value>Mở khóa</value>
+  </data>
+  <data name="AdminUserLocked" xml:space="preserve">
+    <value>Đã khóa tài khoản.</value>
+  </data>
+  <data name="AdminUserUnlocked" xml:space="preserve">
+    <value>Đã mở khóa tài khoản.</value>
+  </data>
+  <data name="AdminRolesUpdated" xml:space="preserve">
+    <value>Đã cập nhật quyền cho {0}.</value>
+  </data>
+  <data name="AdminYou" xml:space="preserve">
+    <value>Bạn</value>
+  </data>
+  <data name="AdminWalletTotal" xml:space="preserve">
+    <value>Tổng tài sản ví</value>
+  </data>
+  <data name="FieldRole" xml:space="preserve">
+    <value>Vai trò</value>
+  </data>
+  <data name="RoleAdmin" xml:space="preserve">
+    <value>Quản trị viên</value>
+  </data>
+  <data name="RoleInvestor" xml:space="preserve">
+    <value>Nhà đầu tư</value>
+  </data>
+  <data name="RoleAdminHint" xml:space="preserve">
+    <value>Toàn quyền khu quản trị: dữ liệu, giá, người dùng, nhật ký.</value>
+  </data>
+  <data name="RoleInvestorHint" xml:space="preserve">
+    <value>Giao dịch giả lập, watchlist, ví ảo. Tự tạo ví 500 triệu nếu chưa có.</value>
+  </data>
+  <data name="UserStatusActive" xml:space="preserve">
+    <value>Hoạt động</value>
+  </data>
+  <data name="UserStatusDisabled" xml:space="preserve">
+    <value>Bị khóa</value>
+  </data>
+  <data name="UserStatusLockedOut" xml:space="preserve">
+    <value>Khóa tạm (sai mật khẩu)</value>
+  </data>
+  <data name="UserCannotLockSelf" xml:space="preserve">
+    <value>Bạn không thể tự khóa tài khoản của mình.</value>
+  </data>
+  <data name="UserCannotRemoveOwnAdmin" xml:space="preserve">
+    <value>Bạn không thể tự gỡ quyền Admin của mình.</value>
+  </data>
+  <data name="UserRoleRequired" xml:space="preserve">
+    <value>Người dùng phải có ít nhất một vai trò.</value>
+  </data>
+  <data name="ConfirmLockUser" xml:space="preserve">
+    <value>Khóa tài khoản {0}? Người dùng sẽ bị đăng xuất và không thể đăng nhập.</value>
+  </data>
+  <data name="ConfirmUnlockUser" xml:space="preserve">
+    <value>Mở khóa tài khoản {0}?</value>
+  </data>
+  <data name="AdminWalletsSubtitle" xml:space="preserve">
+    <value>Thống kê số dư, tiền phong tỏa và dòng tiền ví ảo của nhà đầu tư.</value>
+  </data>
+  <data name="AdminStatWallets" xml:space="preserve">
+    <value>Số ví</value>
+  </data>
+  <data name="AdminAverageBalance" xml:space="preserve">
+    <value>Bình quân</value>
+  </data>
+  <data name="AdminStatCashBalance" xml:space="preserve">
+    <value>Tổng tiền khả dụng</value>
+  </data>
+  <data name="AdminStatBlockedBalance" xml:space="preserve">
+    <value>Tổng tiền phong tỏa</value>
+  </data>
+  <data name="AdminStatCashFlow" xml:space="preserve">
+    <value>Dòng tiền (VNĐ)</value>
+  </data>
+  <data name="AdminInvestor" xml:space="preserve">
+    <value>Nhà đầu tư</value>
+  </data>
+  <data name="AdminCashBalance" xml:space="preserve">
+    <value>Khả dụng</value>
+  </data>
+  <data name="AdminBlockedBalance" xml:space="preserve">
+    <value>Phong tỏa</value>
+  </data>
+  <data name="AdminTxCount" xml:space="preserve">
+    <value>Số GD</value>
+  </data>
+  <data name="AdminViewTransactions" xml:space="preserve">
+    <value>Xem giao dịch ví</value>
+  </data>
+  <data name="AdminRecentTransactions" xml:space="preserve">
+    <value>Giao dịch ví gần đây</value>
+  </data>
+  <data name="AdminRecentTransactionsNote" xml:space="preserve">
+    <value>Hiển thị tối đa {0} giao dịch gần nhất.</value>
+  </data>
+  <data name="AdminTxType" xml:space="preserve">
+    <value>Loại</value>
+  </data>
+  <data name="AdminAmount" xml:space="preserve">
+    <value>Số tiền</value>
+  </data>
+  <data name="AdminBalanceAfter" xml:space="preserve">
+    <value>Số dư sau</value>
+  </data>
+  <data name="TxDeposit" xml:space="preserve">
+    <value>Nạp tiền</value>
+  </data>
+  <data name="TxWithdraw" xml:space="preserve">
+    <value>Rút tiền</value>
+  </data>
+  <data name="TxInitialGrant" xml:space="preserve">
+    <value>Cấp ban đầu</value>
+  </data>
+  <data name="TxBuyDebit" xml:space="preserve">
+    <value>Mua CK</value>
+  </data>
+  <data name="TxSellCredit" xml:space="preserve">
+    <value>Bán CK</value>
+  </data>
+  <data name="TxFee" xml:space="preserve">
+    <value>Phí GD</value>
+  </data>
+  <data name="TxRefund" xml:space="preserve">
+    <value>Hoàn tiền</value>
+  </data>
+  <data name="AdminAuditSubtitle" xml:space="preserve">
+    <value>Nhật ký đăng nhập, thao tác ghi của Admin và giao dịch.</value>
+  </data>
+  <data name="AdminAuditSearchPlaceholder" xml:space="preserve">
+    <value>Email, chi tiết, IP...</value>
+  </data>
+  <data name="FieldAuditAction" xml:space="preserve">
+    <value>Hành động</value>
+  </data>
+  <data name="AdminActor" xml:space="preserve">
+    <value>Người thực hiện</value>
+  </data>
+  <data name="AdminEntity" xml:space="preserve">
+    <value>Đối tượng</value>
+  </data>
+  <data name="NavDashboard" xml:space="preserve">
+    <value>Tổng quan</value>
+  </data>
+  <data name="NavTrade" xml:space="preserve">
+    <value>Đặt lệnh</value>
+  </data>
+  <data name="NavTrades" xml:space="preserve">
+    <value>Lịch sử khớp</value>
+  </data>
+  <data name="InvestorArea" xml:space="preserve">
+    <value>Khu nhà đầu tư</value>
+  </data>
+  <data name="BtnRefresh" xml:space="preserve">
+    <value>Làm mới</value>
+  </data>
+  <data name="ConcurrencyConflict" xml:space="preserve">
+    <value>Dữ liệu vừa được cập nhật bởi thao tác khác. Vui lòng thử lại.</value>
+  </data>
+  <data name="FieldOrderType" xml:space="preserve">
+    <value>Loại lệnh</value>
+  </data>
+  <data name="FieldOrderMode" xml:space="preserve">
+    <value>Kiểu lệnh</value>
+  </data>
+  <data name="FieldOrderPrice" xml:space="preserve">
+    <value>Giá đặt</value>
+  </data>
+  <data name="FieldQuantity" xml:space="preserve">
+    <value>Khối lượng</value>
+  </data>
+  <data name="ThMatchedPrice" xml:space="preserve">
+    <value>Giá khớp</value>
+  </data>
+  <data name="OrderTypeBuy" xml:space="preserve">
+    <value>Mua</value>
+  </data>
+  <data name="OrderTypeSell" xml:space="preserve">
+    <value>Bán</value>
+  </data>
+  <data name="OrderModeMarket" xml:space="preserve">
+    <value>Thị trường</value>
+  </data>
+  <data name="OrderModeLimit" xml:space="preserve">
+    <value>Giới hạn (LO)</value>
+  </data>
+  <data name="OrderStatusPending" xml:space="preserve">
+    <value>Chờ khớp</value>
+  </data>
+  <data name="OrderStatusMatched" xml:space="preserve">
+    <value>Đã khớp</value>
+  </data>
+  <data name="OrderStatusCancelled" xml:space="preserve">
+    <value>Đã hủy</value>
+  </data>
+  <data name="OrderCancel" xml:space="preserve">
+    <value>Hủy lệnh</value>
+  </data>
+  <data name="OrderCancelled" xml:space="preserve">
+    <value>Đã hủy lệnh #{0} và hoàn lại tiền / cổ phiếu bị giam.</value>
+  </data>
+  <data name="ConfirmCancelOrder" xml:space="preserve">
+    <value>Hủy lệnh #{0}: {1} {2} {3}?</value>
+  </data>
+  <data name="OrderMatchedNow" xml:space="preserve">
+    <value>Đã khớp lệnh {0} {1} {2} giá {3} (phí {4} VNĐ).</value>
+  </data>
+  <data name="OrderPendingNow" xml:space="preserve">
+    <value>Đã đặt lệnh {0} {1} {2} giá {3}, đang chờ khớp.</value>
+  </data>
+  <data name="OrderQuantityInvalid" xml:space="preserve">
+    <value>Khối lượng phải là bội số của {0}, tối đa {1:N0} cổ phiếu.</value>
+  </data>
+  <data name="OrderStockNotTradable" xml:space="preserve">
+    <value>Mã {0} không tồn tại hoặc đang ngừng giao dịch.</value>
+  </data>
+  <data name="OrderPriceOutOfBand" xml:space="preserve">
+    <value>Giá đặt phải nằm trong khoảng giá sàn {0:N0} – giá trần {1:N0}.</value>
+  </data>
+  <data name="OrderInsufficientCash" xml:space="preserve">
+    <value>Không đủ tiền: cần {0:N0} VNĐ (gồm phí) nhưng số dư khả dụng chỉ còn {1:N0} VNĐ.</value>
+  </data>
+  <data name="OrderInsufficientShares" xml:space="preserve">
+    <value>Không đủ cổ phiếu: chỉ có {0:N0} {1} khả dụng để bán.</value>
+  </data>
+  <data name="OrderNotPending" xml:space="preserve">
+    <value>Chỉ có thể hủy lệnh đang chờ khớp.</value>
+  </data>
+  <data name="OrderFeeNote" xml:space="preserve">
+    <value>Phí lệnh chờ là phí dự kiến; phí thực tế tính theo giá khớp.</value>
+  </data>
+  <data name="ValLotSize" xml:space="preserve">
+    <value>{0} phải là bội số của {1} (lô giao dịch theo quy định sàn).</value>
+  </data>
+  <data name="ValQuantityRange" xml:space="preserve">
+    <value>{0} phải từ {1:N0} đến {2:N0} cổ phiếu.</value>
+  </data>
+  <data name="ValLimitPriceRequired" xml:space="preserve">
+    <value>Lệnh giới hạn cần nhập giá đặt.</value>
+  </data>
+  <data name="TradeTitle" xml:space="preserve">
+    <value>Đặt lệnh</value>
+  </data>
+  <data name="TradeSubtitle" xml:space="preserve">
+    <value>Mua / bán cổ phiếu ngân hàng giả lập, khớp theo giá phiên gần nhất.</value>
+  </data>
+  <data name="TradeNoStocks" xml:space="preserve">
+    <value>Chưa có mã nào đang giao dịch.</value>
+  </data>
+  <data name="TradeConfirmTitle" xml:space="preserve">
+    <value>Xác nhận đặt lệnh</value>
+  </data>
+  <data name="TradeEstimatedValue" xml:space="preserve">
+    <value>Giá trị lệnh</value>
+  </data>
+  <data name="TradeEstimatedFee" xml:space="preserve">
+    <value>Phí dự kiến</value>
+  </data>
+  <data name="TradeTotalPay" xml:space="preserve">
+    <value>Tổng tiền trả</value>
+  </data>
+  <data name="TradeTotalReceive" xml:space="preserve">
+    <value>Tiền nhận về</value>
+  </data>
+  <data name="TradeAvailableCash" xml:space="preserve">
+    <value>Tiền khả dụng</value>
+  </data>
+  <data name="TradeAvailableShares" xml:space="preserve">
+    <value>Cổ phiếu khả dụng</value>
+  </data>
+  <data name="TradeMaxQuantity" xml:space="preserve">
+    <value>KL tối đa</value>
+  </data>
+  <data name="TradeSubmitBuy" xml:space="preserve">
+    <value>Đặt lệnh MUA</value>
+  </data>
+  <data name="TradeSubmitSell" xml:space="preserve">
+    <value>Đặt lệnh BÁN</value>
+  </data>
+  <data name="TradeRulesHint" xml:space="preserve">
+    <value>Lệnh thị trường khớp ngay theo giá khớp hiện tại. Lệnh giới hạn khớp khi giá thị trường chạm giá đặt (mua: giá khớp ≤ giá đặt; bán: giá khớp ≥ giá đặt), nếu chưa sẽ chờ tới khi giá thay đổi. Khi đặt lệnh mua, tiền (kể cả phí) bị giam; lệnh bán giam cổ phiếu.</value>
+  </data>
+  <data name="TradePendingOrders" xml:space="preserve">
+    <value>Lệnh đang chờ khớp</value>
+  </data>
+  <data name="TradeNoPending" xml:space="preserve">
+    <value>Không có lệnh chờ khớp.</value>
+  </data>
+  <data name="OrderHistoryTitle" xml:space="preserve">
+    <value>Sổ lệnh</value>
+  </data>
+  <data name="OrderHistorySubtitle" xml:space="preserve">
+    <value>Tất cả lệnh đã đặt; có thể hủy lệnh đang chờ khớp.</value>
+  </data>
+  <data name="TradeHistoryTitle" xml:space="preserve">
+    <value>Lịch sử khớp lệnh</value>
+  </data>
+  <data name="TradeHistorySubtitle" xml:space="preserve">
+    <value>Các giao dịch đã khớp kèm phí và số tiền thực trả / nhận.</value>
+  </data>
+  <data name="TradeValue" xml:space="preserve">
+    <value>Giá trị</value>
+  </data>
+  <data name="TradeNetAmount" xml:space="preserve">
+    <value>Tiền thực trả / nhận</value>
+  </data>
+  <data name="TradeOrderRef" xml:space="preserve">
+    <value>Lệnh</value>
+  </data>
+  <data name="AdminOrdersSubtitle" xml:space="preserve">
+    <value>Sổ lệnh giả lập của toàn bộ nhà đầu tư.</value>
+  </data>
+  <data name="AdminOrderSearchPlaceholder" xml:space="preserve">
+    <value>Email, mã CK...</value>
+  </data>
+  <data name="WalletTitle" xml:space="preserve">
+    <value>Ví đầu tư ảo</value>
+  </data>
+  <data name="WalletSubtitle" xml:space="preserve">
+    <value>Nạp / rút tiền giả lập và theo dõi lịch sử giao dịch tiền.</value>
+  </data>
+  <data name="WalletBlockedHint" xml:space="preserve">
+    <value>Đang giam cho lệnh mua chờ khớp</value>
+  </data>
+  <data name="WalletTotalCash" xml:space="preserve">
+    <value>Tổng tiền</value>
+  </data>
+  <data name="WalletTransferHint" xml:space="preserve">
+    <value>Giả lập, không phát sinh tiền thật. Mỗi lần từ 100.000 đến 10 tỷ VNĐ; chỉ rút được tiền khả dụng.</value>
+  </data>
+  <data name="WalletHistory" xml:space="preserve">
+    <value>Lịch sử giao dịch tiền</value>
+  </data>
+  <data name="WalletBalanceAfter" xml:space="preserve">
+    <value>Tổng tiền sau GD</value>
+  </data>
+  <data name="WalletDeposited" xml:space="preserve">
+    <value>Đã nạp {0} VNĐ vào ví.</value>
+  </data>
+  <data name="WalletWithdrawn" xml:space="preserve">
+    <value>Đã rút {0} VNĐ khỏi ví.</value>
+  </data>
+  <data name="WalletAmountInvalid" xml:space="preserve">
+    <value>Số tiền phải là số nguyên từ {0:N0} đến {1:N0} VNĐ.</value>
+  </data>
+  <data name="WalletInsufficientBalance" xml:space="preserve">
+    <value>Số dư khả dụng không đủ (còn {0:N0} VNĐ).</value>
+  </data>
+  <data name="WalletInactive" xml:space="preserve">
+    <value>Ví đang bị khóa.</value>
+  </data>
+  <data name="WalletNotFound" xml:space="preserve">
+    <value>Tài khoản chưa có ví đầu tư.</value>
+  </data>
+  <data name="FieldAmount" xml:space="preserve">
+    <value>Số tiền</value>
+  </data>
+  <data name="ConfirmWithdraw" xml:space="preserve">
+    <value>Rút {0} VNĐ khỏi ví?</value>
+  </data>
+  <data name="InvestorDashboardTitle" xml:space="preserve">
+    <value>Tổng quan đầu tư</value>
+  </data>
+  <data name="InvestorDashboardSubtitle" xml:space="preserve">
+    <value>Tài sản, danh mục và watchlist — tự cập nhật mỗi 30 giây.</value>
+  </data>
+  <data name="PortfolioTitle" xml:space="preserve">
+    <value>Danh mục đầu tư</value>
+  </data>
+  <data name="PortfolioSubtitle" xml:space="preserve">
+    <value>Mã đang nắm giữ, giá vốn bình quân và lãi/lỗ chưa thực hiện theo giá thị trường.</value>
+  </data>
+  <data name="PortfolioTotalAssets" xml:space="preserve">
+    <value>Tổng tài sản</value>
+  </data>
+  <data name="PortfolioTotalReturn" xml:space="preserve">
+    <value>Lãi/lỗ tổng</value>
+  </data>
+  <data name="PortfolioStockValue" xml:space="preserve">
+    <value>Giá trị cổ phiếu</value>
+  </data>
+  <data name="PortfolioCostValue" xml:space="preserve">
+    <value>Giá vốn</value>
+  </data>
+  <data name="PortfolioUnrealizedPnl" xml:space="preserve">
+    <value>Lãi/lỗ chưa thực hiện</value>
+  </data>
+  <data name="PortfolioHoldings" xml:space="preserve">
+    <value>Cổ phiếu đang nắm giữ</value>
+  </data>
+  <data name="PortfolioQuantity" xml:space="preserve">
+    <value>Tổng KL</value>
+  </data>
+  <data name="PortfolioAvailableQty" xml:space="preserve">
+    <value>KL khả dụng</value>
+  </data>
+  <data name="PortfolioAvgCost" xml:space="preserve">
+    <value>Giá vốn BQ</value>
+  </data>
+  <data name="PortfolioMarketValue" xml:space="preserve">
+    <value>Giá trị TT</value>
+  </data>
+  <data name="PortfolioWeight" xml:space="preserve">
+    <value>Tỷ trọng</value>
+  </data>
+  <data name="PortfolioAllocation" xml:space="preserve">
+    <value>Cơ cấu tài sản</value>
+  </data>
+  <data name="PortfolioCash" xml:space="preserve">
+    <value>Tiền</value>
+  </data>
+  <data name="PortfolioEmpty" xml:space="preserve">
+    <value>Chưa nắm giữ cổ phiếu nào.</value>
+  </data>
+  <data name="PortfolioNote" xml:space="preserve">
+    <value>Lãi/lỗ tổng = tổng tài sản − (cấp ban đầu + nạp − rút). Giá vốn bình quân gia quyền, không gồm phí.</value>
+  </data>
+  <data name="WatchlistSubtitle" xml:space="preserve">
+    <value>Theo dõi nhanh giá các mã quan tâm.</value>
+  </data>
+  <data name="WatchlistAdd" xml:space="preserve">
+    <value>Theo dõi</value>
+  </data>
+  <data name="WatchlistRemove" xml:space="preserve">
+    <value>Bỏ theo dõi</value>
+  </data>
+  <data name="WatchlistAdded" xml:space="preserve">
+    <value>Đã thêm vào watchlist.</value>
+  </data>
+  <data name="WatchlistRemoved" xml:space="preserve">
+    <value>Đã bỏ khỏi watchlist.</value>
+  </data>
+  <data name="WatchlistEmpty" xml:space="preserve">
+    <value>Watchlist trống. Hãy thêm mã để theo dõi.</value>
+  </data>
+  <data name="WatchlistPick" xml:space="preserve">
+    <value>Chọn mã</value>
+  </data>
+  <data name="WatchlistManage" xml:space="preserve">
+    <value>Quản lý</value>
+  </data>
+  <data name="WatchlistFull" xml:space="preserve">
+    <value>Watchlist tối đa {0} mã.</value>
+  </data>
+  <data name="JsValMin" xml:space="preserve">
+    <value>Giá trị phải lớn hơn hoặc bằng {0}.</value>
+  </data>
+  <data name="JsValMax" xml:space="preserve">
+    <value>Giá trị phải nhỏ hơn hoặc bằng {0}.</value>
+  </data>
+  <data name="JsValStep" xml:space="preserve">
+    <value>Giá trị phải là bội số của {0}.</value>
+  </data>
+  <data name="JsValNumber" xml:space="preserve">
+    <value>Vui lòng nhập một số hợp lệ.</value>
+  </data>
+  <data name="OrderDraftTitle" xml:space="preserve">
+    <value>Giỏ lệnh nháp</value>
+  </data>
+  <data name="OrderDraftHint" xml:space="preserve">
+    <value>Lưu trong phiên làm việc, chưa giam tiền / cổ phiếu cho tới khi đặt lệnh.</value>
+  </data>
+  <data name="OrderDraftSave" xml:space="preserve">
+    <value>Lưu nháp</value>
+  </data>
+  <data name="OrderDraftSaved" xml:space="preserve">
+    <value>Đã lưu lệnh vào giỏ lệnh nháp.</value>
+  </data>
+  <data name="OrderDraftFull" xml:space="preserve">
+    <value>Giỏ lệnh nháp đã đủ {0} lệnh. Hãy xóa bớt trước khi lưu thêm.</value>
+  </data>
+  <data name="OrderDraftEmpty" xml:space="preserve">
+    <value>Chưa có lệnh nháp. Bấm "Lưu nháp" để giữ lệnh lại và đặt sau.</value>
+  </data>
+  <data name="OrderDraftUse" xml:space="preserve">
+    <value>Dùng</value>
+  </data>
+  <data name="OrderDraftLoaded" xml:space="preserve">
+    <value>Đã điền lệnh nháp vào form. Kiểm tra lại rồi bấm đặt lệnh.</value>
+  </data>
+  <data name="OrderDraftRemoved" xml:space="preserve">
+    <value>Đã xóa lệnh nháp.</value>
+  </data>
+  <data name="OrderDraftCleared" xml:space="preserve">
+    <value>Đã xóa toàn bộ giỏ lệnh nháp.</value>
+  </data>
+  <data name="OrderDraftClear" xml:space="preserve">
+    <value>Xóa tất cả</value>
+  </data>
+  <data name="OrderDraftNotFound" xml:space="preserve">
+    <value>Lệnh nháp không còn tồn tại (phiên làm việc có thể đã hết hạn).</value>
+  </data>
+  <data name="ConfirmRemoveDraft" xml:space="preserve">
+    <value>Xóa lệnh nháp {0} {1} {2}?</value>
+  </data>
+  <data name="ConfirmClearDrafts" xml:space="preserve">
+    <value>Xóa toàn bộ lệnh trong giỏ lệnh nháp?</value>
+  </data>
+</root>

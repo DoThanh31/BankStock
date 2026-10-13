@@ -1,0 +1,140 @@
+@{
+    ViewData["Title"] = Localizer["AboutTitle"];
+}
+
+<!-- About Hero Section -->
+<div class="about-hero rounded-4 mb-4">
+    <div class="container py-4 text-center">
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill mb-3">
+            <i class="bi bi-bank me-1"></i> Fintech Simulation
+        </span>
+        <h1 class="display-5 fw-bold mb-3">@Localizer["AboutTitle"]</h1>
+        <p class="lead text-secondary mx-auto" style="max-width: 720px;">
+            @Localizer["AboutSubtitle"]
+        </p>
+    </div>
+</div>
+
+<!-- Mission Section -->
+<div class="stock-card mb-4 p-4 p-lg-5">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-6">
+            <span class="text-primary text-uppercase fw-bold small letter-spacing-1">Giới thiệu nền tảng</span>
+            <h2 class="fw-bold mt-1 mb-3">@Localizer["AboutMissionTitle"]</h2>
+            <p class="text-secondary leading-relaxed mb-4">
+                @Localizer["AboutMissionDesc"]
+            </p>
+            <div class="d-flex flex-wrap gap-3">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-primary px-4 py-2">
+                    <i class="bi bi-table me-2"></i>@Localizer["BtnBackBoard"]
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="row g-3">
+                <div class="col-6">
+                    <div class="p-3 rounded-3 bg-body-tertiary border border-subtle text-center">
+                        <div class="display-6 fw-bold text-primary num-font">10</div>
+                        <div class="text-secondary small">Ngân hàng hàng đầu</div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="p-3 rounded-3 bg-body-tertiary border border-subtle text-center">
+                        <div class="display-6 fw-bold stock-ceil num-font">500M</div>
+                        <div class="text-secondary small">Vốn ban đầu trải nghiệm</div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="p-3 rounded-3 bg-body-tertiary border border-subtle text-center">
+                        <div class="display-6 fw-bold stock-up num-font">0.15%</div>
+                        <div class="text-secondary small">Phí giao dịch ưu đãi</div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="p-3 rounded-3 bg-body-tertiary border border-subtle text-center">
+                        <div class="display-6 fw-bold stock-floor num-font">100%</div>
+                        <div class="text-secondary small">Dữ liệu mô phỏng bảo mật</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Key Features Grid -->
+<div class="row g-4 mb-4">
+    <!-- Feature 1 -->
+    <div class="col-lg-4 col-md-6">
+        <div class="feature-box">
+            <div class="feature-icon-wrap">
+                <i class="bi bi-speedometer2"></i>
+            </div>
+            <h5 class="fw-bold mb-2">@Localizer["AboutFeature1Title"]</h5>
+            <p class="text-secondary small mb-0">@Localizer["AboutFeature1Desc"]</p>
+        </div>
+    </div>
+
+    <!-- Feature 2 -->
+    <div class="col-lg-4 col-md-6">
+        <div class="feature-box">
+            <div class="feature-icon-wrap">
+                <i class="bi bi-wallet2"></i>
+            </div>
+            <h5 class="fw-bold mb-2">@Localizer["AboutFeature2Title"]</h5>
+            <p class="text-secondary small mb-0">@Localizer["AboutFeature2Desc"]</p>
+        </div>
+    </div>
+
+    <!-- Feature 3 -->
+    <div class="col-lg-4 col-md-12">
+        <div class="feature-box">
+            <div class="feature-icon-wrap">
+                <i class="bi bi-pie-chart-fill"></i>
+            </div>
+            <h5 class="fw-bold mb-2">@Localizer["AboutFeature3Title"]</h5>
+            <p class="text-secondary small mb-0">@Localizer["AboutFeature3Desc"]</p>
+        </div>
+    </div>
+</div>
+
+<!-- Coverage & Tech Stack -->
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="stock-card p-4 h-100">
+            <h5 class="fw-bold mb-3 d-flex align-items-center gap-2">
+                <i class="bi bi-buildings text-primary"></i>
+                @Localizer["AboutBanksTitle"]
+            </h5>
+            <p class="text-secondary small mb-3">@Localizer["AboutBanksDesc"]</p>
+            <div class="d-flex flex-wrap gap-2">
+                <span class="badge bg-body-tertiary text-primary-emphasis border px-3 py-2 num-font">VCB</span>
+                <span class="badge bg-body-tertiary text-primary-emphasis border px-3 py-2 num-font">BID</span>
+                <span class="badge bg-body-tertiary text-primary-emphasis border px-3 py-2 num-font">CTG</span>
+                <span class="badge bg-body-tertiary text-primary-emphasis border px-3 py-2 num-font">TCB</span>
+                <span class="badge bg-body-tertiary text-primary-emphasis border px-3 py-2 num-font">MBB</span>
+                <span class="badge bg-body-tertiary text-primary-emphasis border px-3 py-2 num-font">VPB</span>
+                <span class="badge bg-body-tertiary text-primary-emphasis border px-3 py-2 num-font">ACB</span>
+                <span class="badge bg-body-tertiary text-primary-emphasis border px-3 py-2 num-font">STB</span>
+                <span class="badge bg-body-tertiary text-primary-emphasis border px-3 py-2 num-font">HDB</span>
+                <span class="badge bg-body-tertiary text-primary-emphasis border px-3 py-2 num-font">TPB</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="stock-card p-4 h-100">
+            <h5 class="fw-bold mb-3 d-flex align-items-center gap-2">
+                <i class="bi bi-code-slash text-info"></i>
+                @Localizer["AboutTechTitle"]
+            </h5>
+            <p class="text-secondary small mb-3">@Localizer["AboutTechDesc"]</p>
+            <div class="d-flex flex-wrap gap-2">
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2">.NET 8 (C# 12)</span>
+                <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2">ASP.NET Core MVC</span>
+                <span class="badge bg-info-subtle text-info border border-info-subtle px-3 py-2">Entity Framework Core 8</span>
+                <span class="badge bg-warning-subtle text-warning border border-warning-subtle px-3 py-2">SQL Server</span>
+                <span class="badge bg-secondary-subtle text-secondary border px-3 py-2">Bootstrap 5.3.3</span>
+            </div>
+        </div>
+    </div>
+</div>

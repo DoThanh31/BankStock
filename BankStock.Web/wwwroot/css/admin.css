@@ -1,0 +1,332 @@
+/* ==========================================================================
+   ADMIN LAYOUT CSS (AdminLTE / SB Admin 2 Inspiration)
+   ========================================================================== */
+
+.admin-wrapper {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Sidebar */
+.admin-sidebar {
+    width: 260px;
+    background: var(--bg-surface);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1040;
+}
+
+.admin-sidebar-brand {
+    padding: 1.25rem 1.5rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.admin-sidebar-menu {
+    list-style: none;
+    padding: 1rem 0.75rem;
+    margin: 0;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.admin-menu-header {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--text-muted);
+    padding: 0.85rem 0.75rem 0.35rem;
+}
+
+.admin-nav-item {
+    margin-bottom: 0.2rem;
+}
+
+.admin-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0.85rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+}
+
+.admin-nav-link i {
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.admin-nav-link:hover,
+.admin-nav-link.active {
+    color: var(--text-primary);
+    background-color: var(--bg-hover);
+}
+
+.admin-nav-link.active {
+    background-color: rgba(37, 99, 235, 0.15);
+    color: var(--brand-primary);
+    font-weight: 600;
+}
+
+/* Main Content Area */
+.admin-main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background-color: var(--bg-base);
+}
+
+/* Topbar */
+.admin-topbar {
+    height: 64px;
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+
+.admin-content-body {
+    padding: 1.75rem;
+    flex-grow: 1;
+}
+
+/* Stat Cards (SB Admin 2 style) */
+.admin-stat-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s ease;
+}
+
+.admin-stat-card:hover {
+    transform: translateY(-2px);
+}
+
+.admin-stat-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--brand-primary);
+}
+
+.admin-stat-card.card-green::before { background: var(--stock-up); }
+.admin-stat-card.card-purple::before { background: var(--stock-ceil); }
+.admin-stat-card.card-cyan::before { background: var(--stock-floor); }
+.admin-stat-card.card-amber::before { background: var(--stock-ref); }
+
+.admin-stat-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 0.35rem;
+}
+
+.admin-stat-value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    color: var(--text-primary);
+    margin-bottom: 0;
+}
+
+.admin-stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--bg-surface-elevated);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+}
+
+/* Admin Footer */
+.admin-footer {
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border-color);
+    padding: 1rem 1.5rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+}
+
+/* Mobile Sidebar & Overlay */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1035;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+@media (max-width: 991.98px) {
+    .admin-sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+    }
+
+    .admin-sidebar.show {
+        transform: translateX(0);
+    }
+
+    .sidebar-overlay.show {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .admin-content-body {
+        padding: 1rem;
+    }
+}
+
+/* ==========================================================================
+   ADMIN CRUD (Phase 4)
+   ========================================================================== */
+
+.admin-page-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.admin-bank-logo {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.admin-stat-value-sm {
+    font-size: 1.15rem;
+}
+
+a.admin-stat-card {
+    color: inherit;
+}
+
+/* Modal theo theme sáng/tối */
+.admin-modal-content {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.admin-modal-content .modal-header,
+.admin-modal-content .modal-footer {
+    border-color: var(--border-color);
+}
+
+.admin-modal-content .form-control,
+.admin-modal-content .form-select {
+    background-color: var(--bg-base);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.admin-form-section {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin: 0.25rem 0 0.75rem;
+}
+
+.admin-form-section:not(:first-of-type) {
+    margin-top: 1.5rem;
+}
+
+/* Xếp hạng mã giao dịch nhiều nhất */
+.admin-rank-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.45rem 0;
+}
+
+.admin-rank-no {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--bg-surface-elevated);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.admin-rank-bar {
+    height: 6px;
+    background-color: var(--bg-surface-elevated);
+}
+
+.admin-audit-feed li {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.admin-audit-feed li:last-child {
+    border-bottom: 0;
+}
+
+.admin-audit-detail {
+    max-width: 320px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.min-w-0 {
+    min-width: 0;
+}

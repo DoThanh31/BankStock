@@ -1,0 +1,99 @@
+@model StockListViewModel
+@{
+    ViewData["Title"] = Localizer["StockListTitle"];
+    var q = Model.Query;
+}
+
+<div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-3">
+    <div>
+        <h4 class="fw-bold mb-1"><i class="bi bi-list-columns-reverse text-primary me-2"></i>@Localizer["StockListTitle"]</h4>
+        <p class="text-secondary small mb-0">@Localizer["StockListSubtitle"]</p>
+    </div>
+</div>
+
+<!-- Bộ lọc: submit GET bình thường, stock-list.js chuyển thành AJAX -->
+<form id="stockFilterForm" class="stock-card filter-panel mb-3" method="get" asp-controller="Stocks" asp-action="Index" role="search">
+    <div class="row g-3 align-items-end">
+        <div class="col-lg-3 col-md-6">
+            <label for="filterQ" class="form-label small text-secondary">@Localizer["FieldSearch"]</label>
+            <input type="search" id="filterQ" name="q" value="@q.Q" maxlength="50" class="form-control form-control-sm fintech-search-input w-100"
+                   placeholder="@Localizer["SearchPlaceholder"]" autocomplete="off" />
+        </div>
+        <div class="col-lg-2 col-md-3 col-6">
+            <label for="filterGroup" class="form-label small text-secondary">@Localizer["FieldBankGroup"]</label>
+            <select id="filterGroup" name="group" class="form-select form-select-sm">
+                <option value="" selected="@(q.Group is null)">@Localizer["FilterAll"]</option>
+                <option value="Big4" selected="@(q.Group == BankGroup.Big4)">@Localizer["FilterBig4"]</option>
+                <option value="PrivateJSC" selected="@(q.Group == BankGroup.PrivateJSC)">@Localizer["FilterPrivate"]</option>
+            </select>
+        </div>
+        <div class="col-lg-2 col-md-3 col-6">
+            <label for="filterDividend" class="form-label small text-secondary">@Localizer["FilterMinDividend"]</label>
+            <select id="filterDividend" name="minDividend" class="form-select form-select-sm">
+                <option value="" selected="@(q.MinDividend is null)">@Localizer["FilterAny"]</option>
+                @foreach (var level in new[] { 2m, 4m, 5m })
+                {
+                    <option value="@level.ToString(System.Globalization.CultureInfo.InvariantCulture)" selected="@(q.MinDividend == level)">≥ @level.ToString("0")%</option>
+                }
+            </select>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <span class="form-label small text-secondary d-block">@Localizer["FilterValuation"]</span>
+            <div class="d-flex flex-wrap gap-3">
+                <div class="form-check form-check-inline m-0">
+                    <input class="form-check-input" type="checkbox" id="filterPe" name="peUnder10" value="true" checked="@q.PeUnder10" />
+                    <label class="form-check-label small" for="filterPe">@Localizer["FilterPeUnder10"]</label>
+                </div>
+                <div class="form-check form-check-inline m-0">
+                    <input class="form-check-input" type="checkbox" id="filterCasa" name="casaOver30" value="true" checked="@q.CasaOver30" />
+                    <label class="form-check-label small" for="filterCasa">@Localizer["FilterCasaOver30"]</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="row g-2">
+                <div class="col-5">
+                    <label for="filterSort" class="form-label small text-secondary">@Localizer["SortBy"]</label>
+                    <select id="filterSort" name="sort" class="form-select form-select-sm">
+                        @foreach (var field in Enum.GetValues<StockSortField>())
+                        {
+                            <option value="@field" selected="@(q.Sort == field)">@Localizer["Sort" + field]</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-4">
+                    <label for="filterDir" class="form-label small text-secondary">@Localizer["SortDirection"]</label>
+                    <select id="filterDir" name="dir" class="form-select form-select-sm">
+                        <option value="Asc" selected="@(q.Dir == SortDirection.Asc)">@Localizer["SortAsc"]</option>
+                        <option value="Desc" selected="@(q.Dir == SortDirection.Desc)">@Localizer["SortDesc"]</option>
+                    </select>
+                </div>
+                <div class="col-3">
+                    <label for="filterPageSize" class="form-label small text-secondary">@Localizer["PageSize"]</label>
+                    <select id="filterPageSize" name="pageSize" class="form-select form-select-sm">
+                        @foreach (var size in StockListQuery.AllowedPageSizes)
+                        {
+                            <option value="@size" selected="@(q.PageSize == size)">@size</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex flex-wrap justify-content-end gap-2 mt-3">
+        <a asp-controller="Stocks" asp-action="Index" asp-route-reset="true" class="btn btn-sm btn-outline-secondary" id="filterReset">
+            <i class="bi bi-x-circle me-1"></i>@Localizer["FilterReset"]
+        </a>
+        <button type="submit" class="btn btn-sm btn-primary">
+            <i class="bi bi-funnel me-1"></i>@Localizer["FilterApply"]
+        </button>
+    </div>
+</form>
+
+<div id="stockListResults" aria-live="polite">
+    <partial name="_StockListResults" model="Model" />
+</div>
+
+@section Scripts {
+    <script src="~/js/stock-list.js" asp-append-version="true"></script>
+}

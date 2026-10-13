@@ -1,0 +1,119 @@
+@{
+    ViewData["Title"] = Localizer["NavDashboard"];
+}
+
+<partial name="_InvestorNav" />
+
+@* ng-app chỉ bao khối này; bên trong chỉ có chuỗi resource tĩnh, dữ liệu người dùng đi qua API + binding của AngularJS. *@
+<div ng-app="bankStockInvestor" ng-strict-di ng-controller="DashboardController as vm" ng-cloak
+     data-summary-url="@Url.Content("~/api/v1/portfolio/summary")"
+     data-watchlist-url="@Url.Content("~/api/v1/watchlist")"
+     data-trade-url="@Url.Action("Index", "Trade")"
+     data-detail-url="@Url.Action("Details", "Stocks", new { area = "", code = "__CODE__" })"
+     data-cash-label="@Localizer["PortfolioCash"]">
+
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-3">
+        <div>
+            <h4 class="fw-bold mb-1"><i class="bi bi-speedometer2 text-primary me-2"></i>@Localizer["InvestorDashboardTitle"]</h4>
+            <p class="text-secondary small mb-0">@Localizer["InvestorDashboardSubtitle"]</p>
+        </div>
+        <button type="button" class="btn btn-sm btn-outline-secondary" ng-click="vm.refresh()" ng-disabled="vm.loading">
+            <i class="bi bi-arrow-clockwise me-1"></i>@Localizer["BtnRefresh"]
+        </button>
+    </div>
+
+    <div class="row g-3 mb-3">
+        <div class="col-xl-3 col-md-6">
+            <div class="stock-card p-3 h-100">
+                <div class="small text-secondary">@Localizer["PortfolioTotalAssets"]</div>
+                <div class="fs-4 fw-bold num-font">{{ vm.summary.totalAssets | money }}</div>
+                <div class="small" ng-class="vm.pnlClass(vm.summary.totalReturn)">
+                    @Localizer["PortfolioTotalReturn"]: <span class="num-font">{{ vm.summary.totalReturn | signedMoney }} ({{ vm.summary.totalReturnPercent | signedPercent }})</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="stock-card p-3 h-100">
+                <div class="small text-secondary">@Localizer["PortfolioStockValue"]</div>
+                <div class="fs-4 fw-bold num-font">{{ vm.summary.stockValue | money }}</div>
+                <div class="small" ng-class="vm.pnlClass(vm.summary.unrealizedPnl)">
+                    @Localizer["PortfolioUnrealizedPnl"]: <span class="num-font">{{ vm.summary.unrealizedPnl | signedMoney }} ({{ vm.summary.unrealizedPnlPercent | signedPercent }})</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="stock-card p-3 h-100">
+                <div class="small text-secondary">@Localizer["AdminCashBalance"]</div>
+                <div class="fs-4 fw-bold num-font stock-up">{{ vm.summary.cashBalance | money }}</div>
+                <div class="small text-secondary">@Localizer["AdminBlockedBalance"]: <span class="num-font">{{ vm.summary.blockedCash | money }}</span></div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="stock-card p-3 h-100">
+                <div class="small text-secondary">@Localizer["AdminPendingOrders"]</div>
+                <div class="fs-4 fw-bold num-font">{{ vm.summary.pendingOrders }}</div>
+                <a asp-controller="Orders" asp-action="Index" asp-route-status="Pending" class="small">@Localizer["AdminViewAll"]</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-3">
+        <div class="col-lg-4">
+            <div class="stock-card h-100">
+                <div class="stock-card-header"><div class="fw-bold"><i class="bi bi-pie-chart-fill text-primary me-2"></i>@Localizer["PortfolioAllocation"]</div></div>
+                <div class="p-3 allocation-chart"><canvas id="allocationChart" aria-label="@Localizer["PortfolioAllocation"]" role="img"></canvas></div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="stock-card h-100">
+                <div class="stock-card-header">
+                    <div class="fw-bold"><i class="bi bi-briefcase text-primary me-2"></i>@Localizer["PortfolioHoldings"]</div>
+                    <a asp-controller="Portfolio" asp-action="Index" class="small">@Localizer["AdminViewAll"]</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="fintech-table">
+                        <thead>
+                            <tr>
+                                <th class="ps-3">@Localizer["ThStockCode"]</th>
+                                <th class="text-end">@Localizer["PortfolioQuantity"]</th>
+                                <th class="text-end">@Localizer["PortfolioAvgCost"]</th>
+                                <th class="text-end">@Localizer["ThMatchPrice"]</th>
+                                <th class="text-end pe-3">@Localizer["PortfolioUnrealizedPnl"]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="h in vm.summary.holdings track by h.stockCode">
+                                <td class="ps-3"><a ng-href="{{ vm.detailUrl(h.stockCode) }}" class="stock-code-badge stock-ref text-decoration-none">{{ h.stockCode }}</a></td>
+                                <td class="text-end stock-num">{{ h.totalQuantity | money }}</td>
+                                <td class="text-end stock-num">{{ h.avgCost | money }}</td>
+                                <td class="text-end stock-num">{{ h.marketPrice | money }}</td>
+                                <td class="text-end stock-num pe-3" ng-class="vm.pnlClass(h.unrealizedPnl)">{{ h.unrealizedPnl | signedMoney }} ({{ h.unrealizedPnlPercent | signedPercent }})</td>
+                            </tr>
+                            <tr ng-if="vm.summary && !vm.summary.holdings.length">
+                                <td colspan="5" class="text-center py-4 text-muted">@Localizer["PortfolioEmpty"]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="stock-card">
+        <div class="stock-card-header">
+            <div class="fw-bold"><i class="bi bi-star-fill text-warning me-2"></i>@Localizer["NavWatchlist"]</div>
+            <a asp-controller="Watchlist" asp-action="Index" class="small">@Localizer["WatchlistManage"]</a>
+        </div>
+        <partial name="_WatchlistTable" />
+    </div>
+</div>
+
+@section Styles {
+    <style>[ng-cloak] { display: none !important; }</style>
+}
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/angular@1.8.3/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="~/js/investor-app.js" asp-append-version="true"></script>
+}

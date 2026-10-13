@@ -1,0 +1,55 @@
+@model PagedListViewModel<OrderListItem, OrderListQuery>
+@{
+    var items = Model.Items;
+}
+
+<div class="stock-card">
+    <partial name="_ListHeader" model="@((items.TotalCount, items.FirstItemNumber, items.LastItemNumber, Model.Query.HasFilters))" />
+
+    <div class="table-responsive">
+        <table class="fintech-table">
+            <thead>
+                <tr>
+                    <th class="ps-3">#</th>
+                    <th>@Localizer["AdminTime"]</th>
+                    <th>@Localizer["ThStockCode"]</th>
+                    <th>@Localizer["FieldOrderType"]</th>
+                    <th class="d-none d-md-table-cell">@Localizer["FieldOrderMode"]</th>
+                    <th class="text-end">@Localizer["FieldQuantity"]</th>
+                    <th class="text-end">@Localizer["FieldOrderPrice"]</th>
+                    <th class="text-end d-none d-md-table-cell">@Localizer["ThMatchedPrice"]</th>
+                    <th class="text-end d-none d-lg-table-cell">@Localizer["TxFee"]</th>
+                    <th>@Localizer["FieldStatus"]</th>
+                    <th class="text-end pe-3"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in items.Items)
+                {
+                    <tr>
+                        <td class="ps-3 small text-secondary">@order.Id</td>
+                        <td class="small text-secondary text-nowrap">@order.CreatedAt.ToLocalTime().ToString("g")</td>
+                        <td><a asp-area="" asp-controller="Stocks" asp-action="Details" asp-route-code="@order.StockCode" class="stock-code-badge stock-ref text-decoration-none">@order.StockCode</a></td>
+                        <td><partial name="_OrderTypeBadge" model="order.Type" /></td>
+                        <td class="small d-none d-md-table-cell">@Localizer["OrderMode" + order.Mode]</td>
+                        <td class="text-end stock-num">@order.Quantity.ToString("N0")</td>
+                        <td class="text-end stock-num">@order.Price.ToString("N0")</td>
+                        <td class="text-end stock-num d-none d-md-table-cell">@(order.MatchedPrice?.ToString("N0") ?? "—")</td>
+                        <td class="text-end stock-num text-secondary d-none d-lg-table-cell">@order.Fee.ToString("N0")</td>
+                        <td><partial name="_OrderStatusBadge" model="order.Status" /></td>
+                        <td class="text-end pe-3"><partial name="_CancelOrderButton" model="order" /></td>
+                    </tr>
+                }
+                @if (items.TotalCount == 0)
+                {
+                    <partial name="_EmptyRow" model="11" />
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 px-3 py-3">
+        <span class="small text-secondary">@Localizer["OrderFeeNote"]</span>
+        <partial name="_Pagination" model="@(new PagerViewModel(items.PageIndex, items.TotalPages, page => Url.Action("Index", Model.Query.ToRouteValues(page))))" />
+    </div>
+</div>

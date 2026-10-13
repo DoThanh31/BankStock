@@ -1,0 +1,37 @@
+@* Bảng watchlist (template AngularJS, dùng trong ng-controller có vm.watchlist hoặc vm.items). *@
+@{
+    var source = ViewData["WatchlistSource"] as string ?? "vm.watchlist";
+    var removeFn = ViewData["WatchlistRemove"] as string ?? "vm.removeFromWatchlist";
+}
+<div class="table-responsive">
+    <table class="fintech-table">
+        <thead>
+            <tr>
+                <th class="ps-3">@Localizer["ThStockCode"]</th>
+                <th class="d-none d-sm-table-cell">@Localizer["ThBankName"]</th>
+                <th class="text-end">@Localizer["ThMatchPrice"]</th>
+                <th class="text-end">@Localizer["ThChangePercent"]</th>
+                <th class="text-end d-none d-md-table-cell">@Localizer["ThVolume"]</th>
+                <th class="text-end pe-3">@Localizer["ThAction"]</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in @source track by item.quote.stockCode">
+                <td class="ps-3"><a ng-href="{{ vm.detailUrl(item.quote.stockCode) }}" class="stock-code-badge text-decoration-none" ng-class="vm.statusClass(item.quote.status)">{{ item.quote.stockCode }}</a></td>
+                <td class="d-none d-sm-table-cell text-secondary">{{ item.quote.bankShortName }}</td>
+                <td class="text-end stock-num fw-bold" ng-class="vm.statusClass(item.quote.status)">{{ item.quote.currentPrice | money }}</td>
+                <td class="text-end stock-num" ng-class="vm.statusClass(item.quote.status)">{{ item.quote.changePercent | signedPercent }}</td>
+                <td class="text-end stock-num text-secondary d-none d-md-table-cell">{{ item.quote.volume | money }}</td>
+                <td class="text-end pe-3 text-nowrap">
+                    <a ng-href="{{ vm.tradeUrl(item.quote.stockCode, 'Buy') }}" class="btn btn-outline-success btn-sm py-0 px-2">@Localizer["OrderTypeBuy"]</a>
+                    <button type="button" class="btn btn-outline-secondary btn-sm py-0 px-2" title="@Localizer["WatchlistRemove"]" ng-click="@(removeFn)(item.quote.stockCode)">
+                        <i class="bi bi-star-fill text-warning"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr ng-if="!@(source).length">
+                <td colspan="6" class="text-center py-4 text-muted">@Localizer["WatchlistEmpty"]</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,54 @@
+@model IReadOnlyList<OrderDraftItem>
+@* Giỏ lệnh nháp (Session). "Dùng" điền lệnh vào form (investor-trade.js); "Xóa" gọi POST qua data-confirm-post. *@
+@if (Model.Count == 0)
+{
+    <p class="text-muted text-center small py-4 mb-0">@Localizer["OrderDraftEmpty"]</p>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="fintech-table">
+            <thead>
+                <tr>
+                    <th class="ps-3">@Localizer["ThStockCode"]</th>
+                    <th>@Localizer["FieldOrderType"]</th>
+                    <th class="text-end">@Localizer["FieldQuantity"]</th>
+                    <th class="text-end">@Localizer["FieldOrderPrice"]</th>
+                    <th class="d-none d-sm-table-cell">@Localizer["AdminTime"]</th>
+                    <th class="text-end pe-3"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var draft in Model)
+                {
+                    var side = Localizer["OrderType" + draft.Type].Value;
+                    var price = draft.Price?.ToString("N0") ?? Localizer["OrderModeMarket"].Value;
+                    <tr>
+                        <td class="ps-3"><span class="stock-code-badge stock-ref">@draft.StockCode</span></td>
+                        <td><partial name="_OrderTypeBadge" model="draft.Type" /></td>
+                        <td class="text-end stock-num">@draft.Quantity.ToString("N0")</td>
+                        <td class="text-end stock-num">@price</td>
+                        <td class="small text-secondary d-none d-sm-table-cell text-nowrap">@draft.CreatedAt.ToLocalTime().ToString("g")</td>
+                        <td class="text-end pe-3 text-nowrap">
+                            <button type="button" class="btn btn-outline-primary btn-sm py-0 px-2" title="@Localizer["OrderDraftUse"]"
+                                    data-draft-use="@draft.Id"
+                                    data-code="@draft.StockCode"
+                                    data-type="@draft.Type"
+                                    data-mode="@draft.Mode"
+                                    data-quantity="@draft.Quantity"
+                                    data-price="@draft.Price?.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture)">
+                                <i class="bi bi-box-arrow-in-left"></i><span class="d-none d-xl-inline ms-1">@Localizer["OrderDraftUse"]</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-danger btn-sm py-0 px-2" title="@Localizer["BtnDelete"]"
+                                    data-confirm-post="@Url.Action("RemoveDraft", new { id = draft.Id })"
+                                    data-confirm-text="@Localizer["ConfirmRemoveDraft", side, draft.Quantity.ToString("N0"), draft.StockCode]"
+                                    data-confirm-button="@Localizer["BtnDelete"]">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

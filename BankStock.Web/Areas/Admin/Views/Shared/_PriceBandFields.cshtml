@@ -1,0 +1,25 @@
+@model PriceBandFormBase
+@* Các ô Tham chiếu / Trần / Sàn + nút tính trần sàn theo biên độ sàn (dùng chung cho form giá và điều chỉnh giá). *@
+@{
+    string Num(decimal value) => value == 0 ? string.Empty : value.ToString("0.##########", System.Globalization.CultureInfo.InvariantCulture);
+}
+<div class="col-md-4">
+    <label asp-for="RefPrice" class="form-label small"></label>
+    <div class="input-group input-group-sm">
+        <input asp-for="RefPrice" type="number" min="1" step="any" value="@Num(Model.RefPrice)" class="form-control" />
+        <button type="button" class="btn btn-outline-secondary" data-band-url="@Url.Action("Band", "PriceHistories")" title="@Localizer["AdminCalcBandHint"]">
+            <i class="bi bi-calculator"></i><span class="d-none d-sm-inline ms-1">@Localizer["AdminCalcBand"]</span>
+        </button>
+    </div>
+    <span asp-validation-for="RefPrice" class="field-validation-error"></span>
+</div>
+<div class="col-md-4 col-6">
+    <label asp-for="CeilingPrice" class="form-label small stock-ceil"></label>
+    <input asp-for="CeilingPrice" type="number" min="1" step="any" value="@Num(Model.CeilingPrice)" class="form-control form-control-sm" />
+    <span asp-validation-for="CeilingPrice" class="field-validation-error"></span>
+</div>
+<div class="col-md-4 col-6">
+    <label asp-for="FloorPrice" class="form-label small stock-floor"></label>
+    <input asp-for="FloorPrice" type="number" min="1" step="any" value="@Num(Model.FloorPrice)" class="form-control form-control-sm" />
+    <span asp-validation-for="FloorPrice" class="field-validation-error"></span>
+</div>

@@ -1,0 +1,10 @@
+@model OrderListItem
+@if (Model.CanCancel)
+{
+    <button type="button" class="btn btn-outline-danger btn-sm py-0 px-2" title="@Localizer["OrderCancel"]"
+            data-confirm-post="@Url.Action("Cancel", "Orders", new { id = Model.Id })"
+            data-confirm-text="@Localizer["ConfirmCancelOrder", Model.Id, Localizer["OrderType" + Model.Type].Value, Model.Quantity.ToString("N0"), Model.StockCode]"
+            data-confirm-button="@Localizer["OrderCancel"]">
+        <i class="bi bi-x-circle"></i><span class="d-none d-xl-inline ms-1">@Localizer["OrderCancel"]</span>
+    </button>
+}

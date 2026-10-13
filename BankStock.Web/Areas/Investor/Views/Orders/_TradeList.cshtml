@@ -1,0 +1,51 @@
+@model PagedListViewModel<TradeListItem, TradeListQuery>
+@{
+    var items = Model.Items;
+}
+
+<div class="stock-card">
+    <partial name="_ListHeader" model="@((items.TotalCount, items.FirstItemNumber, items.LastItemNumber, Model.Query.HasFilters))" />
+
+    <div class="table-responsive">
+        <table class="fintech-table">
+            <thead>
+                <tr>
+                    <th class="ps-3">@Localizer["AdminTime"]</th>
+                    <th>@Localizer["ThStockCode"]</th>
+                    <th>@Localizer["FieldOrderType"]</th>
+                    <th class="text-end">@Localizer["FieldQuantity"]</th>
+                    <th class="text-end">@Localizer["ThMatchedPrice"]</th>
+                    <th class="text-end d-none d-md-table-cell">@Localizer["TradeValue"]</th>
+                    <th class="text-end d-none d-md-table-cell">@Localizer["TxFee"]</th>
+                    <th class="text-end">@Localizer["TradeNetAmount"]</th>
+                    <th class="text-end pe-3 d-none d-lg-table-cell">@Localizer["TradeOrderRef"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var trade in items.Items)
+                {
+                    <tr>
+                        <td class="ps-3 small text-secondary text-nowrap">@trade.CreatedAt.ToLocalTime().ToString("g")</td>
+                        <td><span class="stock-code-badge stock-ref">@trade.StockCode</span></td>
+                        <td><partial name="_OrderTypeBadge" model="trade.Type" /></td>
+                        <td class="text-end stock-num">@trade.Quantity.ToString("N0")</td>
+                        <td class="text-end stock-num fw-semibold">@trade.Price.ToString("N0")</td>
+                        <td class="text-end stock-num d-none d-md-table-cell">@trade.Value.ToString("N0")</td>
+                        <td class="text-end stock-num text-secondary d-none d-md-table-cell">@trade.Fee.ToString("N0")</td>
+                        <td class="text-end stock-num fw-semibold @(trade.NetAmount >= 0 ? "stock-up" : "stock-down")">@(trade.NetAmount > 0 ? "+" : "")@trade.NetAmount.ToString("N0")</td>
+                        <td class="text-end pe-3 small text-secondary d-none d-lg-table-cell">@(trade.OrderId is { } orderId ? "#" + orderId : "—")</td>
+                    </tr>
+                }
+                @if (items.TotalCount == 0)
+                {
+                    <partial name="_EmptyRow" model="9" />
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 px-3 py-3">
+        <span class="small text-secondary">@Localizer["AdminUnitVnd"]</span>
+        <partial name="_Pagination" model="@(new PagerViewModel(items.PageIndex, items.TotalPages, page => Url.Action("Trades", Model.Query.ToRouteValues(page))))" />
+    </div>
+</div>

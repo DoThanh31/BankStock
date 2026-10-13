@@ -1,0 +1,10 @@
+@model OrderStatus
+@{
+    var css = Model switch
+    {
+        OrderStatus.Matched => "bg-success-subtle text-success",
+        OrderStatus.Cancelled => "bg-secondary-subtle text-secondary",
+        _ => "bg-warning-subtle text-warning-emphasis"
+    };
+}
+<span class="badge @css">@Localizer["OrderStatus" + Model]</span>

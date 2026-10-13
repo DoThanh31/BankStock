@@ -1,0 +1,64 @@
+@model FinancialReportFormViewModel
+@{
+    var stockOptions = ViewData["StockOptions"] as IEnumerable<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> ?? [];
+    string Num(decimal value) => Math.Round(value, 2).ToString("0.##", System.Globalization.CultureInfo.InvariantCulture);
+}
+
+<form asp-action="@(Model.IsNew ? "Create" : "Edit")" asp-route-id="@(Model.IsNew ? null : Model.Id.ToString())" method="post" data-ajax-form novalidate>
+    <div class="modal-header">
+        <h5 class="modal-title">
+            <i class="bi bi-file-earmark-bar-graph text-primary me-2"></i>@(Model.IsNew ? Localizer["AdminAddReport"] : Localizer["AdminEditReport"])
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@Localizer["Close"]"></button>
+    </div>
+    <div class="modal-body">
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger small py-2" role="alert"></div>
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="StockId" class="form-label small"></label>
+                <select asp-for="StockId" asp-items="stockOptions" class="form-select form-select-sm">
+                    <option value="0">— @Localizer["SelectPlaceholder"] —</option>
+                </select>
+                <span asp-validation-for="StockId" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-3 col-6">
+                <label asp-for="Year" class="form-label small"></label>
+                <input asp-for="Year" type="number" min="2000" max="2100" class="form-control form-control-sm" />
+                <span asp-validation-for="Year" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-3 col-6">
+                <label asp-for="Quarter" class="form-label small"></label>
+                <select asp-for="Quarter" class="form-select form-select-sm">
+                    @for (var quarter = 1; quarter <= 4; quarter++)
+                    {
+                        <option value="@quarter">Q@(quarter)</option>
+                    }
+                </select>
+                <span asp-validation-for="Quarter" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="RevenueBillion" class="form-label small"></label>
+                <input asp-for="RevenueBillion" type="number" step="any" value="@Num(Model.RevenueBillion)" class="form-control form-control-sm" />
+                <span asp-validation-for="RevenueBillion" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="NetProfitBillion" class="form-label small"></label>
+                <input asp-for="NetProfitBillion" type="number" step="any" value="@Num(Model.NetProfitBillion)" class="form-control form-control-sm" />
+                <span asp-validation-for="NetProfitBillion" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="TotalAssetsBillion" class="form-label small"></label>
+                <input asp-for="TotalAssetsBillion" type="number" step="any" value="@Num(Model.TotalAssetsBillion)" class="form-control form-control-sm" />
+                <span asp-validation-for="TotalAssetsBillion" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="TotalLiabilitiesBillion" class="form-label small"></label>
+                <input asp-for="TotalLiabilitiesBillion" type="number" step="any" value="@Num(Model.TotalLiabilitiesBillion)" class="form-control form-control-sm" />
+                <span asp-validation-for="TotalLiabilitiesBillion" class="field-validation-error"></span>
+            </div>
+        </div>
+        <p class="form-text small mt-3 mb-0"><i class="bi bi-info-circle me-1"></i>@Localizer["UnitBillionNote"]</p>
+    </div>
+    <partial name="_FormFooter" />
+</form>

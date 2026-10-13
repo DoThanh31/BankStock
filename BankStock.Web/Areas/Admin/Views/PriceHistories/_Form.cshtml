@@ -1,0 +1,62 @@
+@model PriceHistoryFormViewModel
+@{
+    var stockOptions = ViewData["StockOptions"] as IEnumerable<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> ?? [];
+    string Num(decimal value) => value == 0 ? string.Empty : value.ToString("0.##########", System.Globalization.CultureInfo.InvariantCulture);
+}
+
+<form asp-action="@(Model.IsNew ? "Create" : "Edit")" asp-route-id="@(Model.IsNew ? null : Model.Id.ToString())" method="post" data-ajax-form novalidate>
+    <div class="modal-header">
+        <h5 class="modal-title">
+            <i class="bi bi-sliders text-primary me-2"></i>@(Model.IsNew ? Localizer["AdminAddPrice"] : Localizer["AdminEditPrice"])
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@Localizer["Close"]"></button>
+    </div>
+    <div class="modal-body">
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger small py-2" role="alert"></div>
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="StockId" class="form-label small"></label>
+                <select asp-for="StockId" asp-items="stockOptions" class="form-select form-select-sm">
+                    <option value="0">— @Localizer["SelectPlaceholder"] —</option>
+                </select>
+                <span asp-validation-for="StockId" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="TradeDate" class="form-label small"></label>
+                <input asp-for="TradeDate" class="form-control form-control-sm" />
+                <span asp-validation-for="TradeDate" class="field-validation-error"></span>
+            </div>
+
+            <partial name="_PriceBandFields" model="Model" />
+
+            <div class="col-md-3 col-6">
+                <label asp-for="Open" class="form-label small"></label>
+                <input asp-for="Open" type="number" min="1" step="any" value="@Num(Model.Open)" class="form-control form-control-sm" />
+                <span asp-validation-for="Open" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-3 col-6">
+                <label asp-for="High" class="form-label small"></label>
+                <input asp-for="High" type="number" min="1" step="any" value="@Num(Model.High)" class="form-control form-control-sm" />
+                <span asp-validation-for="High" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-3 col-6">
+                <label asp-for="Low" class="form-label small"></label>
+                <input asp-for="Low" type="number" min="1" step="any" value="@Num(Model.Low)" class="form-control form-control-sm" />
+                <span asp-validation-for="Low" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-3 col-6">
+                <label asp-for="Close" class="form-label small"></label>
+                <input asp-for="Close" type="number" min="1" step="any" value="@Num(Model.Close)" class="form-control form-control-sm" />
+                <span asp-validation-for="Close" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Volume" class="form-label small"></label>
+                <input asp-for="Volume" type="number" min="0" step="1" class="form-control form-control-sm" />
+                <span asp-validation-for="Volume" class="field-validation-error"></span>
+            </div>
+        </div>
+        <p class="form-text small mt-3 mb-0"><i class="bi bi-info-circle me-1"></i>@Localizer["AdminPriceRulesHint"]</p>
+    </div>
+    <partial name="_FormFooter" />
+</form>
