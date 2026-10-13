@@ -1,0 +1,1545 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="0" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- Brand & Navigation -->
+  <data name="BrandName" xml:space="preserve">
+    <value>BankStock</value>
+  </data>
+  <data name="BrandSlogan" xml:space="preserve">
+    <value>Vietnam Bank Stock Simulation Exchange</value>
+  </data>
+  <data name="NavPriceBoard" xml:space="preserve">
+    <value>Price Board</value>
+  </data>
+  <data name="NavBanks" xml:space="preserve">
+    <value>Banks</value>
+  </data>
+  <data name="NavAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="NavWatchlist" xml:space="preserve">
+    <value>Watchlist</value>
+  </data>
+  <data name="NavPortfolio" xml:space="preserve">
+    <value>Portfolio</value>
+  </data>
+  <data name="NavOrders" xml:space="preserve">
+    <value>Order Book</value>
+  </data>
+  <data name="NavWallet" xml:space="preserve">
+    <value>Wallet</value>
+  </data>
+  <data name="NavAdmin" xml:space="preserve">
+    <value>Admin Area</value>
+  </data>
+  <data name="NavLogin" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="NavRegister" xml:space="preserve">
+    <value>Sign Up</value>
+  </data>
+  <data name="NavLogout" xml:space="preserve">
+    <value>Sign Out</value>
+  </data>
+  <data name="NavThemeToggle" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="NavLanguage" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LanguageVi" xml:space="preserve">
+    <value>Tiếng Việt</value>
+  </data>
+  <data name="LanguageEn" xml:space="preserve">
+    <value>English</value>
+  </data>
+
+  <!-- Market Overview & Ticker -->
+  <data name="MarketOverview" xml:space="preserve">
+    <value>Market Overview</value>
+  </data>
+  <data name="BankIndex" xml:space="preserve">
+    <value>VN-Bank Index</value>
+  </data>
+  <data name="SimulatedLabel" xml:space="preserve">
+    <value>(simulated)</value>
+  </data>
+  <data name="TotalTradingVolume" xml:space="preserve">
+    <value>Total Volume</value>
+  </data>
+  <data name="GainersCount" xml:space="preserve">
+    <value>Gainers</value>
+  </data>
+  <data name="LosersCount" xml:space="preserve">
+    <value>Losers</value>
+  </data>
+  <data name="UnchangedCount" xml:space="preserve">
+    <value>Unchanged</value>
+  </data>
+  <data name="CeilingCount" xml:space="preserve">
+    <value>Ceiling</value>
+  </data>
+  <data name="FloorCount" xml:space="preserve">
+    <value>Floor</value>
+  </data>
+  <data name="ActiveStocksCount" xml:space="preserve">
+    <value>Listed Tickers</value>
+  </data>
+
+  <!-- Price Board Table -->
+  <data name="StockBoardTitle" xml:space="preserve">
+    <value>Live Bank Stock Board</value>
+  </data>
+  <data name="StockBoardSubtitle" xml:space="preserve">
+    <value>Real-time order matching and price data for Vietnamese banking stocks</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Search ticker or bank name (VCB, MBB, Techcombank...)</value>
+  </data>
+  <data name="FilterAll" xml:space="preserve">
+    <value>All Tickers</value>
+  </data>
+  <data name="FilterBig4" xml:space="preserve">
+    <value>Big 4 State-owned</value>
+  </data>
+  <data name="FilterPrivate" xml:space="preserve">
+    <value>Private JSC</value>
+  </data>
+  <data name="ThStockCode" xml:space="preserve">
+    <value>Ticker</value>
+  </data>
+  <data name="ThBankName" xml:space="preserve">
+    <value>Bank Name</value>
+  </data>
+  <data name="ThExchange" xml:space="preserve">
+    <value>Exchange</value>
+  </data>
+  <data name="ThCeiling" xml:space="preserve">
+    <value>Ceil</value>
+  </data>
+  <data name="ThFloor" xml:space="preserve">
+    <value>Floor</value>
+  </data>
+  <data name="ThRef" xml:space="preserve">
+    <value>Ref</value>
+  </data>
+  <data name="ThMatchPrice" xml:space="preserve">
+    <value>Matched</value>
+  </data>
+  <data name="ThChange" xml:space="preserve">
+    <value>+/-</value>
+  </data>
+  <data name="ThChangePercent" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="ThVolume" xml:space="preserve">
+    <value>Total Vol</value>
+  </data>
+  <data name="ThHigh" xml:space="preserve">
+    <value>High</value>
+  </data>
+  <data name="ThLow" xml:space="preserve">
+    <value>Low</value>
+  </data>
+  <data name="ThAction" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="BtnTrade" xml:space="preserve">
+    <value>Trade</value>
+  </data>
+  <data name="BtnDetail" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="LegendCeiling" xml:space="preserve">
+    <value>Ceiling (+7%)</value>
+  </data>
+  <data name="LegendFloor" xml:space="preserve">
+    <value>Floor (-7%)</value>
+  </data>
+  <data name="LegendUp" xml:space="preserve">
+    <value>Up</value>
+  </data>
+  <data name="LegendDown" xml:space="preserve">
+    <value>Down</value>
+  </data>
+  <data name="LegendRef" xml:space="preserve">
+    <value>Reference</value>
+  </data>
+  <data name="NoStockFound" xml:space="preserve">
+    <value>No banking stocks match your filter criteria.</value>
+  </data>
+  <data name="UnitVND" xml:space="preserve">
+    <value>VND</value>
+  </data>
+  <data name="SharesUnit" xml:space="preserve">
+    <value>shares</value>
+  </data>
+
+  <!-- About Page -->
+  <data name="AboutTitle" xml:space="preserve">
+    <value>About BankStock</value>
+  </data>
+  <data name="AboutSubtitle" xml:space="preserve">
+    <value>Premier simulation and analytical platform for Vietnamese banking stocks</value>
+  </data>
+  <data name="AboutMissionTitle" xml:space="preserve">
+    <value>Our Mission</value>
+  </data>
+  <data name="AboutMissionDesc" xml:space="preserve">
+    <value>BankStock is built to deliver a highly realistic, responsive, and visually modern stock market simulation tailored specifically for the banking sector - the cornerstone of Vietnam's financial market.</value>
+  </data>
+  <data name="AboutFeature1Title" xml:space="preserve">
+    <value>TradingView-grade Board</value>
+  </data>
+  <data name="AboutFeature1Desc" xml:space="preserve">
+    <value>Fintech dark theme styling following strict Vietnam stock conventions (Green, Red, Yellow, Purple, Cyan) with instantaneous response.</value>
+  </data>
+  <data name="AboutFeature2Title" xml:space="preserve">
+    <value>500 Million VND Virtual Wallet</value>
+  </data>
+  <data name="AboutFeature2Desc" xml:space="preserve">
+    <value>Every new investor account receives an initial grant of 500,000,000 VND to test investment strategies safely without real monetary risks.</value>
+  </data>
+  <data name="AboutFeature3Title" xml:space="preserve">
+    <value>Banking-Specific Metrics</value>
+  </data>
+  <data name="AboutFeature3Desc" xml:space="preserve">
+    <value>Deep fundamental insights: CASA demand deposit ratio, NPL non-performing loan ratio, P/E, P/B, EPS, and quarterly financial reports.</value>
+  </data>
+  <data name="AboutBanksTitle" xml:space="preserve">
+    <value>10 Premier Listed Banks</value>
+  </data>
+  <data name="AboutBanksDesc" xml:space="preserve">
+    <value>Full coverage of Big 4 state-owned banks (VCB, BID, CTG) as well as leading private joint-stock commercial banks (TCB, MBB, VPB, ACB, STB, HDB, TPB).</value>
+  </data>
+  <data name="AboutTechTitle" xml:space="preserve">
+    <value>Technology &amp; Architecture</value>
+  </data>
+  <data name="AboutTechDesc" xml:space="preserve">
+    <value>Engineered with .NET 8, ASP.NET Core MVC, Entity Framework Core 8, N-tier architecture, robust ASP.NET Identity with granular role authorization.</value>
+  </data>
+
+  <!-- Error Pages -->
+  <data name="Error404Title" xml:space="preserve">
+    <value>404 - Page Not Found</value>
+  </data>
+  <data name="Error404Message" xml:space="preserve">
+    <value>The page you requested does not exist, has been removed, or is temporarily unavailable.</value>
+  </data>
+  <data name="Error500Title" xml:space="preserve">
+    <value>500 - Internal Server Error</value>
+  </data>
+  <data name="Error500Message" xml:space="preserve">
+    <value>The system encountered an unexpected issue. Our engineering team has been notified and is addressing it.</value>
+  </data>
+  <data name="ErrorDefaultTitle" xml:space="preserve">
+    <value>Something went wrong</value>
+  </data>
+  <data name="ErrorDefaultMessage" xml:space="preserve">
+    <value>Your request could not be processed at this time. Please try again later.</value>
+  </data>
+  <data name="ErrorRequestId" xml:space="preserve">
+    <value>Request ID</value>
+  </data>
+  <data name="BtnBackHome" xml:space="preserve">
+    <value>Back to Home</value>
+  </data>
+  <data name="BtnBackBoard" xml:space="preserve">
+    <value>View Price Board</value>
+  </data>
+
+  <!-- Footer -->
+  <data name="FooterAbout" xml:space="preserve">
+    <value>About BankStock</value>
+  </data>
+  <data name="FooterAboutDesc" xml:space="preserve">
+    <value>Vietnam banking stocks simulation trading platform. Empowering investors to practice order placement, manage portfolios, and analyze fundamental reports.</value>
+  </data>
+  <data name="FooterQuickLinks" xml:space="preserve">
+    <value>Quick Links</value>
+  </data>
+  <data name="FooterDisclaimer" xml:space="preserve">
+    <value>Disclaimers &amp; Terms</value>
+  </data>
+  <data name="FooterDisclaimerDesc" xml:space="preserve">
+    <value>This platform is exclusively for educational and simulation purposes. No data or information constitutes actual investment advice.</value>
+  </data>
+  <data name="FooterContact" xml:space="preserve">
+    <value>Contact &amp; Support</value>
+  </data>
+  <data name="FooterCopyright" xml:space="preserve">
+    <value>© 2026 BankStock. All rights reserved.</value>
+  </data>
+  <data name="FooterPrivacy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="FooterTerms" xml:space="preserve">
+    <value>Terms of Service</value>
+  </data>
+
+  <!-- Admin Area Layout & Dashboard -->
+  <data name="AdminDashboard" xml:space="preserve">
+    <value>Admin Dashboard</value>
+  </data>
+  <data name="AdminSidebarCore" xml:space="preserve">
+    <value>CORE</value>
+  </data>
+  <data name="AdminSidebarData" xml:space="preserve">
+    <value>DATA MANAGEMENT</value>
+  </data>
+  <data name="AdminSidebarUsers" xml:space="preserve">
+    <value>USERS &amp; TRADING</value>
+  </data>
+  <data name="AdminSidebarSystem" xml:space="preserve">
+    <value>SYSTEM</value>
+  </data>
+  <data name="AdminNavDashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="AdminNavBanks" xml:space="preserve">
+    <value>Banks Management</value>
+  </data>
+  <data name="AdminNavStocks" xml:space="preserve">
+    <value>Stocks Management</value>
+  </data>
+  <data name="AdminNavPriceHistory" xml:space="preserve">
+    <value>Prices &amp; Manual Edit</value>
+  </data>
+  <data name="AdminNavReports" xml:space="preserve">
+    <value>Financial Reports</value>
+  </data>
+  <data name="AdminNavUsers" xml:space="preserve">
+    <value>User Accounts</value>
+  </data>
+  <data name="AdminNavWallets" xml:space="preserve">
+    <value>Wallet Analytics</value>
+  </data>
+  <data name="AdminNavOrders" xml:space="preserve">
+    <value>All Exchange Orders</value>
+  </data>
+  <data name="AdminNavAudit" xml:space="preserve">
+    <value>Audit Logs</value>
+  </data>
+  <data name="AdminNavBackToMarket" xml:space="preserve">
+    <value>Back to Public Exchange</value>
+  </data>
+  <data name="AdminStatBanks" xml:space="preserve">
+    <value>Total Banks</value>
+  </data>
+  <data name="AdminStatStocks" xml:space="preserve">
+    <value>Listed Tickers</value>
+  </data>
+  <data name="AdminStatUsers" xml:space="preserve">
+    <value>Active Investors</value>
+  </data>
+  <data name="AdminStatVolume" xml:space="preserve">
+    <value>Latest Session Volume</value>
+  </data>
+  <data name="AdminRecentUpdates" xml:space="preserve">
+    <value>Recent Price Updates</value>
+  </data>
+  <data name="AdminQuickActions" xml:space="preserve">
+    <value>Quick Actions</value>
+  </data>
+  <data name="AdminSystemStatus" xml:space="preserve">
+    <value>Server Status</value>
+  </data>
+  <data name="AdminSystemNormal" xml:space="preserve">
+    <value>Operational (Normal)</value>
+  </data>
+  <!-- Phase 3: Stocks, Account -->
+  <data name="NavStocks" xml:space="preserve">
+    <value>Stocks</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="PaginationLabel" xml:space="preserve">
+    <value>Pagination</value>
+  </data>
+  <data name="PaginationPrevious" xml:space="preserve">
+    <value>Previous page</value>
+  </data>
+  <data name="PaginationNext" xml:space="preserve">
+    <value>Next page</value>
+  </data>
+  <data name="RecentlyViewed" xml:space="preserve">
+    <value>Recently viewed</value>
+  </data>
+  <data name="StockListTitle" xml:space="preserve">
+    <value>Bank stock list</value>
+  </data>
+  <data name="StockListSubtitle" xml:space="preserve">
+    <value>Filter by bank group, P/E valuation, CASA ratio and dividend yield. Data is filtered, sorted and paged on the server.</value>
+  </data>
+  <data name="FieldSearch" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="FieldBankGroup" xml:space="preserve">
+    <value>Bank group</value>
+  </data>
+  <data name="FilterMinDividend" xml:space="preserve">
+    <value>Dividend yield</value>
+  </data>
+  <data name="FilterAny" xml:space="preserve">
+    <value>Any</value>
+  </data>
+  <data name="FilterValuation" xml:space="preserve">
+    <value>Ratios</value>
+  </data>
+  <data name="FilterPeUnder10" xml:space="preserve">
+    <value>P/E &lt; 10</value>
+  </data>
+  <data name="FilterCasaOver30" xml:space="preserve">
+    <value>CASA &gt; 30%</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Sort by</value>
+  </data>
+  <data name="SortCode" xml:space="preserve">
+    <value>Ticker</value>
+  </data>
+  <data name="SortPrice" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="SortChange" xml:space="preserve">
+    <value>% change</value>
+  </data>
+  <data name="SortVolume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="SortPE" xml:space="preserve">
+    <value>P/E</value>
+  </data>
+  <data name="SortCASA" xml:space="preserve">
+    <value>CASA</value>
+  </data>
+  <data name="SortDividend" xml:space="preserve">
+    <value>Dividend</value>
+  </data>
+  <data name="SortMarketCap" xml:space="preserve">
+    <value>Market cap</value>
+  </data>
+  <data name="SortDirection" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="SortAsc" xml:space="preserve">
+    <value>Ascending</value>
+  </data>
+  <data name="SortDesc" xml:space="preserve">
+    <value>Descending</value>
+  </data>
+  <data name="PageSize" xml:space="preserve">
+    <value>Rows</value>
+  </data>
+  <data name="FilterReset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="FilterApply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="ShowingRange" xml:space="preserve">
+    <value>Showing {0}–{1} of {2} stocks</value>
+  </data>
+  <data name="FiltersActive" xml:space="preserve">
+    <value>Filtered</value>
+  </data>
+  <data name="ThDividend" xml:space="preserve">
+    <value>Dividend</value>
+  </data>
+  <data name="ThMarketCap" xml:space="preserve">
+    <value>Market cap (bn)</value>
+  </data>
+  <data name="MarketCapNote" xml:space="preserve">
+    <value>Market cap = listed shares × last price, in VND billion. Financial ratios are simulated data.</value>
+  </data>
+  <data name="LastSession" xml:space="preserve">
+    <value>Last session</value>
+  </data>
+  <data name="PriceChartTitle" xml:space="preserve">
+    <value>Price chart</value>
+  </data>
+  <data name="ChartNoData" xml:space="preserve">
+    <value>No price data for this period.</value>
+  </data>
+  <data name="ChartLoadError" xml:space="preserve">
+    <value>Could not load chart data. Please try again.</value>
+  </data>
+  <data name="KeyMetrics" xml:space="preserve">
+    <value>Key metrics</value>
+  </data>
+  <data name="MetricNpl" xml:space="preserve">
+    <value>Bad debt (NPL)</value>
+  </data>
+  <data name="MetricListedShares" xml:space="preserve">
+    <value>Listed shares</value>
+  </data>
+  <data name="MetricCharterCapital" xml:space="preserve">
+    <value>Charter capital (bn)</value>
+  </data>
+  <data name="MetricFaceValue" xml:space="preserve">
+    <value>Face value</value>
+  </data>
+  <data name="UnitBillionNote" xml:space="preserve">
+    <value>Unit: VND billion</value>
+  </data>
+  <data name="FinancialReportsTitle" xml:space="preserve">
+    <value>Quarterly financial reports</value>
+  </data>
+  <data name="NoFinancialReports" xml:space="preserve">
+    <value>No financial reports yet.</value>
+  </data>
+  <data name="ThPeriod" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="ThRevenue" xml:space="preserve">
+    <value>Revenue</value>
+  </data>
+  <data name="ThNetProfit" xml:space="preserve">
+    <value>Net profit</value>
+  </data>
+  <data name="ThTotalAssets" xml:space="preserve">
+    <value>Total assets</value>
+  </data>
+  <data name="ThEquity" xml:space="preserve">
+    <value>Equity</value>
+  </data>
+  <data name="BankProfile" xml:space="preserve">
+    <value>Bank profile</value>
+  </data>
+  <data name="BankFounded" xml:space="preserve">
+    <value>Founded</value>
+  </data>
+  <data name="BankHeadquarters" xml:space="preserve">
+    <value>Headquarters</value>
+  </data>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="LoginSubtitle" xml:space="preserve">
+    <value>Sign in to manage your wallet, portfolio and orders.</value>
+  </data>
+  <data name="ForgotPasswordLink" xml:space="preserve">
+    <value>Forgot password?</value>
+  </data>
+  <data name="NoAccountYet" xml:space="preserve">
+    <value>No account yet?</value>
+  </data>
+  <data name="HaveAccount" xml:space="preserve">
+    <value>Already have an account?</value>
+  </data>
+  <data name="RegisterTitle" xml:space="preserve">
+    <value>Investor sign up</value>
+  </data>
+  <data name="RegisterSubtitle" xml:space="preserve">
+    <value>Create a free account to try simulated trading.</value>
+  </data>
+  <data name="RegisterGrantNotice" xml:space="preserve">
+    <value>New accounts receive 500,000,000 VND of virtual money in their wallet.</value>
+  </data>
+  <data name="RegisterSuccess" xml:space="preserve">
+    <value>Registration successful! Your wallet has been credited with 500,000,000 VND of virtual money.</value>
+  </data>
+  <data name="PasswordHint" xml:space="preserve">
+    <value>At least 8 characters with upper case, lower case and a digit.</value>
+  </data>
+  <data name="ForgotPasswordTitle" xml:space="preserve">
+    <value>Forgot password</value>
+  </data>
+  <data name="ForgotPasswordSubtitle" xml:space="preserve">
+    <value>Enter your registered email and we will send you a password reset link.</value>
+  </data>
+  <data name="ForgotPasswordSubmit" xml:space="preserve">
+    <value>Send link</value>
+  </data>
+  <data name="BackToLogin" xml:space="preserve">
+    <value>Back to sign in</value>
+  </data>
+  <data name="ForgotPasswordConfirmTitle" xml:space="preserve">
+    <value>Check your email</value>
+  </data>
+  <data name="ForgotPasswordConfirmMessage" xml:space="preserve">
+    <value>If the email exists in our system, a password reset link has been sent to it.</value>
+  </data>
+  <data name="DevResetLinkNotice" xml:space="preserve">
+    <value>Development environment (no SMTP) — reset link:</value>
+  </data>
+  <data name="ResetPasswordTitle" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
+  <data name="ResetPasswordSubmit" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
+  <data name="ResetPasswordDoneTitle" xml:space="preserve">
+    <value>Password reset</value>
+  </data>
+  <data name="ResetPasswordDoneMessage" xml:space="preserve">
+    <value>Your password has been updated. Please sign in with your new password.</value>
+  </data>
+  <data name="ResetPasswordInvalidToken" xml:space="preserve">
+    <value>The password reset link is invalid or has expired.</value>
+  </data>
+  <data name="ResetPasswordEmailSubject" xml:space="preserve">
+    <value>[BankStock] Reset your password</value>
+  </data>
+  <data name="ResetPasswordEmailBody" xml:space="preserve">
+    <value>Click the following link to reset your password:</value>
+  </data>
+  <data name="AccessDeniedTitle" xml:space="preserve">
+    <value>Access denied</value>
+  </data>
+  <data name="AccessDeniedMessage" xml:space="preserve">
+    <value>Your account does not have permission to access this page.</value>
+  </data>
+  <data name="LoginInvalid" xml:space="preserve">
+    <value>Invalid email or password.</value>
+  </data>
+  <data name="LoginDisabled" xml:space="preserve">
+    <value>This account has been disabled. Please contact an administrator.</value>
+  </data>
+  <data name="LoginLockedOut" xml:space="preserve">
+    <value>Account locked for 15 minutes after 5 failed sign-in attempts.</value>
+  </data>
+  <data name="EmailTaken" xml:space="preserve">
+    <value>This email is already registered.</value>
+  </data>
+  <data name="FieldEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="FieldPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="FieldNewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="FieldConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="FieldRememberMe" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+  <data name="FieldFullName" xml:space="preserve">
+    <value>Full name</value>
+  </data>
+  <data name="ValRequired" xml:space="preserve">
+    <value>{0} is required.</value>
+  </data>
+  <data name="ValEmail" xml:space="preserve">
+    <value>{0} is not a valid email address.</value>
+  </data>
+  <data name="ValMaxLength" xml:space="preserve">
+    <value>{0} must be at most {1} characters.</value>
+  </data>
+  <data name="ValStringLength" xml:space="preserve">
+    <value>{0} must be between {2} and {1} characters.</value>
+  </data>
+  <data name="ValPasswordComplexity" xml:space="preserve">
+    <value>Password must be at least 8 characters with upper case, lower case and a digit.</value>
+  </data>
+  <data name="ValPasswordMismatch" xml:space="preserve">
+    <value>The confirmation password does not match.</value>
+  </data>
+  <data name="AdminNoData" xml:space="preserve">
+    <value>No data.</value>
+  </data>
+  <data name="AdminNotFound" xml:space="preserve">
+    <value>Record not found (it may have been deleted).</value>
+  </data>
+  <data name="AdminOperationFailed" xml:space="preserve">
+    <value>The operation failed. Please try again.</value>
+  </data>
+  <data name="AdminDeleted" xml:space="preserve">
+    <value>Deleted successfully.</value>
+  </data>
+  <data name="AdminViewAll" xml:space="preserve">
+    <value>View all</value>
+  </data>
+  <data name="AdminTime" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="AdminCreatedAt" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="AdminLastUpdated" xml:space="preserve">
+    <value>Last updated</value>
+  </data>
+  <data name="AdminSectionGeneral" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="AdminUnitVnd" xml:space="preserve">
+    <value>Unit: VND</value>
+  </data>
+  <data name="UnitBillionShort" xml:space="preserve">
+    <value>bn</value>
+  </data>
+  <data name="BtnCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="BtnSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="BtnEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="BtnDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ConfirmTitle" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="ConfirmYes" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Something went wrong</value>
+  </data>
+  <data name="SelectPlaceholder" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="FieldStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="FieldDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="FieldFromDate" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="FieldToDate" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="StatusTrading" xml:space="preserve">
+    <value>Trading</value>
+  </data>
+  <data name="StatusSuspended" xml:space="preserve">
+    <value>Suspended</value>
+  </data>
+  <data name="ValRange" xml:space="preserve">
+    <value>{0} must be between {1} and {2}.</value>
+  </data>
+  <data name="ValSelectRequired" xml:space="preserve">
+    <value>Please select {0}.</value>
+  </data>
+  <data name="ValUrl" xml:space="preserve">
+    <value>{0} must be a valid URL (http/https).</value>
+  </data>
+  <data name="ValBankCode" xml:space="preserve">
+    <value>{0} must be 2–20 uppercase letters or digits.</value>
+  </data>
+  <data name="ValStockCode" xml:space="preserve">
+    <value>{0} must be exactly 3 uppercase letters (e.g. VCB).</value>
+  </data>
+  <data name="ValExchange" xml:space="preserve">
+    <value>{0} must be HOSE, HNX or UPCOM.</value>
+  </data>
+  <data name="ValNumber" xml:space="preserve">
+    <value>{0} must be a number.</value>
+  </data>
+  <data name="ValInvalidValue" xml:space="preserve">
+    <value>The value "{0}" is not valid for {1}.</value>
+  </data>
+  <data name="ValValueRequired" xml:space="preserve">
+    <value>A value is required.</value>
+  </data>
+  <data name="ValFloorAboveRef" xml:space="preserve">
+    <value>Floor price cannot be above the reference price.</value>
+  </data>
+  <data name="ValCeilingBelowRef" xml:space="preserve">
+    <value>Ceiling price cannot be below the reference price.</value>
+  </data>
+  <data name="ValHighTooLow" xml:space="preserve">
+    <value>High must be ≥ open, close and low.</value>
+  </data>
+  <data name="ValLowTooHigh" xml:space="preserve">
+    <value>Low must be ≤ open and close.</value>
+  </data>
+  <data name="ValPriceOutOfBand" xml:space="preserve">
+    <value>High / low must be within the floor – ceiling band.</value>
+  </data>
+  <data name="ValMatchOutOfBand" xml:space="preserve">
+    <value>Match price must be within the floor – ceiling band.</value>
+  </data>
+  <data name="AdminDashboardSubtitle" xml:space="preserve">
+    <value>Monitor the market, simulated trading, virtual wallets and system activity.</value>
+  </data>
+  <data name="AdminTopTraded" xml:space="preserve">
+    <value>Most traded stocks ({0} days)</value>
+  </data>
+  <data name="AdminPeriodVolume" xml:space="preserve">
+    <value>Period volume</value>
+  </data>
+  <data name="AdminPeriodValue" xml:space="preserve">
+    <value>Period value</value>
+  </data>
+  <data name="AdminInternalTrading" xml:space="preserve">
+    <value>Simulated trading on BankStock</value>
+  </data>
+  <data name="AdminTradeCount" xml:space="preserve">
+    <value>Matched trades</value>
+  </data>
+  <data name="AdminTradeQuantity" xml:space="preserve">
+    <value>Matched volume</value>
+  </data>
+  <data name="AdminTradeValue" xml:space="preserve">
+    <value>Matched value (VND)</value>
+  </data>
+  <data name="AdminPendingOrders" xml:space="preserve">
+    <value>Pending orders</value>
+  </data>
+  <data name="AdminQuickStocks" xml:space="preserve">
+    <value>Manage stocks</value>
+  </data>
+  <data name="AdminQuickPrices" xml:space="preserve">
+    <value>Adjust prices / price history</value>
+  </data>
+  <data name="AdminQuickUsers" xml:space="preserve">
+    <value>Manage accounts &amp; roles</value>
+  </data>
+  <data name="AdminQuickReports" xml:space="preserve">
+    <value>Enter financial reports</value>
+  </data>
+  <data name="AdminRecentAudit" xml:space="preserve">
+    <value>Recent activity</value>
+  </data>
+  <data name="AdminBanksSubtitle" xml:space="preserve">
+    <value>Create, edit and delete listed banks.</value>
+  </data>
+  <data name="AdminAddBank" xml:space="preserve">
+    <value>Add bank</value>
+  </data>
+  <data name="AdminEditBank" xml:space="preserve">
+    <value>Edit bank {0}</value>
+  </data>
+  <data name="AdminBankSearchPlaceholder" xml:space="preserve">
+    <value>Code, bank name...</value>
+  </data>
+  <data name="AdminStockCount" xml:space="preserve">
+    <value>Stocks</value>
+  </data>
+  <data name="AdminSavedBank" xml:space="preserve">
+    <value>Bank {0} saved.</value>
+  </data>
+  <data name="FieldBankCode" xml:space="preserve">
+    <value>Bank code</value>
+  </data>
+  <data name="FieldBankFullName" xml:space="preserve">
+    <value>Full name</value>
+  </data>
+  <data name="FieldBankShortName" xml:space="preserve">
+    <value>Short name</value>
+  </data>
+  <data name="FieldWebsite" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="FieldLogoUrl" xml:space="preserve">
+    <value>Logo URL</value>
+  </data>
+  <data name="BankCodeTaken" xml:space="preserve">
+    <value>Bank code {0} already exists.</value>
+  </data>
+  <data name="BankDeleteHasStocks" xml:space="preserve">
+    <value>Cannot delete bank {0}: it still has {1} stock(s). Delete or reassign them first.</value>
+  </data>
+  <data name="ConfirmDeleteBank" xml:space="preserve">
+    <value>Delete bank {0}? This cannot be undone.</value>
+  </data>
+  <data name="AdminStocksSubtitle" xml:space="preserve">
+    <value>Manage stock codes, key metrics and trading status.</value>
+  </data>
+  <data name="AdminAddStock" xml:space="preserve">
+    <value>Add stock</value>
+  </data>
+  <data name="AdminEditStock" xml:space="preserve">
+    <value>Edit {0}</value>
+  </data>
+  <data name="AdminSavedStock" xml:space="preserve">
+    <value>Stock {0} saved.</value>
+  </data>
+  <data name="AdminPriceSessions" xml:space="preserve">
+    <value>Price sessions</value>
+  </data>
+  <data name="AdminCharterCapitalHint" xml:space="preserve">
+    <value>Leave blank to use listed shares × face value.</value>
+  </data>
+  <data name="FieldStockCode" xml:space="preserve">
+    <value>Stock code</value>
+  </data>
+  <data name="FieldBank" xml:space="preserve">
+    <value>Bank</value>
+  </data>
+  <data name="FieldExchange" xml:space="preserve">
+    <value>Exchange</value>
+  </data>
+  <data name="FieldIsActive" xml:space="preserve">
+    <value>Trading (shown on the price board)</value>
+  </data>
+  <data name="FieldPE" xml:space="preserve">
+    <value>P/E</value>
+  </data>
+  <data name="FieldPB" xml:space="preserve">
+    <value>P/B</value>
+  </data>
+  <data name="FieldEPS" xml:space="preserve">
+    <value>EPS (VND)</value>
+  </data>
+  <data name="FieldCASA" xml:space="preserve">
+    <value>CASA (%)</value>
+  </data>
+  <data name="FieldCharterCapitalBillion" xml:space="preserve">
+    <value>Charter capital (VND bn)</value>
+  </data>
+  <data name="StockCodeTaken" xml:space="preserve">
+    <value>Stock code {0} already exists.</value>
+  </data>
+  <data name="StockDeleteInUse" xml:space="preserve">
+    <value>Cannot delete {0}: it has orders, trades, holdings or watchlist entries. Mark it as suspended instead.</value>
+  </data>
+  <data name="ConfirmDeleteStock" xml:space="preserve">
+    <value>Delete {0}? All {1} price sessions and financial reports of this stock will also be deleted.</value>
+  </data>
+  <data name="AdminPricesSubtitle" xml:space="preserve">
+    <value>Price sessions; manually adjust reference, ceiling, floor and match prices.</value>
+  </data>
+  <data name="AdminAddPrice" xml:space="preserve">
+    <value>Add price session</value>
+  </data>
+  <data name="AdminEditPrice" xml:space="preserve">
+    <value>Edit price session</value>
+  </data>
+  <data name="AdminSavedPrice" xml:space="preserve">
+    <value>Price session saved.</value>
+  </data>
+  <data name="AdminAdjustPrice" xml:space="preserve">
+    <value>Adjust price</value>
+  </data>
+  <data name="AdminAdjustPriceTitle" xml:space="preserve">
+    <value>Adjust price — {0}</value>
+  </data>
+  <data name="AdminPriceAdjusted" xml:space="preserve">
+    <value>Price of {0} updated. {1} pending order(s) matched.</value>
+  </data>
+  <data name="AdminNewSessionNotice" xml:space="preserve">
+    <value>No session on this date — a new one will be created.</value>
+  </data>
+  <data name="AdminExistingSessionNotice" xml:space="preserve">
+    <value>Editing the existing session of this date.</value>
+  </data>
+  <data name="AdminAdjustHint" xml:space="preserve">
+    <value>The match price becomes the session close; high/low are extended to include it and kept within the band.</value>
+  </data>
+  <data name="AdminPriceRulesHint" xml:space="preserve">
+    <value>Rules: Floor ≤ Reference ≤ Ceiling; Floor ≤ Low ≤ Open, Close ≤ High ≤ Ceiling.</value>
+  </data>
+  <data name="AdminCalcBand" xml:space="preserve">
+    <value>Calc band</value>
+  </data>
+  <data name="AdminCalcBandHint" xml:space="preserve">
+    <value>Calculate ceiling/floor from the exchange band (HOSE 7%, HNX 10%, UPCOM 15%)</value>
+  </data>
+  <data name="AdminBandMissingInput" xml:space="preserve">
+    <value>Select a stock and enter the reference price first.</value>
+  </data>
+  <data name="FieldTradeDate" xml:space="preserve">
+    <value>Trade date</value>
+  </data>
+  <data name="ThOpen" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="ThClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="PriceSessionExists" xml:space="preserve">
+    <value>This stock already has a price session on {0}.</value>
+  </data>
+  <data name="ConfirmDeletePrice" xml:space="preserve">
+    <value>Delete the {0} price session of {1}?</value>
+  </data>
+  <data name="AdminReportsSubtitle" xml:space="preserve">
+    <value>Quarterly financial reports of listed banks.</value>
+  </data>
+  <data name="AdminAddReport" xml:space="preserve">
+    <value>Add report</value>
+  </data>
+  <data name="AdminEditReport" xml:space="preserve">
+    <value>Edit financial report</value>
+  </data>
+  <data name="AdminSavedReport" xml:space="preserve">
+    <value>Financial report saved.</value>
+  </data>
+  <data name="FieldYear" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="FieldQuarter" xml:space="preserve">
+    <value>Quarter</value>
+  </data>
+  <data name="FieldRevenueBillion" xml:space="preserve">
+    <value>Revenue (VND bn)</value>
+  </data>
+  <data name="FieldNetProfitBillion" xml:space="preserve">
+    <value>Net profit (VND bn)</value>
+  </data>
+  <data name="FieldTotalAssetsBillion" xml:space="preserve">
+    <value>Total assets (VND bn)</value>
+  </data>
+  <data name="FieldTotalLiabilitiesBillion" xml:space="preserve">
+    <value>Total liabilities (VND bn)</value>
+  </data>
+  <data name="ThTotalLiabilities" xml:space="preserve">
+    <value>Liabilities</value>
+  </data>
+  <data name="ReportPeriodExists" xml:space="preserve">
+    <value>This stock already has a Q{0}/{1} report.</value>
+  </data>
+  <data name="ConfirmDeleteReport" xml:space="preserve">
+    <value>Delete the {0} Q{1}/{2} report?</value>
+  </data>
+  <data name="AdminUsersSubtitle" xml:space="preserve">
+    <value>Lock / unlock accounts and assign Admin, Investor roles.</value>
+  </data>
+  <data name="AdminUserSearchPlaceholder" xml:space="preserve">
+    <value>Email, full name...</value>
+  </data>
+  <data name="AdminAssignRoles" xml:space="preserve">
+    <value>Assign roles</value>
+  </data>
+  <data name="AdminLockUser" xml:space="preserve">
+    <value>Lock</value>
+  </data>
+  <data name="AdminUnlockUser" xml:space="preserve">
+    <value>Unlock</value>
+  </data>
+  <data name="AdminUserLocked" xml:space="preserve">
+    <value>Account locked.</value>
+  </data>
+  <data name="AdminUserUnlocked" xml:space="preserve">
+    <value>Account unlocked.</value>
+  </data>
+  <data name="AdminRolesUpdated" xml:space="preserve">
+    <value>Roles updated for {0}.</value>
+  </data>
+  <data name="AdminYou" xml:space="preserve">
+    <value>You</value>
+  </data>
+  <data name="AdminWalletTotal" xml:space="preserve">
+    <value>Wallet total</value>
+  </data>
+  <data name="FieldRole" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="RoleAdmin" xml:space="preserve">
+    <value>Administrator</value>
+  </data>
+  <data name="RoleInvestor" xml:space="preserve">
+    <value>Investor</value>
+  </data>
+  <data name="RoleAdminHint" xml:space="preserve">
+    <value>Full access to the admin area: data, prices, users, logs.</value>
+  </data>
+  <data name="RoleInvestorHint" xml:space="preserve">
+    <value>Simulated trading, watchlist, virtual wallet. A 500M wallet is created if missing.</value>
+  </data>
+  <data name="UserStatusActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="UserStatusDisabled" xml:space="preserve">
+    <value>Locked</value>
+  </data>
+  <data name="UserStatusLockedOut" xml:space="preserve">
+    <value>Temporarily locked (failed logins)</value>
+  </data>
+  <data name="UserCannotLockSelf" xml:space="preserve">
+    <value>You cannot lock your own account.</value>
+  </data>
+  <data name="UserCannotRemoveOwnAdmin" xml:space="preserve">
+    <value>You cannot remove your own Admin role.</value>
+  </data>
+  <data name="UserRoleRequired" xml:space="preserve">
+    <value>A user must have at least one role.</value>
+  </data>
+  <data name="ConfirmLockUser" xml:space="preserve">
+    <value>Lock {0}? The user will be signed out and cannot sign in.</value>
+  </data>
+  <data name="ConfirmUnlockUser" xml:space="preserve">
+    <value>Unlock {0}?</value>
+  </data>
+  <data name="AdminWalletsSubtitle" xml:space="preserve">
+    <value>Balances, blocked cash and cash flow of investor virtual wallets.</value>
+  </data>
+  <data name="AdminStatWallets" xml:space="preserve">
+    <value>Wallets</value>
+  </data>
+  <data name="AdminAverageBalance" xml:space="preserve">
+    <value>Average</value>
+  </data>
+  <data name="AdminStatCashBalance" xml:space="preserve">
+    <value>Total available cash</value>
+  </data>
+  <data name="AdminStatBlockedBalance" xml:space="preserve">
+    <value>Total blocked cash</value>
+  </data>
+  <data name="AdminStatCashFlow" xml:space="preserve">
+    <value>Cash flow (VND)</value>
+  </data>
+  <data name="AdminInvestor" xml:space="preserve">
+    <value>Investor</value>
+  </data>
+  <data name="AdminCashBalance" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="AdminBlockedBalance" xml:space="preserve">
+    <value>Blocked</value>
+  </data>
+  <data name="AdminTxCount" xml:space="preserve">
+    <value>Transactions</value>
+  </data>
+  <data name="AdminViewTransactions" xml:space="preserve">
+    <value>View wallet transactions</value>
+  </data>
+  <data name="AdminRecentTransactions" xml:space="preserve">
+    <value>Recent wallet transactions</value>
+  </data>
+  <data name="AdminRecentTransactionsNote" xml:space="preserve">
+    <value>Showing up to {0} latest transactions.</value>
+  </data>
+  <data name="AdminTxType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="AdminAmount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="AdminBalanceAfter" xml:space="preserve">
+    <value>Balance after</value>
+  </data>
+  <data name="TxDeposit" xml:space="preserve">
+    <value>Deposit</value>
+  </data>
+  <data name="TxWithdraw" xml:space="preserve">
+    <value>Withdrawal</value>
+  </data>
+  <data name="TxInitialGrant" xml:space="preserve">
+    <value>Initial grant</value>
+  </data>
+  <data name="TxBuyDebit" xml:space="preserve">
+    <value>Buy</value>
+  </data>
+  <data name="TxSellCredit" xml:space="preserve">
+    <value>Sell</value>
+  </data>
+  <data name="TxFee" xml:space="preserve">
+    <value>Fee</value>
+  </data>
+  <data name="TxRefund" xml:space="preserve">
+    <value>Refund</value>
+  </data>
+  <data name="AdminAuditSubtitle" xml:space="preserve">
+    <value>Log of sign-ins, admin write operations and transactions.</value>
+  </data>
+  <data name="AdminAuditSearchPlaceholder" xml:space="preserve">
+    <value>Email, detail, IP...</value>
+  </data>
+  <data name="FieldAuditAction" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="AdminActor" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="AdminEntity" xml:space="preserve">
+    <value>Entity</value>
+  </data>
+  <data name="NavDashboard" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="NavTrade" xml:space="preserve">
+    <value>Trade</value>
+  </data>
+  <data name="NavTrades" xml:space="preserve">
+    <value>Trade history</value>
+  </data>
+  <data name="InvestorArea" xml:space="preserve">
+    <value>Investor area</value>
+  </data>
+  <data name="BtnRefresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="ConcurrencyConflict" xml:space="preserve">
+    <value>The data was just changed by another operation. Please try again.</value>
+  </data>
+  <data name="FieldOrderType" xml:space="preserve">
+    <value>Side</value>
+  </data>
+  <data name="FieldOrderMode" xml:space="preserve">
+    <value>Order type</value>
+  </data>
+  <data name="FieldOrderPrice" xml:space="preserve">
+    <value>Order price</value>
+  </data>
+  <data name="FieldQuantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="ThMatchedPrice" xml:space="preserve">
+    <value>Matched price</value>
+  </data>
+  <data name="OrderTypeBuy" xml:space="preserve">
+    <value>Buy</value>
+  </data>
+  <data name="OrderTypeSell" xml:space="preserve">
+    <value>Sell</value>
+  </data>
+  <data name="OrderModeMarket" xml:space="preserve">
+    <value>Market</value>
+  </data>
+  <data name="OrderModeLimit" xml:space="preserve">
+    <value>Limit (LO)</value>
+  </data>
+  <data name="OrderStatusPending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="OrderStatusMatched" xml:space="preserve">
+    <value>Matched</value>
+  </data>
+  <data name="OrderStatusCancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="OrderCancel" xml:space="preserve">
+    <value>Cancel order</value>
+  </data>
+  <data name="OrderCancelled" xml:space="preserve">
+    <value>Order #{0} cancelled; blocked cash / shares released.</value>
+  </data>
+  <data name="ConfirmCancelOrder" xml:space="preserve">
+    <value>Cancel order #{0}: {1} {2} {3}?</value>
+  </data>
+  <data name="OrderMatchedNow" xml:space="preserve">
+    <value>{0} {1} {2} matched at {3} (fee {4} VND).</value>
+  </data>
+  <data name="OrderPendingNow" xml:space="preserve">
+    <value>{0} {1} {2} at {3} placed and waiting to be matched.</value>
+  </data>
+  <data name="OrderQuantityInvalid" xml:space="preserve">
+    <value>Quantity must be a multiple of {0}, at most {1:N0} shares.</value>
+  </data>
+  <data name="OrderStockNotTradable" xml:space="preserve">
+    <value>Stock {0} does not exist or is suspended.</value>
+  </data>
+  <data name="OrderPriceOutOfBand" xml:space="preserve">
+    <value>Order price must be between the floor {0:N0} and the ceiling {1:N0}.</value>
+  </data>
+  <data name="OrderInsufficientCash" xml:space="preserve">
+    <value>Insufficient cash: {0:N0} VND required (incl. fee), only {1:N0} VND available.</value>
+  </data>
+  <data name="OrderInsufficientShares" xml:space="preserve">
+    <value>Insufficient shares: only {0:N0} {1} available to sell.</value>
+  </data>
+  <data name="OrderNotPending" xml:space="preserve">
+    <value>Only pending orders can be cancelled.</value>
+  </data>
+  <data name="OrderFeeNote" xml:space="preserve">
+    <value>Fees of pending orders are estimates; actual fees use the matched price.</value>
+  </data>
+  <data name="ValLotSize" xml:space="preserve">
+    <value>{0} must be a multiple of {1} (exchange lot size).</value>
+  </data>
+  <data name="ValQuantityRange" xml:space="preserve">
+    <value>{0} must be between {1:N0} and {2:N0} shares.</value>
+  </data>
+  <data name="ValLimitPriceRequired" xml:space="preserve">
+    <value>A limit order requires an order price.</value>
+  </data>
+  <data name="TradeTitle" xml:space="preserve">
+    <value>Place order</value>
+  </data>
+  <data name="TradeSubtitle" xml:space="preserve">
+    <value>Simulated buy / sell of bank stocks, matched at the latest session price.</value>
+  </data>
+  <data name="TradeNoStocks" xml:space="preserve">
+    <value>No stock is currently tradable.</value>
+  </data>
+  <data name="TradeConfirmTitle" xml:space="preserve">
+    <value>Confirm order</value>
+  </data>
+  <data name="TradeEstimatedValue" xml:space="preserve">
+    <value>Order value</value>
+  </data>
+  <data name="TradeEstimatedFee" xml:space="preserve">
+    <value>Estimated fee</value>
+  </data>
+  <data name="TradeTotalPay" xml:space="preserve">
+    <value>Total cost</value>
+  </data>
+  <data name="TradeTotalReceive" xml:space="preserve">
+    <value>Net proceeds</value>
+  </data>
+  <data name="TradeAvailableCash" xml:space="preserve">
+    <value>Available cash</value>
+  </data>
+  <data name="TradeAvailableShares" xml:space="preserve">
+    <value>Available shares</value>
+  </data>
+  <data name="TradeMaxQuantity" xml:space="preserve">
+    <value>Max quantity</value>
+  </data>
+  <data name="TradeSubmitBuy" xml:space="preserve">
+    <value>Place BUY order</value>
+  </data>
+  <data name="TradeSubmitSell" xml:space="preserve">
+    <value>Place SELL order</value>
+  </data>
+  <data name="TradeRulesHint" xml:space="preserve">
+    <value>Market orders match immediately at the current price. Limit orders match when the market reaches the order price (buy: market ≤ limit; sell: market ≥ limit), otherwise they wait for a price change. Buy orders block cash (incl. fee); sell orders block shares.</value>
+  </data>
+  <data name="TradePendingOrders" xml:space="preserve">
+    <value>Pending orders</value>
+  </data>
+  <data name="TradeNoPending" xml:space="preserve">
+    <value>No pending orders.</value>
+  </data>
+  <data name="OrderHistoryTitle" xml:space="preserve">
+    <value>Order history</value>
+  </data>
+  <data name="OrderHistorySubtitle" xml:space="preserve">
+    <value>All your orders; pending orders can be cancelled.</value>
+  </data>
+  <data name="TradeHistoryTitle" xml:space="preserve">
+    <value>Trade history</value>
+  </data>
+  <data name="TradeHistorySubtitle" xml:space="preserve">
+    <value>Matched trades with fees and net amounts.</value>
+  </data>
+  <data name="TradeValue" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="TradeNetAmount" xml:space="preserve">
+    <value>Net amount</value>
+  </data>
+  <data name="TradeOrderRef" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="AdminOrdersSubtitle" xml:space="preserve">
+    <value>Simulated orders of all investors.</value>
+  </data>
+  <data name="AdminOrderSearchPlaceholder" xml:space="preserve">
+    <value>Email, stock code...</value>
+  </data>
+  <data name="WalletTitle" xml:space="preserve">
+    <value>Virtual wallet</value>
+  </data>
+  <data name="WalletSubtitle" xml:space="preserve">
+    <value>Simulated deposits / withdrawals and cash transaction history.</value>
+  </data>
+  <data name="WalletBlockedHint" xml:space="preserve">
+    <value>Blocked for pending buy orders</value>
+  </data>
+  <data name="WalletTotalCash" xml:space="preserve">
+    <value>Total cash</value>
+  </data>
+  <data name="WalletTransferHint" xml:space="preserve">
+    <value>Simulation only, no real money. 100,000 to 10 billion VND per transfer; only available cash can be withdrawn.</value>
+  </data>
+  <data name="WalletHistory" xml:space="preserve">
+    <value>Cash transaction history</value>
+  </data>
+  <data name="WalletBalanceAfter" xml:space="preserve">
+    <value>Total cash after</value>
+  </data>
+  <data name="WalletDeposited" xml:space="preserve">
+    <value>Deposited {0} VND.</value>
+  </data>
+  <data name="WalletWithdrawn" xml:space="preserve">
+    <value>Withdrew {0} VND.</value>
+  </data>
+  <data name="WalletAmountInvalid" xml:space="preserve">
+    <value>Amount must be a whole number between {0:N0} and {1:N0} VND.</value>
+  </data>
+  <data name="WalletInsufficientBalance" xml:space="preserve">
+    <value>Insufficient available balance ({0:N0} VND left).</value>
+  </data>
+  <data name="WalletInactive" xml:space="preserve">
+    <value>The wallet is locked.</value>
+  </data>
+  <data name="WalletNotFound" xml:space="preserve">
+    <value>This account has no wallet.</value>
+  </data>
+  <data name="FieldAmount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="ConfirmWithdraw" xml:space="preserve">
+    <value>Withdraw {0} VND?</value>
+  </data>
+  <data name="InvestorDashboardTitle" xml:space="preserve">
+    <value>Investment overview</value>
+  </data>
+  <data name="InvestorDashboardSubtitle" xml:space="preserve">
+    <value>Assets, holdings and watchlist — refreshed every 30 seconds.</value>
+  </data>
+  <data name="PortfolioTitle" xml:space="preserve">
+    <value>Portfolio</value>
+  </data>
+  <data name="PortfolioSubtitle" xml:space="preserve">
+    <value>Holdings, average cost and unrealized P&amp;L at market price.</value>
+  </data>
+  <data name="PortfolioTotalAssets" xml:space="preserve">
+    <value>Total assets</value>
+  </data>
+  <data name="PortfolioTotalReturn" xml:space="preserve">
+    <value>Total return</value>
+  </data>
+  <data name="PortfolioStockValue" xml:space="preserve">
+    <value>Stock value</value>
+  </data>
+  <data name="PortfolioCostValue" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+  <data name="PortfolioUnrealizedPnl" xml:space="preserve">
+    <value>Unrealized P&amp;L</value>
+  </data>
+  <data name="PortfolioHoldings" xml:space="preserve">
+    <value>Holdings</value>
+  </data>
+  <data name="PortfolioQuantity" xml:space="preserve">
+    <value>Total qty</value>
+  </data>
+  <data name="PortfolioAvailableQty" xml:space="preserve">
+    <value>Available qty</value>
+  </data>
+  <data name="PortfolioAvgCost" xml:space="preserve">
+    <value>Avg cost</value>
+  </data>
+  <data name="PortfolioMarketValue" xml:space="preserve">
+    <value>Market value</value>
+  </data>
+  <data name="PortfolioWeight" xml:space="preserve">
+    <value>Weight</value>
+  </data>
+  <data name="PortfolioAllocation" xml:space="preserve">
+    <value>Allocation</value>
+  </data>
+  <data name="PortfolioCash" xml:space="preserve">
+    <value>Cash</value>
+  </data>
+  <data name="PortfolioEmpty" xml:space="preserve">
+    <value>No holdings yet.</value>
+  </data>
+  <data name="PortfolioNote" xml:space="preserve">
+    <value>Total return = total assets − (initial grant + deposits − withdrawals). Weighted average cost, excluding fees.</value>
+  </data>
+  <data name="WatchlistSubtitle" xml:space="preserve">
+    <value>Track the stocks you care about.</value>
+  </data>
+  <data name="WatchlistAdd" xml:space="preserve">
+    <value>Watch</value>
+  </data>
+  <data name="WatchlistRemove" xml:space="preserve">
+    <value>Unwatch</value>
+  </data>
+  <data name="WatchlistAdded" xml:space="preserve">
+    <value>Added to watchlist.</value>
+  </data>
+  <data name="WatchlistRemoved" xml:space="preserve">
+    <value>Removed from watchlist.</value>
+  </data>
+  <data name="WatchlistEmpty" xml:space="preserve">
+    <value>Your watchlist is empty. Add a stock to track.</value>
+  </data>
+  <data name="WatchlistPick" xml:space="preserve">
+    <value>Pick a stock</value>
+  </data>
+  <data name="WatchlistManage" xml:space="preserve">
+    <value>Manage</value>
+  </data>
+  <data name="WatchlistFull" xml:space="preserve">
+    <value>A watchlist can hold at most {0} stocks.</value>
+  </data>
+  <data name="JsValMin" xml:space="preserve">
+    <value>Please enter a value greater than or equal to {0}.</value>
+  </data>
+  <data name="JsValMax" xml:space="preserve">
+    <value>Please enter a value less than or equal to {0}.</value>
+  </data>
+  <data name="JsValStep" xml:space="preserve">
+    <value>Please enter a multiple of {0}.</value>
+  </data>
+  <data name="JsValNumber" xml:space="preserve">
+    <value>Please enter a valid number.</value>
+  </data>
+  <data name="OrderDraftTitle" xml:space="preserve">
+    <value>Draft orders</value>
+  </data>
+  <data name="OrderDraftHint" xml:space="preserve">
+    <value>Kept for this session only; no cash or shares are blocked until you place the order.</value>
+  </data>
+  <data name="OrderDraftSave" xml:space="preserve">
+    <value>Save draft</value>
+  </data>
+  <data name="OrderDraftSaved" xml:space="preserve">
+    <value>Order saved to drafts.</value>
+  </data>
+  <data name="OrderDraftFull" xml:space="preserve">
+    <value>You already have {0} draft orders. Remove some before saving more.</value>
+  </data>
+  <data name="OrderDraftEmpty" xml:space="preserve">
+    <value>No draft orders yet. Click "Save draft" to keep an order and place it later.</value>
+  </data>
+  <data name="OrderDraftUse" xml:space="preserve">
+    <value>Use</value>
+  </data>
+  <data name="OrderDraftLoaded" xml:space="preserve">
+    <value>Draft loaded into the form. Review it, then place the order.</value>
+  </data>
+  <data name="OrderDraftRemoved" xml:space="preserve">
+    <value>Draft order removed.</value>
+  </data>
+  <data name="OrderDraftCleared" xml:space="preserve">
+    <value>All draft orders removed.</value>
+  </data>
+  <data name="OrderDraftClear" xml:space="preserve">
+    <value>Clear all</value>
+  </data>
+  <data name="OrderDraftNotFound" xml:space="preserve">
+    <value>This draft order no longer exists (your session may have expired).</value>
+  </data>
+  <data name="ConfirmRemoveDraft" xml:space="preserve">
+    <value>Remove draft order {0} {1} {2}?</value>
+  </data>
+  <data name="ConfirmClearDrafts" xml:space="preserve">
+    <value>Remove all draft orders?</value>
+  </data>
+</root>

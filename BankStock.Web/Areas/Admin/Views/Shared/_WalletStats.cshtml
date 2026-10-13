@@ -1,0 +1,43 @@
+@model WalletStatsViewModel
+@* Thẻ thống kê ví ảo (dùng ở Dashboard và trang Thống kê ví). *@
+<div class="row g-3 mb-4">
+    <div class="col-xl-3 col-md-6 col-12">
+        <div class="admin-stat-card card-purple">
+            <div>
+                <div class="admin-stat-title">@Localizer["AdminStatWallets"]</div>
+                <div class="admin-stat-value">@Model.TotalWallets.ToString("N0")</div>
+                <div class="small text-secondary">@Localizer["AdminAverageBalance"]: <span class="num-font">@Model.AverageBalance.ToString("N0")</span></div>
+            </div>
+            <div class="admin-stat-icon"><i class="bi bi-wallet2"></i></div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 col-12">
+        <div class="admin-stat-card card-green">
+            <div>
+                <div class="admin-stat-title">@Localizer["AdminStatCashBalance"]</div>
+                <div class="admin-stat-value admin-stat-value-sm">@Html.DisplayFor(m => m.TotalBalance)</div>
+            </div>
+            <div class="admin-stat-icon"><i class="bi bi-cash-stack"></i></div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 col-12">
+        <div class="admin-stat-card card-amber">
+            <div>
+                <div class="admin-stat-title">@Localizer["AdminStatBlockedBalance"]</div>
+                <div class="admin-stat-value admin-stat-value-sm">@Html.DisplayFor(m => m.TotalBlocked)</div>
+            </div>
+            <div class="admin-stat-icon"><i class="bi bi-lock"></i></div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 col-12">
+        <div class="admin-stat-card card-cyan">
+            <div class="w-100">
+                <div class="admin-stat-title">@Localizer["AdminStatCashFlow"]</div>
+                <div class="d-flex justify-content-between small"><span class="text-secondary">@Localizer["TxInitialGrant"]</span><span class="num-font">@Model.TotalGranted.ToString("N0")</span></div>
+                <div class="d-flex justify-content-between small"><span class="text-secondary">@Localizer["TxDeposit"]</span><span class="num-font stock-up">@Model.TotalDeposited.ToString("N0")</span></div>
+                <div class="d-flex justify-content-between small"><span class="text-secondary">@Localizer["TxWithdraw"]</span><span class="num-font stock-down">@Model.TotalWithdrawn.ToString("N0")</span></div>
+                <div class="d-flex justify-content-between small"><span class="text-secondary">@Localizer["TxFee"]</span><span class="num-font">@Model.TotalFees.ToString("N0")</span></div>
+            </div>
+        </div>
+    </div>
+</div>

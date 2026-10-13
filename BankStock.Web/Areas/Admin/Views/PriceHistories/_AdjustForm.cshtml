@@ -1,0 +1,56 @@
+@model PriceAdjustViewModel
+@{
+    string Num(decimal value) => value == 0 ? string.Empty : value.ToString("0.##########", System.Globalization.CultureInfo.InvariantCulture);
+}
+
+<form asp-action="Adjust" method="post" data-ajax-form novalidate>
+    <input type="hidden" asp-for="StockId" />
+    <input type="hidden" asp-for="StockCode" />
+    <input type="hidden" asp-for="Exchange" />
+    <input type="hidden" asp-for="IsNewSession" />
+
+    <div class="modal-header">
+        <h5 class="modal-title">
+            <i class="bi bi-sliders text-warning me-2"></i>@Localizer["AdminAdjustPriceTitle", Model.StockCode]
+            <span class="badge bg-secondary-subtle text-secondary ms-1">@Model.Exchange</span>
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@Localizer["Close"]"></button>
+    </div>
+    <div class="modal-body">
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger small py-2" role="alert"></div>
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="TradeDate" class="form-label small"></label>
+                <input asp-for="TradeDate" class="form-control form-control-sm"
+                       data-modal-reload="@Url.Action("Adjust", new { stockId = Model.StockId })" />
+                <span asp-validation-for="TradeDate" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-6 d-flex align-items-end">
+                @if (Model.IsNewSession)
+                {
+                    <div class="alert alert-info small py-2 mb-0 w-100"><i class="bi bi-plus-circle me-1"></i>@Localizer["AdminNewSessionNotice"]</div>
+                }
+                else
+                {
+                    <div class="alert alert-warning small py-2 mb-0 w-100"><i class="bi bi-pencil me-1"></i>@Localizer["AdminExistingSessionNotice"]</div>
+                }
+            </div>
+
+            <partial name="_PriceBandFields" model="Model" />
+
+            <div class="col-md-6">
+                <label asp-for="MatchPrice" class="form-label small fw-semibold"></label>
+                <input asp-for="MatchPrice" type="number" min="1" step="any" value="@Num(Model.MatchPrice)" class="form-control" />
+                <span asp-validation-for="MatchPrice" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Volume" class="form-label small"></label>
+                <input asp-for="Volume" type="number" min="0" step="1" class="form-control" />
+                <span asp-validation-for="Volume" class="field-validation-error"></span>
+            </div>
+        </div>
+        <p class="form-text small mt-3 mb-0"><i class="bi bi-info-circle me-1"></i>@Localizer["AdminAdjustHint"]</p>
+    </div>
+    <partial name="_FormFooter" />
+</form>

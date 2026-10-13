@@ -1,0 +1,109 @@
+@model StockFormViewModel
+@{
+    var bankOptions = ViewData["BankOptions"] as IEnumerable<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> ?? [];
+    string Num(decimal? value) => value?.ToString("0.##########", System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty;
+}
+
+<form asp-action="@(Model.IsNew ? "Create" : "Edit")" asp-route-id="@(Model.IsNew ? null : Model.Id.ToString())" method="post" data-ajax-form novalidate>
+    <div class="modal-header">
+        <h5 class="modal-title">
+            <i class="bi bi-graph-up text-primary me-2"></i>@(Model.IsNew ? Localizer["AdminAddStock"] : Localizer["AdminEditStock", Model.StockCode])
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@Localizer["Close"]"></button>
+    </div>
+    <div class="modal-body">
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger small py-2" role="alert"></div>
+
+        <h6 class="admin-form-section">@Localizer["AdminSectionGeneral"]</h6>
+        <div class="row g-3">
+            <div class="col-md-3 col-6">
+                <label asp-for="StockCode" class="form-label small"></label>
+                <input asp-for="StockCode" class="form-control form-control-sm text-uppercase" maxlength="3" data-uppercase autocomplete="off" />
+                <span asp-validation-for="StockCode" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-5 col-6">
+                <label asp-for="BankId" class="form-label small"></label>
+                <select asp-for="BankId" asp-items="bankOptions" class="form-select form-select-sm">
+                    <option value="0">— @Localizer["SelectPlaceholder"] —</option>
+                </select>
+                <span asp-validation-for="BankId" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-2 col-6">
+                <label asp-for="Exchange" class="form-label small"></label>
+                <select asp-for="Exchange" class="form-select form-select-sm">
+                    @foreach (var exchange in BankStock.Web.Services.PriceRules.Exchanges)
+                    {
+                        <option value="@exchange">@exchange</option>
+                    }
+                </select>
+                <span asp-validation-for="Exchange" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-2 col-6">
+                <label asp-for="BankGroup" class="form-label small"></label>
+                <select asp-for="BankGroup" class="form-select form-select-sm">
+                    <option value="Big4">@Localizer["FilterBig4"]</option>
+                    <option value="PrivateJSC">@Localizer["FilterPrivate"]</option>
+                </select>
+                <span asp-validation-for="BankGroup" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-4 col-6">
+                <label asp-for="ListedShares" class="form-label small"></label>
+                <input asp-for="ListedShares" type="number" min="0" step="1" class="form-control form-control-sm" />
+                <span asp-validation-for="ListedShares" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-4 col-6">
+                <label asp-for="FaceValue" class="form-label small"></label>
+                <input asp-for="FaceValue" type="number" min="1" step="1" value="@Num(Model.FaceValue)" class="form-control form-control-sm" />
+                <span asp-validation-for="FaceValue" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="CharterCapitalBillion" class="form-label small"></label>
+                <input asp-for="CharterCapitalBillion" type="number" min="0" step="any" value="@Num(Model.CharterCapitalBillion)" class="form-control form-control-sm"
+                       aria-describedby="charterHelp" />
+                <div id="charterHelp" class="form-text small">@Localizer["AdminCharterCapitalHint"]</div>
+                <span asp-validation-for="CharterCapitalBillion" class="field-validation-error"></span>
+            </div>
+            <div class="col-12">
+                <div class="form-check form-switch">
+                    <input asp-for="IsActive" class="form-check-input" role="switch" />
+                    <label asp-for="IsActive" class="form-check-label small"></label>
+                </div>
+            </div>
+        </div>
+
+        <h6 class="admin-form-section">@Localizer["KeyMetrics"]</h6>
+        <div class="row g-3">
+            <div class="col-md-2 col-4">
+                <label asp-for="PE" class="form-label small"></label>
+                <input asp-for="PE" type="number" step="any" value="@Num(Model.PE)" class="form-control form-control-sm" />
+                <span asp-validation-for="PE" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-2 col-4">
+                <label asp-for="PB" class="form-label small"></label>
+                <input asp-for="PB" type="number" step="any" value="@Num(Model.PB)" class="form-control form-control-sm" />
+                <span asp-validation-for="PB" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-2 col-4">
+                <label asp-for="EPS" class="form-label small"></label>
+                <input asp-for="EPS" type="number" step="any" value="@Num(Model.EPS)" class="form-control form-control-sm" />
+                <span asp-validation-for="EPS" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-2 col-4">
+                <label asp-for="CASA" class="form-label small"></label>
+                <input asp-for="CASA" type="number" step="any" value="@Num(Model.CASA)" class="form-control form-control-sm" />
+                <span asp-validation-for="CASA" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-2 col-4">
+                <label asp-for="NPL" class="form-label small"></label>
+                <input asp-for="NPL" type="number" step="any" value="@Num(Model.NPL)" class="form-control form-control-sm" />
+                <span asp-validation-for="NPL" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-2 col-4">
+                <label asp-for="DividendYield" class="form-label small"></label>
+                <input asp-for="DividendYield" type="number" step="any" value="@Num(Model.DividendYield)" class="form-control form-control-sm" />
+                <span asp-validation-for="DividendYield" class="field-validation-error"></span>
+            </div>
+        </div>
+    </div>
+    <partial name="_FormFooter" />
+</form>

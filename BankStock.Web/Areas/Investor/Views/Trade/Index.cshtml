@@ -1,0 +1,151 @@
+@model TradePageViewModel
+@{
+    ViewData["Title"] = Localizer["NavTrade"];
+    var form = Model.Form;
+    var quote = Model.Quote;
+}
+
+<partial name="_InvestorNav" />
+
+<div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-3">
+    <div>
+        <h4 class="fw-bold mb-1"><i class="bi bi-arrow-left-right text-primary me-2"></i>@Localizer["TradeTitle"]</h4>
+        <p class="text-secondary small mb-0">@Localizer["TradeSubtitle"]</p>
+    </div>
+</div>
+
+@if (quote is null)
+{
+    <div class="alert alert-warning">@Localizer["TradeNoStocks"]</div>
+}
+else
+{
+    <div class="row g-3">
+        <!-- Form đặt lệnh -->
+        <div class="col-lg-5">
+            <form id="orderForm" class="stock-card p-3" asp-action="Place" method="post" novalidate
+                  data-quote-url="@Url.Action("Quote")"
+                  data-pending-url="@Url.Action("Pending")"
+                  data-drafts-url="@Url.Action("Drafts")"
+                  data-save-draft-url="@Url.Action("SaveDraft")"
+                  data-draft-loaded="@Localizer["OrderDraftLoaded"]"
+                  data-confirm-title="@Localizer["TradeConfirmTitle"]"
+                  data-label-buy="@Localizer["OrderTypeBuy"]"
+                  data-label-sell="@Localizer["OrderTypeSell"]"
+                  data-label-market="@Localizer["OrderModeMarket"]">
+                <div class="btn-group w-100 mb-3" role="group" aria-label="@Localizer["FieldOrderType"]">
+                    <input type="radio" class="btn-check" name="Type" id="sideBuy" value="Buy" checked="@(form.Type == OrderType.Buy)" autocomplete="off" />
+                    <label class="btn btn-outline-success fw-bold" for="sideBuy">@Localizer["OrderTypeBuy"]</label>
+                    <input type="radio" class="btn-check" name="Type" id="sideSell" value="Sell" checked="@(form.Type == OrderType.Sell)" autocomplete="off" />
+                    <label class="btn btn-outline-danger fw-bold" for="sideSell">@Localizer["OrderTypeSell"]</label>
+                </div>
+
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger small py-2" role="alert"></div>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <label for="StockCode" class="form-label small">@Localizer["FieldStockCode"]</label>
+                        <select name="StockCode" id="StockCode" class="form-select">
+                            @foreach (var stock in Model.Stocks)
+                            {
+                                <option value="@stock.StockCode" selected="@(stock.StockCode == form.StockCode)">@stock.StockCode (@stock.Exchange)</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <span class="form-label small d-block">@Localizer["FieldOrderMode"]</span>
+                        <div class="btn-group w-100" role="group" aria-label="@Localizer["FieldOrderMode"]">
+                            <input type="radio" class="btn-check" name="Mode" id="modeMarket" value="Market" checked="@(form.Mode == OrderMode.Market)" autocomplete="off" />
+                            <label class="btn btn-outline-secondary" for="modeMarket">@Localizer["OrderModeMarket"]</label>
+                            <input type="radio" class="btn-check" name="Mode" id="modeLimit" value="Limit" checked="@(form.Mode == OrderMode.Limit)" autocomplete="off" />
+                            <label class="btn btn-outline-secondary" for="modeLimit">@Localizer["OrderModeLimit"]</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <partial name="_QuantityField" model="form" />
+                    </div>
+                    <div class="col-6">
+                        <partial name="_PriceField" model="form" />
+                    </div>
+                </div>
+
+                <dl class="trade-estimate small mt-3 mb-3">
+                    <div><dt>@Localizer["TradeEstimatedValue"]</dt><dd class="num-font" data-estimate="value">—</dd></div>
+                    <div><dt>@Localizer["TradeEstimatedFee"] (<span data-quote="feePercent"></span>%)</dt><dd class="num-font" data-estimate="fee">—</dd></div>
+                    <div class="fw-semibold"><dt data-estimate="totalLabel" data-label-buy="@Localizer["TradeTotalPay"]" data-label-sell="@Localizer["TradeTotalReceive"]">@Localizer["TradeTotalPay"]</dt><dd class="num-font" data-estimate="total">—</dd></div>
+                    <div><dt data-available-label data-label-buy="@Localizer["TradeAvailableCash"]" data-label-sell="@Localizer["TradeAvailableShares"]">@Localizer["TradeAvailableCash"]</dt><dd class="num-font" data-estimate="available">—</dd></div>
+                    <div><dt>@Localizer["TradeMaxQuantity"]</dt><dd class="num-font"><a href="#" data-estimate="max">—</a></dd></div>
+                </dl>
+
+                <input type="hidden" name="DraftId" id="DraftId" value="" />
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-success flex-grow-1 fw-bold" id="orderSubmit"
+                            data-class-buy="btn-success" data-class-sell="btn-danger"
+                            data-text-buy="@Localizer["TradeSubmitBuy"]" data-text-sell="@Localizer["TradeSubmitSell"]">
+                        <i class="bi bi-send me-1"></i><span>@Localizer["TradeSubmitBuy"]</span>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary" id="draftSave" title="@Localizer["OrderDraftHint"]">
+                        <i class="bi bi-bookmark-plus me-1"></i>@Localizer["OrderDraftSave"]
+                    </button>
+                </div>
+                <p class="form-text small mt-2 mb-0">@Localizer["TradeRulesHint"]</p>
+            </form>
+        </div>
+
+        <!-- Báo giá + lệnh chờ -->
+        <div class="col-lg-7">
+            <script type="application/json" id="tradeQuoteData">@Json.Serialize(quote)</script>
+            <div class="stock-card p-3 mb-3" id="tradeQuote">
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="stock-code-badge detail-code-badge stock-ref" data-quote="stockCode">@quote.StockCode</span>
+                        <div>
+                            <div class="fw-semibold" data-quote="bankShortName">@quote.BankShortName</div>
+                            <div class="small text-secondary"><span data-quote="exchange">@quote.Exchange</span> · @Localizer["LastSession"]: <span data-quote="tradeDate">@quote.TradeDate?.ToString("d")</span></div>
+                        </div>
+                    </div>
+                    <a class="small" data-quote-link href="@Url.Action("Details", "Stocks", new { area = "", code = quote.StockCode })">@Localizer["BtnDetail"] <i class="bi bi-box-arrow-up-right"></i></a>
+                </div>
+                <div class="row row-cols-2 row-cols-sm-4 g-2 text-center small">
+                    <div><div class="text-secondary">@Localizer["ThMatchPrice"]</div><div class="num-font fs-5 fw-bold" data-quote="matchPrice">@quote.MatchPrice.ToString("N0")</div></div>
+                    <div><div class="text-secondary">@Localizer["ThRef"]</div><div class="num-font fw-semibold stock-ref" data-quote="refPrice">@quote.RefPrice.ToString("N0")</div></div>
+                    <div><div class="text-secondary">@Localizer["ThCeiling"]</div><div class="num-font fw-semibold stock-ceil" data-quote="ceilingPrice">@quote.CeilingPrice.ToString("N0")</div></div>
+                    <div><div class="text-secondary">@Localizer["ThFloor"]</div><div class="num-font fw-semibold stock-floor" data-quote="floorPrice">@quote.FloorPrice.ToString("N0")</div></div>
+                </div>
+            </div>
+
+            <div class="stock-card">
+                <div class="stock-card-header">
+                    <div class="fw-bold"><i class="bi bi-hourglass-split text-warning me-2"></i>@Localizer["TradePendingOrders"]</div>
+                    <a asp-controller="Orders" asp-action="Index" class="small">@Localizer["AdminViewAll"]</a>
+                </div>
+                <div id="pendingOrders" aria-live="polite">
+                    <partial name="_PendingOrders" model="Model.PendingOrders" />
+                </div>
+            </div>
+
+            <div class="stock-card mt-3">
+                <div class="stock-card-header">
+                    <div>
+                        <div class="fw-bold"><i class="bi bi-bookmarks text-primary me-2"></i>@Localizer["OrderDraftTitle"]</div>
+                        <div class="small text-secondary">@Localizer["OrderDraftHint"]</div>
+                    </div>
+                    <button type="button" class="btn btn-outline-danger btn-sm"
+                            data-confirm-post="@Url.Action("ClearDrafts")"
+                            data-confirm-text="@Localizer["ConfirmClearDrafts"]"
+                            data-confirm-button="@Localizer["OrderDraftClear"]">
+                        <i class="bi bi-trash me-1"></i>@Localizer["OrderDraftClear"]
+                    </button>
+                </div>
+                <div id="orderDrafts" aria-live="polite">
+                    <partial name="_OrderDrafts" model="Model.Drafts" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/investor-trade.js" asp-append-version="true"></script>
+}

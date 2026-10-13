@@ -1,0 +1,19 @@
+@model PagedListQuery
+@* Ô chọn số dòng/trang + nút Xóa lọc / Lọc dùng chung cho các trang danh sách Admin / Investor. *@
+<div class="col-lg-2 col-md-3 col-6">
+    <label for="filterPageSize" class="form-label small text-secondary">@Localizer["PageSize"]</label>
+    <select id="filterPageSize" name="pageSize" class="form-select form-select-sm">
+        @foreach (var size in PagedListQuery.AllowedPageSizes)
+        {
+            <option value="@size" selected="@(Model.PageSize == size)">@size</option>
+        }
+    </select>
+</div>
+<div class="col-lg-2 col-md-3 col-6 d-flex gap-2">
+    <a asp-action="@ViewContext.RouteData.Values["action"]" asp-route-reset="true" class="btn btn-sm btn-outline-secondary flex-fill" id="filterReset" title="@Localizer["FilterReset"]">
+        <i class="bi bi-x-circle"></i><span class="d-none d-xl-inline ms-1">@Localizer["FilterReset"]</span>
+    </a>
+    <button type="submit" class="btn btn-sm btn-primary flex-fill" title="@Localizer["FilterApply"]">
+        <i class="bi bi-funnel"></i><span class="d-none d-xl-inline ms-1">@Localizer["FilterApply"]</span>
+    </button>
+</div>

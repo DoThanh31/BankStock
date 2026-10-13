@@ -1,0 +1,53 @@
+@model PagerViewModel
+@{
+    var start = Math.Max(1, Model.PageIndex - Model.Window);
+    var end = Math.Min(Model.TotalPages, Model.PageIndex + Model.Window);
+}
+@if (Model.TotalPages > 1)
+{
+    <nav aria-label="@Localizer["PaginationLabel"]">
+        <ul class="pagination pagination-sm fintech-pagination mb-0">
+            <li class="page-item @(Model.PageIndex <= 1 ? "disabled" : "")">
+                <a class="page-link" href="@(Model.PageIndex > 1 ? Model.PageUrl(Model.PageIndex - 1) : "#")" aria-label="@Localizer["PaginationPrevious"]">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            </li>
+
+            @if (start > 1)
+            {
+                <li class="page-item"><a class="page-link" href="@Model.PageUrl(1)">1</a></li>
+                @if (start > 2)
+                {
+                    <li class="page-item disabled"><span class="page-link">…</span></li>
+                }
+            }
+
+            @for (var i = start; i <= end; i++)
+            {
+                if (i == Model.PageIndex)
+                {
+                    <li class="page-item active" aria-current="page"><span class="page-link">@i</span></li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" href="@Model.PageUrl(i)">@i</a></li>
+                }
+            }
+
+            @if (end < Model.TotalPages)
+            {
+                @if (end < Model.TotalPages - 1)
+                {
+                    <li class="page-item disabled"><span class="page-link">…</span></li>
+                }
+                <li class="page-item"><a class="page-link" href="@Model.PageUrl(Model.TotalPages)">@Model.TotalPages</a></li>
+            }
+
+            <li class="page-item @(Model.PageIndex >= Model.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="@(Model.PageIndex < Model.TotalPages ? Model.PageUrl(Model.PageIndex + 1) : "#")" aria-label="@Localizer["PaginationNext"]">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+}

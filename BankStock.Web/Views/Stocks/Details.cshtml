@@ -1,0 +1,204 @@
+@using BankStock.Web.Dtos
+@model StockDetailViewModel
+@{
+    var quote = Model.Quote;
+    ViewData["Title"] = $"{quote.StockCode} - {quote.BankShortName}";
+    const decimal billion = 1_000_000_000m;
+}
+
+<nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb small mb-0">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">@Localizer["NavPriceBoard"]</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Stocks" asp-action="Index">@Localizer["StockListTitle"]</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@quote.StockCode</li>
+    </ol>
+</nav>
+
+<partial name="_RecentlyViewedStocks" model="Model.RecentlyViewed" />
+
+<!-- Quote header -->
+<div class="stock-card p-3 p-lg-4 mb-3">
+    <div class="row g-3 align-items-center">
+        <div class="col-lg-5">
+            <div class="d-flex align-items-center gap-3">
+                <span class="stock-code-badge detail-code-badge @quote.StatusClass">@quote.StockCode</span>
+                <div>
+                    <h1 class="h4 fw-bold mb-1">@quote.BankShortName</h1>
+                    <div class="text-secondary small">@quote.BankName</div>
+                    <div class="d-flex flex-wrap gap-1 mt-1">
+                        <span class="badge bg-secondary-subtle text-secondary font-monospace">@quote.Exchange</span>
+                        <span class="badge bg-primary-subtle text-primary-emphasis">@(quote.BankGroup == BankGroup.Big4 ? Localizer["FilterBig4"] : Localizer["FilterPrivate"])</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="detail-price num-font @quote.StatusClass">@quote.CurrentPrice.ToString("N0")</div>
+            <div class="num-font fw-semibold @quote.StatusClass">@quote.ChangeDisplay (@quote.ChangePercentDisplay)</div>
+            @if (Model.LastTradeDate is { } tradeDate)
+            {
+                <div class="small text-secondary mt-1">@Localizer["LastSession"]: @tradeDate.ToString("d")</div>
+            }
+        </div>
+        <div class="col-lg-4 col-sm-6">
+            <div class="row row-cols-3 g-2 small text-center">
+                <div><div class="text-secondary">@Localizer["ThRef"]</div><div class="num-font stock-ref fw-semibold">@quote.RefPrice.ToString("N0")</div></div>
+                <div><div class="text-secondary">@Localizer["ThCeiling"]</div><div class="num-font stock-ceil fw-semibold">@quote.CeilingPrice.ToString("N0")</div></div>
+                <div><div class="text-secondary">@Localizer["ThFloor"]</div><div class="num-font stock-floor fw-semibold">@quote.FloorPrice.ToString("N0")</div></div>
+                <div><div class="text-secondary">@Localizer["ThHigh"]</div><div class="num-font fw-semibold">@quote.High.ToString("N0")</div></div>
+                <div><div class="text-secondary">@Localizer["ThLow"]</div><div class="num-font fw-semibold">@quote.Low.ToString("N0")</div></div>
+                <div><div class="text-secondary">@Localizer["ThVolume"]</div><div class="num-font fw-semibold">@quote.Volume.ToString("N0")</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Giao dịch nhanh: Guest bấm sẽ được chuyển tới đăng nhập; Admin không có role Investor thì ẩn -->
+@if (Model.InWatchlist is not null || User.Identity?.IsAuthenticated != true)
+{
+    <div class="d-flex flex-wrap gap-2 mb-3">
+        <a class="btn btn-success btn-sm fw-semibold" asp-area="Investor" asp-controller="Trade" asp-action="Index" asp-route-code="@quote.StockCode" asp-route-side="Buy">
+            <i class="bi bi-cart-plus me-1"></i>@Localizer["OrderTypeBuy"] @quote.StockCode
+        </a>
+        <a class="btn btn-danger btn-sm fw-semibold" asp-area="Investor" asp-controller="Trade" asp-action="Index" asp-route-code="@quote.StockCode" asp-route-side="Sell">
+            <i class="bi bi-cart-dash me-1"></i>@Localizer["OrderTypeSell"] @quote.StockCode
+        </a>
+        @if (Model.InWatchlist is { } inWatchlist)
+        {
+            <button type="button" class="btn btn-outline-warning btn-sm" aria-pressed="@(inWatchlist ? "true" : "false")"
+                    data-watchlist-toggle="@quote.StockCode"
+                    data-url="@Url.Content("~/api/v1/watchlist/toggle")"
+                    data-label-add="@Localizer["WatchlistAdd"]"
+                    data-label-remove="@Localizer["WatchlistRemove"]">
+                <i class="bi @(inWatchlist ? "bi-star-fill" : "bi-star")"></i>
+                <span>@(inWatchlist ? Localizer["WatchlistRemove"] : Localizer["WatchlistAdd"])</span>
+            </button>
+        }
+    </div>
+}
+
+<div class="row g-3">
+    <!-- Chart -->
+    <div class="col-xl-8">
+        <div class="stock-card h-100">
+            <div class="stock-card-header">
+                <h2 class="h6 fw-bold mb-0"><i class="bi bi-bar-chart-line text-primary me-2"></i>@Localizer["PriceChartTitle"]</h2>
+                <div class="btn-group btn-group-sm filter-btn-group" role="group" aria-label="@Localizer["PriceChartTitle"]" id="timeframeTabs">
+                    @foreach (var tf in PriceTimeframes.Codes)
+                    {
+                        <button type="button" class="btn btn-outline-secondary @(tf == PriceTimeframes.Default ? "active" : "")" data-timeframe="@tf" aria-pressed="@(tf == PriceTimeframes.Default ? "true" : "false")">@tf</button>
+                    }
+                </div>
+            </div>
+            <div class="p-2 p-lg-3">
+                <div id="priceChart" class="price-chart"
+                     data-history-url="@Url.Content($"~/api/v1/stocks/{quote.StockCode}/history")"
+                     data-default-timeframe="@PriceTimeframes.Default"
+                     data-msg-empty="@Localizer["ChartNoData"]"
+                     data-msg-error="@Localizer["ChartLoadError"]"></div>
+                <div id="priceChartStatus" class="chart-status small text-secondary" role="status"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Key metrics -->
+    <div class="col-xl-4">
+        <div class="stock-card h-100">
+            <div class="stock-card-header">
+                <h2 class="h6 fw-bold mb-0"><i class="bi bi-speedometer2 text-primary me-2"></i>@Localizer["KeyMetrics"]</h2>
+            </div>
+            <dl class="metric-list mb-0">
+                <div><dt>P/E</dt><dd class="num-font">@(quote.PE?.ToString("N2") ?? "—")</dd></div>
+                <div><dt>P/B</dt><dd class="num-font">@(quote.PB?.ToString("N2") ?? "—")</dd></div>
+                <div><dt>EPS</dt><dd class="num-font">@(Model.EPS?.ToString("N0") ?? "—")</dd></div>
+                <div><dt>CASA</dt><dd class="num-font">@(quote.CASA is { } casa ? casa.ToString("N1") + "%" : "—")</dd></div>
+                <div><dt>@Localizer["MetricNpl"]</dt><dd class="num-font">@(Model.NPL is { } npl ? npl.ToString("N2") + "%" : "—")</dd></div>
+                <div><dt>@Localizer["ThDividend"]</dt><dd class="num-font">@(quote.DividendYield is { } dividend ? dividend.ToString("N1") + "%" : "—")</dd></div>
+                <div><dt>@Localizer["ThMarketCap"]</dt><dd class="num-font">@((quote.MarketCap / billion).ToString("N0"))</dd></div>
+                <div><dt>@Localizer["MetricListedShares"]</dt><dd class="num-font">@quote.ListedShares.ToString("N0")</dd></div>
+                <div><dt>@Localizer["MetricCharterCapital"]</dt><dd class="num-font">@(Model.CharterCapital is { } capital ? (capital / billion).ToString("N0") : "—")</dd></div>
+                <div><dt>@Localizer["MetricFaceValue"]</dt><dd class="num-font">@Html.DisplayFor(m => m.FaceValue)</dd></div>
+            </dl>
+            <div class="px-3 pb-3 small text-secondary">@Localizer["UnitBillionNote"]</div>
+        </div>
+    </div>
+
+    <!-- Financial reports -->
+    <div class="col-xl-8">
+        <div class="stock-card h-100">
+            <div class="stock-card-header">
+                <h2 class="h6 fw-bold mb-0"><i class="bi bi-file-earmark-bar-graph text-primary me-2"></i>@Localizer["FinancialReportsTitle"]</h2>
+                <span class="small text-secondary">@Localizer["UnitBillionNote"]</span>
+            </div>
+            @if (Model.FinancialReports.Count == 0)
+            {
+                <p class="text-muted text-center py-4 mb-0">@Localizer["NoFinancialReports"]</p>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="fintech-table">
+                        <thead>
+                            <tr>
+                                <th class="ps-3">@Localizer["ThPeriod"]</th>
+                                <th class="text-end">@Localizer["ThRevenue"]</th>
+                                <th class="text-end">@Localizer["ThNetProfit"]</th>
+                                <th class="text-end">@Localizer["ThTotalAssets"]</th>
+                                <th class="text-end pe-3">@Localizer["ThEquity"]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var report in Model.FinancialReports)
+                            {
+                                <tr>
+                                    <td class="ps-3 fw-semibold">@report.PeriodLabel</td>
+                                    <td class="text-end stock-num">@((report.Revenue / billion).ToString("N0"))</td>
+                                    <td class="text-end stock-num @(report.NetProfit >= 0 ? "stock-up" : "stock-down")">@((report.NetProfit / billion).ToString("N0"))</td>
+                                    <td class="text-end stock-num">@((report.TotalAssets / billion).ToString("N0"))</td>
+                                    <td class="text-end stock-num pe-3">@((report.Equity / billion).ToString("N0"))</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Bank profile -->
+    <div class="col-xl-4">
+        <div class="stock-card h-100">
+            <div class="stock-card-header">
+                <h2 class="h6 fw-bold mb-0"><i class="bi bi-bank text-primary me-2"></i>@Localizer["BankProfile"]</h2>
+            </div>
+            <dl class="metric-list mb-0">
+                <div><dt>@Localizer["ThBankName"]</dt><dd>@quote.BankName</dd></div>
+                <div><dt>@Localizer["BankFounded"]</dt><dd class="num-font">@(Model.Founded?.ToString() ?? "—")</dd></div>
+                <div><dt>@Localizer["BankHeadquarters"]</dt><dd>@(Model.Headquarters ?? "—")</dd></div>
+                <div>
+                    <dt>Website</dt>
+                    <dd>
+                        @if (Uri.TryCreate(Model.Website, UriKind.Absolute, out var site) && (site.Scheme == Uri.UriSchemeHttp || site.Scheme == Uri.UriSchemeHttps))
+                        {
+                            <a href="@site" target="_blank" rel="noopener noreferrer">@site.Host</a>
+                        }
+                        else
+                        {
+                            <span>—</span>
+                        }
+                    </dd>
+                </div>
+            </dl>
+            @if (!string.IsNullOrWhiteSpace(Model.Description))
+            {
+                <p class="px-3 pb-3 small text-secondary mb-0">@Model.Description</p>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="~/js/stock-detail.js" asp-append-version="true"></script>
+    <script src="~/js/watchlist-toggle.js" asp-append-version="true"></script>
+}

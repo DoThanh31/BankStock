@@ -1,0 +1,225 @@
+@model BankStock.Web.ViewModels.AdminDashboardViewModel
+@{
+    ViewData["Title"] = Localizer["AdminDashboard"];
+}
+
+<div class="admin-page-header">
+    <div>
+        <h3 class="fw-bold mb-1">@Localizer["AdminDashboard"]</h3>
+        <p class="text-secondary small mb-0">@Localizer["AdminDashboardSubtitle"]</p>
+    </div>
+    <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill">
+        <i class="bi bi-calendar3 me-1"></i>@Localizer["LastSession"]: @(Model.LastSessionDate?.ToString("d") ?? "—")
+    </span>
+</div>
+
+<!-- Thống kê tổng quan -->
+<div class="row g-3 mb-4">
+    <div class="col-xl-3 col-md-6 col-12">
+        <a asp-controller="Banks" asp-action="Index" class="admin-stat-card card-cyan text-decoration-none">
+            <div>
+                <div class="admin-stat-title">@Localizer["AdminStatBanks"]</div>
+                <div class="admin-stat-value">@Model.TotalBanks</div>
+            </div>
+            <div class="admin-stat-icon"><i class="bi bi-bank2"></i></div>
+        </a>
+    </div>
+    <div class="col-xl-3 col-md-6 col-12">
+        <a asp-controller="Stocks" asp-action="Index" class="admin-stat-card card-green text-decoration-none">
+            <div>
+                <div class="admin-stat-title">@Localizer["AdminStatStocks"]</div>
+                <div class="admin-stat-value">@Model.TotalStocks</div>
+            </div>
+            <div class="admin-stat-icon"><i class="bi bi-graph-up-arrow"></i></div>
+        </a>
+    </div>
+    <div class="col-xl-3 col-md-6 col-12">
+        <a asp-controller="Users" asp-action="Index" asp-route-role="@AppRoles.Investor" class="admin-stat-card card-purple text-decoration-none">
+            <div>
+                <div class="admin-stat-title">@Localizer["AdminStatUsers"]</div>
+                <div class="admin-stat-value">@Model.TotalInvestors</div>
+            </div>
+            <div class="admin-stat-icon"><i class="bi bi-people-fill"></i></div>
+        </a>
+    </div>
+    <div class="col-xl-3 col-md-6 col-12">
+        <div class="admin-stat-card card-amber">
+            <div>
+                <div class="admin-stat-title">@Localizer["AdminStatVolume"]</div>
+                <div class="admin-stat-value admin-stat-value-sm">@Model.TotalSessionVolume.ToString("N0")</div>
+            </div>
+            <div class="admin-stat-icon"><i class="bi bi-activity"></i></div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <!-- Mã giao dịch nhiều nhất toàn sàn -->
+    <div class="col-lg-7">
+        <div class="stock-card h-100">
+            <div class="stock-card-header">
+                <div class="fw-bold d-flex align-items-center gap-2">
+                    <i class="bi bi-trophy text-warning"></i>
+                    <span>@Localizer["AdminTopTraded", AdminDashboardViewModel.TopVolumePeriodDays]</span>
+                </div>
+            </div>
+            <div class="p-3">
+                <div class="row g-2 mb-3 small">
+                    <div class="col-6">
+                        <div class="text-secondary">@Localizer["AdminPeriodVolume"]</div>
+                        <div class="num-font fw-bold fs-6">@Model.PeriodTotalVolume.ToString("N0")</div>
+                    </div>
+                    <div class="col-6 text-end">
+                        <div class="text-secondary">@Localizer["AdminPeriodValue"]</div>
+                        <div class="num-font fw-bold fs-6">@((Model.PeriodTotalValue / 1_000_000_000m).ToString("N0")) @Localizer["UnitBillionShort"]</div>
+                    </div>
+                </div>
+                @if (Model.TopVolumeStocks.Count == 0)
+                {
+                    <p class="text-muted text-center py-3 mb-0">@Localizer["AdminNoData"]</p>
+                }
+                @foreach (var (stock, rank) in Model.TopVolumeStocks.Select((s, i) => (s, i + 1)))
+                {
+                    <div class="admin-rank-row">
+                        <span class="admin-rank-no">@rank</span>
+                        <div class="flex-grow-1 min-w-0">
+                            <div class="d-flex justify-content-between small mb-1">
+                                <span><span class="fw-bold">@stock.StockCode</span> <span class="text-secondary">· @stock.BankShortName</span></span>
+                                <span class="num-font">@stock.Volume.ToString("N0") <span class="text-secondary">(@stock.SharePercent.ToString("0.0")%)</span></span>
+                            </div>
+                            <div class="progress admin-rank-bar" role="progressbar" aria-label="@stock.StockCode" aria-valuenow="@stock.SharePercent.ToString(System.Globalization.CultureInfo.InvariantCulture)" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar" style="width: @stock.SharePercent.ToString(System.Globalization.CultureInfo.InvariantCulture)%"></div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Giao dịch nội bộ + thao tác nhanh -->
+    <div class="col-lg-5">
+        <div class="stock-card mb-4">
+            <div class="stock-card-header">
+                <div class="fw-bold d-flex align-items-center gap-2">
+                    <i class="bi bi-arrow-left-right text-info"></i>
+                    <span>@Localizer["AdminInternalTrading"]</span>
+                </div>
+            </div>
+            <div class="p-3 row g-3 small">
+                <div class="col-6">
+                    <div class="text-secondary">@Localizer["AdminTradeCount"]</div>
+                    <div class="num-font fw-bold fs-6">@Model.TradeCount.ToString("N0")</div>
+                </div>
+                <div class="col-6">
+                    <div class="text-secondary">@Localizer["AdminPendingOrders"]</div>
+                    <div class="num-font fw-bold fs-6">@Model.PendingOrderCount.ToString("N0")</div>
+                </div>
+                <div class="col-6">
+                    <div class="text-secondary">@Localizer["AdminTradeQuantity"]</div>
+                    <div class="num-font fw-bold fs-6">@Model.TradeQuantity.ToString("N0")</div>
+                </div>
+                <div class="col-6">
+                    <div class="text-secondary">@Localizer["AdminTradeValue"]</div>
+                    <div class="num-font fw-bold fs-6">@Model.TradeValue.ToString("N0")</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stock-card">
+            <div class="stock-card-header">
+                <div class="fw-bold d-flex align-items-center gap-2">
+                    <i class="bi bi-lightning-charge-fill text-warning"></i>
+                    <span>@Localizer["AdminQuickActions"]</span>
+                </div>
+            </div>
+            <div class="p-3 d-grid gap-2">
+                <a asp-controller="Stocks" asp-action="Index" class="btn btn-sm btn-outline-primary text-start">
+                    <i class="bi bi-plus-circle me-2"></i>@Localizer["AdminQuickStocks"]
+                </a>
+                <a asp-controller="PriceHistories" asp-action="Index" class="btn btn-sm btn-outline-secondary text-start">
+                    <i class="bi bi-sliders me-2"></i>@Localizer["AdminQuickPrices"]
+                </a>
+                <a asp-controller="Users" asp-action="Index" class="btn btn-sm btn-outline-secondary text-start">
+                    <i class="bi bi-person-gear me-2"></i>@Localizer["AdminQuickUsers"]
+                </a>
+                <a asp-controller="FinancialReports" asp-action="Index" class="btn btn-sm btn-outline-secondary text-start">
+                    <i class="bi bi-file-earmark-spreadsheet me-2"></i>@Localizer["AdminQuickReports"]
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Thống kê ví -->
+<h5 class="fw-bold mb-3"><i class="bi bi-wallet2 text-primary me-2"></i>@Localizer["AdminNavWallets"]</h5>
+<partial name="_WalletStats" model="Model.WalletStats" />
+
+<div class="row g-4">
+    <!-- Giá cập nhật gần nhất -->
+    <div class="col-lg-7">
+        <div class="stock-card h-100">
+            <div class="stock-card-header">
+                <div class="fw-bold d-flex align-items-center gap-2">
+                    <i class="bi bi-clock-history text-primary"></i>
+                    <span>@Localizer["AdminRecentUpdates"]</span>
+                </div>
+                <a asp-controller="PriceHistories" asp-action="Index" class="small">@Localizer["AdminViewAll"]</a>
+            </div>
+            <div class="table-responsive">
+                <table class="fintech-table">
+                    <thead>
+                        <tr>
+                            <th class="ps-3">@Localizer["ThStockCode"]</th>
+                            <th class="d-none d-sm-table-cell">@Localizer["ThBankName"]</th>
+                            <th class="text-end">@Localizer["ThMatchPrice"]</th>
+                            <th class="text-end">@Localizer["ThChangePercent"]</th>
+                            <th class="text-end pe-3">@Localizer["ThVolume"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.RecentUpdates)
+                        {
+                            <tr>
+                                <td class="ps-3"><span class="stock-code-badge @item.StatusClass">@item.StockCode</span></td>
+                                <td class="text-secondary d-none d-sm-table-cell">@item.BankShortName</td>
+                                <td class="text-end stock-num @item.StatusClass fw-bold">@item.ClosePrice.ToString("N0")</td>
+                                <td class="text-end stock-num @item.StatusClass">@(item.ChangePercent >= 0 ? "+" : "")@item.ChangePercent.ToString("0.00")%</td>
+                                <td class="text-end stock-num text-secondary pe-3">@item.Volume.ToString("N0")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audit log gần đây -->
+    <div class="col-lg-5">
+        <div class="stock-card h-100">
+            <div class="stock-card-header">
+                <div class="fw-bold d-flex align-items-center gap-2">
+                    <i class="bi bi-shield-check text-success"></i>
+                    <span>@Localizer["AdminRecentAudit"]</span>
+                </div>
+                <a asp-controller="AuditLogs" asp-action="Index" class="small">@Localizer["AdminViewAll"]</a>
+            </div>
+            <ul class="list-unstyled mb-0 admin-audit-feed">
+                @foreach (var log in Model.RecentAuditLogs)
+                {
+                    <li>
+                        <div class="d-flex justify-content-between gap-2">
+                            <span class="fw-semibold small">@log.Action</span>
+                            <span class="small text-secondary text-nowrap">@log.CreatedAt.ToLocalTime().ToString("g")</span>
+                        </div>
+                        <div class="small text-secondary text-truncate">@(log.UserEmail ?? "—")@(string.IsNullOrEmpty(log.Detail) ? "" : " · " + log.Detail)</div>
+                    </li>
+                }
+                @if (Model.RecentAuditLogs.Count == 0)
+                {
+                    <li class="text-muted text-center">@Localizer["AdminNoData"]</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

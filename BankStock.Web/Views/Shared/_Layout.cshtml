@@ -1,0 +1,256 @@
+@using Microsoft.AspNetCore.Localization
+@{
+    var currentTheme = Context.Request.Cookies["theme"] ?? "dark";
+    if (currentTheme != "light" && currentTheme != "dark")
+    {
+        currentTheme = "dark";
+    }
+
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var currentCulture = requestCulture?.RequestCulture.UICulture.Name ?? "vi-VN";
+    var returnUrl = string.Concat(Context.Request.Path, Context.Request.QueryString);
+}
+<!DOCTYPE html>
+<html lang="@(currentCulture.StartsWith("vi") ? "vi" : "en")" data-bs-theme="@currentTheme" data-theme="@currentTheme">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - @Localizer["BrandName"]</title>
+    
+    <!-- Zero-flash theme bootstrapper -->
+    <script>
+        (function() {
+            var match = document.cookie.match(/(?:^|; )theme=([^;]*)/);
+            var theme = match ? decodeURIComponent(match[1]) : '@currentTheme';
+            if (theme !== 'light' && theme !== 'dark') theme = 'dark';
+            document.documentElement.setAttribute('data-bs-theme', theme);
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+
+    <!-- Bootstrap 5 & Bootstrap Icons -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    
+    <!-- Custom Fintech Theme -->
+    <link rel="stylesheet" href="~/css/theme.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg fintech-navbar">
+            <div class="container-fluid px-lg-4">
+                <!-- Brand -->
+                <a class="fintech-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <span class="brand-icon"><i class="bi bi-graph-up-arrow"></i></span>
+                    <span>@Localizer["BrandName"]</span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#fintechNavbarContent" 
+                        aria-controls="fintechNavbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Navbar Items -->
+                <div class="collapse navbar-collapse" id="fintechNavbarContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-3">
+                        <!-- Guest Items (Always visible) -->
+                        <li class="nav-item">
+                            <a class="nav-link fintech-nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="bi bi-table"></i> @Localizer["NavPriceBoard"]
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fintech-nav-link" asp-area="" asp-controller="Stocks" asp-action="Index">
+                                <i class="bi bi-list-columns-reverse"></i> @Localizer["NavStocks"]
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fintech-nav-link" asp-area="" asp-controller="Home" asp-action="About">
+                                <i class="bi bi-info-circle"></i> @Localizer["NavAbout"]
+                            </a>
+                        </li>
+
+                        <!-- Investor Items (Role-based) -->
+                        @if (User.IsInRole(AppRoles.Investor))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link fintech-nav-link" asp-area="Investor" asp-controller="Dashboard" asp-action="Index">
+                                    <i class="bi bi-speedometer2"></i> @Localizer["NavDashboard"]
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link fintech-nav-link" asp-area="Investor" asp-controller="Trade" asp-action="Index">
+                                    <i class="bi bi-arrow-left-right"></i> @Localizer["NavTrade"]
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link fintech-nav-link" asp-area="Investor" asp-controller="Watchlist" asp-action="Index">
+                                    <i class="bi bi-star"></i> @Localizer["NavWatchlist"]
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link fintech-nav-link" asp-area="Investor" asp-controller="Portfolio" asp-action="Index">
+                                    <i class="bi bi-pie-chart"></i> @Localizer["NavPortfolio"]
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link fintech-nav-link" asp-area="Investor" asp-controller="Orders" asp-action="Index">
+                                    <i class="bi bi-journal-text"></i> @Localizer["NavOrders"]
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link fintech-nav-link" asp-area="Investor" asp-controller="Wallet" asp-action="Index">
+                                    <i class="bi bi-wallet2"></i> @Localizer["NavWallet"]
+                                </a>
+                            </li>
+                        }
+
+                        <!-- Admin Item (Role-based) -->
+                        @if (User.IsInRole(AppRoles.Admin))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link fintech-nav-link text-warning" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+                                    <i class="bi bi-shield-lock"></i> @Localizer["NavAdmin"]
+                                </a>
+                            </li>
+                        }
+                    </ul>
+
+                    <!-- Right Controls (Theme, Language, Auth) -->
+                    <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
+                        <!-- Dark / Light Mode Toggle Button -->
+                        <button type="button" class="btn-theme-toggle" data-action="toggle-theme" title="@Localizer["NavThemeToggle"]">
+                            <i class="bi bi-sun-fill"></i>
+                        </button>
+
+                        <!-- Language Selector -->
+                        <form asp-area="" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <div class="dropdown">
+                                <button class="btn btn-lang-selector dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-translate me-1"></i>
+                                    @(currentCulture.StartsWith("vi") ? "VI" : "EN")
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                    <li>
+                                        <button type="submit" name="culture" value="vi-VN" class="dropdown-item @(currentCulture.StartsWith("vi") ? "active" : "")">
+                                            🇻🇳 @Localizer["LanguageVi"]
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="submit" name="culture" value="en-US" class="dropdown-item @(currentCulture.StartsWith("en") ? "active" : "")">
+                                            🇬🇧 @Localizer["LanguageEn"]
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </form>
+
+                        <!-- Authentication Section -->
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <div class="dropdown ms-2">
+                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle"></i>
+                                    <span>@User.Identity.Name</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                    <li><h6 class="dropdown-header">@User.Identity.Name</h6></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
+                                            <button type="submit" class="dropdown-item text-danger"><i class="bi bi-box-arrow-right me-2"></i>@Localizer["NavLogout"]</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="d-flex align-items-center gap-2 ms-2">
+                                <a asp-area="" asp-controller="Account" asp-action="Login" class="btn btn-sm btn-outline-secondary">
+                                    <i class="bi bi-box-arrow-in-right me-1"></i>@Localizer["NavLogin"]
+                                </a>
+                                <a asp-area="" asp-controller="Account" asp-action="Register" class="btn btn-sm btn-primary">
+                                    <i class="bi bi-person-plus me-1"></i>@Localizer["NavRegister"]
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main role="main" class="py-4">
+        <div class="container-fluid px-lg-4">
+            <partial name="_StatusMessage" />
+            @RenderBody()
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="fintech-footer">
+        <div class="container-fluid px-lg-4">
+            <div class="row g-4">
+                <!-- Col 1: Brand Info -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <span class="brand-icon"><i class="bi bi-graph-up-arrow"></i></span>
+                        <span class="fw-bold fs-5 text-primary-emphasis">@Localizer["BrandName"]</span>
+                    </div>
+                    <p class="text-secondary small mb-3">@Localizer["FooterAboutDesc"]</p>
+                    <div class="d-flex align-items-center gap-2 small text-success">
+                        <i class="bi bi-circle-fill" style="font-size: 0.55rem;"></i>
+                        <span>VN-Market Online: <span class="num-font">OK (Ping 15ms)</span></span>
+                    </div>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <div class="col-lg-2 col-md-6 col-6">
+                    <h6 class="footer-heading">@Localizer["FooterQuickLinks"]</h6>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="footer-link">@Localizer["NavPriceBoard"]</a>
+                    <a asp-area="" asp-controller="Stocks" asp-action="Index" class="footer-link">@Localizer["NavStocks"]</a>
+                    <a asp-area="" asp-controller="Home" asp-action="About" class="footer-link">@Localizer["NavAbout"]</a>
+                    <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="footer-link">@Localizer["NavAdmin"]</a>
+                </div>
+
+                <!-- Col 3: Disclaimer & Risk Notice -->
+                <div class="col-lg-3 col-md-6 col-6">
+                    <h6 class="footer-heading">@Localizer["FooterDisclaimer"]</h6>
+                    <p class="text-secondary small mb-2">@Localizer["FooterDisclaimerDesc"]</p>
+                    <a href="#" class="footer-link" title="TODO">@Localizer["FooterTerms"]</a>
+                    <a href="#" class="footer-link" title="TODO">@Localizer["FooterPrivacy"]</a>
+                </div>
+
+                <!-- Col 4: Contact -->
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="footer-heading">@Localizer["FooterContact"]</h6>
+                    <p class="text-secondary small mb-1"><i class="bi bi-envelope me-2"></i>support@bankstock.local</p>
+                    <p class="text-secondary small mb-1"><i class="bi bi-telephone me-2"></i>1900 6868</p>
+                    <p class="text-secondary small"><i class="bi bi-geo-alt me-2"></i>Hà Nội, Việt Nam</p>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center">
+                <div>@Localizer["FooterCopyright"]</div>
+                <div>.NET 8 MVC · ASP.NET Identity · TradingView Theme</div>
+            </div>
+        </div>
+    </footer>
+
+    <partial name="_JsI18n" />
+
+    <!-- Core Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.all.min.js"></script>
+    <script src="~/js/theme.js" asp-append-version="true"></script>
+    <script src="~/js/ui-common.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

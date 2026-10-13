@@ -1,0 +1,111 @@
+@model StockListViewModel
+@{
+    var q = Model.Query;
+    var stocks = Model.Stocks;
+
+    string SortIcon(StockSortField field) =>
+        q.Sort != field ? "bi-arrow-down-up opacity-50"
+        : q.Dir == SortDirection.Asc ? "bi-sort-up" : "bi-sort-down";
+
+    string? AriaSort(StockSortField field) =>
+        q.Sort != field ? null : q.Dir == SortDirection.Asc ? "ascending" : "descending";
+}
+
+<partial name="_RecentlyViewedStocks" model="Model.RecentlyViewed" />
+
+<div class="stock-card">
+    <div class="stock-card-header">
+        <div class="small text-secondary">
+            @if (stocks.TotalCount > 0)
+            {
+                @Localizer["ShowingRange", stocks.FirstItemNumber, stocks.LastItemNumber, stocks.TotalCount]
+            }
+        </div>
+        @if (q.HasFilters)
+        {
+            <span class="badge bg-primary-subtle text-primary-emphasis"><i class="bi bi-funnel-fill me-1"></i>@Localizer["FiltersActive"]</span>
+        }
+    </div>
+
+    <div class="table-responsive">
+        <table class="fintech-table" id="stockListTable">
+            <thead>
+                <tr>
+                    <th class="ps-3" aria-sort="@AriaSort(StockSortField.Code)">
+                        <a class="sort-link" asp-action="Index" asp-all-route-data="@q.ToSortRouteValues(StockSortField.Code)">@Localizer["ThStockCode"] <i class="bi @SortIcon(StockSortField.Code)"></i></a>
+                    </th>
+                    <th>@Localizer["ThBankName"]</th>
+                    <th class="d-none d-lg-table-cell">@Localizer["FieldBankGroup"]</th>
+                    <th class="text-end" aria-sort="@AriaSort(StockSortField.Price)">
+                        <a class="sort-link" asp-action="Index" asp-all-route-data="@q.ToSortRouteValues(StockSortField.Price)">@Localizer["ThMatchPrice"] <i class="bi @SortIcon(StockSortField.Price)"></i></a>
+                    </th>
+                    <th class="text-end" aria-sort="@AriaSort(StockSortField.Change)">
+                        <a class="sort-link" asp-action="Index" asp-all-route-data="@q.ToSortRouteValues(StockSortField.Change)">@Localizer["ThChangePercent"] <i class="bi @SortIcon(StockSortField.Change)"></i></a>
+                    </th>
+                    <th class="text-end d-none d-md-table-cell" aria-sort="@AriaSort(StockSortField.Volume)">
+                        <a class="sort-link" asp-action="Index" asp-all-route-data="@q.ToSortRouteValues(StockSortField.Volume)">@Localizer["ThVolume"] <i class="bi @SortIcon(StockSortField.Volume)"></i></a>
+                    </th>
+                    <th class="text-end" aria-sort="@AriaSort(StockSortField.PE)">
+                        <a class="sort-link" asp-action="Index" asp-all-route-data="@q.ToSortRouteValues(StockSortField.PE)">P/E <i class="bi @SortIcon(StockSortField.PE)"></i></a>
+                    </th>
+                    <th class="text-end d-none d-md-table-cell">P/B</th>
+                    <th class="text-end" aria-sort="@AriaSort(StockSortField.CASA)">
+                        <a class="sort-link" asp-action="Index" asp-all-route-data="@q.ToSortRouteValues(StockSortField.CASA)">CASA <i class="bi @SortIcon(StockSortField.CASA)"></i></a>
+                    </th>
+                    <th class="text-end" aria-sort="@AriaSort(StockSortField.Dividend)">
+                        <a class="sort-link" asp-action="Index" asp-all-route-data="@q.ToSortRouteValues(StockSortField.Dividend)">@Localizer["ThDividend"] <i class="bi @SortIcon(StockSortField.Dividend)"></i></a>
+                    </th>
+                    <th class="text-end d-none d-lg-table-cell" aria-sort="@AriaSort(StockSortField.MarketCap)">
+                        <a class="sort-link" asp-action="Index" asp-all-route-data="@q.ToSortRouteValues(StockSortField.MarketCap)">@Localizer["ThMarketCap"] <i class="bi @SortIcon(StockSortField.MarketCap)"></i></a>
+                    </th>
+                    <th class="text-center pe-3">@Localizer["ThAction"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var stock in stocks.Items)
+                {
+                    <tr>
+                        <td class="ps-3">
+                            <a asp-action="Details" asp-route-code="@stock.StockCode" class="stock-code-badge text-decoration-none @stock.StatusClass">@stock.StockCode</a>
+                        </td>
+                        <td>
+                            <div class="fw-semibold">@stock.BankShortName</div>
+                            <div class="text-secondary small d-none d-sm-block">@stock.BankName</div>
+                        </td>
+                        <td class="d-none d-lg-table-cell">
+                            <span class="badge bg-secondary-subtle text-secondary">@(stock.BankGroup == BankGroup.Big4 ? Localizer["FilterBig4"] : Localizer["FilterPrivate"])</span>
+                        </td>
+                        <td class="text-end stock-num fw-bold @stock.StatusClass">@stock.CurrentPrice.ToString("N0")</td>
+                        <td class="text-end stock-num @stock.StatusClass">@stock.ChangePercentDisplay</td>
+                        <td class="text-end stock-num text-secondary d-none d-md-table-cell">@stock.Volume.ToString("N0")</td>
+                        <td class="text-end stock-num">@(stock.PE?.ToString("N1") ?? "—")</td>
+                        <td class="text-end stock-num d-none d-md-table-cell">@(stock.PB?.ToString("N1") ?? "—")</td>
+                        <td class="text-end stock-num">@(stock.CASA is { } casa ? casa.ToString("N1") + "%" : "—")</td>
+                        <td class="text-end stock-num">@(stock.DividendYield is { } dividend ? dividend.ToString("N1") + "%" : "—")</td>
+                        <td class="text-end stock-num text-secondary d-none d-lg-table-cell">@((stock.MarketCap / 1_000_000_000m).ToString("N0"))</td>
+                        <td class="text-center pe-3">
+                            <a asp-action="Details" asp-route-code="@stock.StockCode" class="btn btn-outline-primary btn-sm py-0 px-2" title="@Localizer["BtnDetail"]">
+                                <i class="bi bi-graph-up"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+                @if (stocks.TotalCount == 0)
+                {
+                    <tr>
+                        <td colspan="12" class="text-center py-4 text-muted">
+                            <i class="bi bi-search fs-3 d-block mb-2"></i>
+                            @Localizer["NoStockFound"]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 px-3 py-3">
+        <span class="small text-secondary">@Localizer["MarketCapNote"]</span>
+        <partial name="_Pagination" model="@(new PagerViewModel(stocks.PageIndex, stocks.TotalPages, page => Url.Action("Index", "Stocks", q.ToRouteValues(page: page))))" />
+    </div>
+</div>

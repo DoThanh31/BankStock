@@ -1,0 +1,32 @@
+@model UserRolesViewModel
+
+<form asp-action="Roles" asp-route-id="@Model.UserId" method="post" data-ajax-form novalidate>
+    <input type="hidden" asp-for="UserId" />
+    <input type="hidden" asp-for="Email" />
+    <input type="hidden" asp-for="FullName" />
+
+    <div class="modal-header">
+        <h5 class="modal-title"><i class="bi bi-person-gear text-primary me-2"></i>@Localizer["AdminAssignRoles"]</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@Localizer["Close"]"></button>
+    </div>
+    <div class="modal-body">
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger small py-2" role="alert"></div>
+
+        <div class="mb-3">
+            <div class="fw-semibold">@Model.FullName</div>
+            <div class="small text-secondary">@Model.Email</div>
+        </div>
+
+        <div class="form-check mb-2">
+            <input asp-for="IsAdmin" class="form-check-input" />
+            <label asp-for="IsAdmin" class="form-check-label"></label>
+            <div class="form-text small">@Localizer["RoleAdminHint"]</div>
+        </div>
+        <div class="form-check">
+            <input asp-for="IsInvestor" class="form-check-input" />
+            <label asp-for="IsInvestor" class="form-check-label"></label>
+            <div class="form-text small">@Localizer["RoleInvestorHint"]</div>
+        </div>
+    </div>
+    <partial name="_FormFooter" />
+</form>

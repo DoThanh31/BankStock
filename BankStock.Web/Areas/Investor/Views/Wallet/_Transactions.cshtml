@@ -1,0 +1,43 @@
+@model PagedListViewModel<WalletTransactionItem, WalletTransactionQuery>
+@{
+    var items = Model.Items;
+}
+
+<div class="stock-card">
+    <partial name="_ListHeader" model="@((items.TotalCount, items.FirstItemNumber, items.LastItemNumber, Model.Query.HasFilters))" />
+
+    <div class="table-responsive">
+        <table class="fintech-table">
+            <thead>
+                <tr>
+                    <th class="ps-3">@Localizer["AdminTime"]</th>
+                    <th>@Localizer["AdminTxType"]</th>
+                    <th class="text-end">@Localizer["AdminAmount"]</th>
+                    <th class="text-end d-none d-sm-table-cell">@Localizer["WalletBalanceAfter"]</th>
+                    <th class="d-none d-md-table-cell pe-3">@Localizer["FieldDescription"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var tx in items.Items)
+                {
+                    <tr>
+                        <td class="ps-3 small text-secondary text-nowrap">@tx.CreatedAt.ToLocalTime().ToString("g")</td>
+                        <td><span class="badge bg-secondary-subtle text-secondary">@Localizer["Tx" + tx.Type]</span></td>
+                        <td class="text-end stock-num fw-semibold @(tx.Amount >= 0 ? "stock-up" : "stock-down")">@(tx.Amount > 0 ? "+" : "")@tx.Amount.ToString("N0")</td>
+                        <td class="text-end stock-num d-none d-sm-table-cell">@tx.BalanceAfter.ToString("N0")</td>
+                        <td class="small text-secondary d-none d-md-table-cell pe-3">@tx.Description</td>
+                    </tr>
+                }
+                @if (items.TotalCount == 0)
+                {
+                    <partial name="_EmptyRow" model="5" />
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 px-3 py-3">
+        <span class="small text-secondary">@Localizer["AdminUnitVnd"]</span>
+        <partial name="_Pagination" model="@(new PagerViewModel(items.PageIndex, items.TotalPages, page => Url.Action("Index", Model.Query.ToRouteValues(page))))" />
+    </div>
+</div>

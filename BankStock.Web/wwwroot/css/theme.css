@@ -1,0 +1,832 @@
+/* ==========================================================================
+   BANKSTOCK FINTECH DESIGN SYSTEM (TradingView Aesthetic)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root,
+[data-bs-theme="dark"],
+[data-theme="dark"] {
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+    /* Backgrounds */
+    --bg-base: #0f131a;
+    --bg-surface: #161b26;
+    --bg-surface-elevated: #1f2636;
+    --bg-card: #161b26;
+    --bg-hover: rgba(255, 255, 255, 0.04);
+    --bg-active: rgba(255, 255, 255, 0.08);
+
+    /* Text Colors */
+    --text-primary: #e6ebf5;
+    --text-secondary: #9aa2b5;
+    --text-muted: #656d82;
+
+    /* Borders */
+    --border-color: #242c3d;
+    --border-subtle: #1c2230;
+
+    /* Vietnamese Stock Convention Colors */
+    --stock-ceil: #e040fb;      /* Tím trần */
+    --stock-floor: #00e5ff;     /* Xanh lơ sàn */
+    --stock-up: #00c076;        /* Xanh lá tăng */
+    --stock-down: #ff3b30;      /* Đỏ giảm */
+    --stock-ref: #f5a623;       /* Vàng tham chiếu */
+
+    /* Subtle backgrounds for badges */
+    --stock-ceil-bg: rgba(224, 64, 251, 0.12);
+    --stock-floor-bg: rgba(0, 229, 255, 0.12);
+    --stock-up-bg: rgba(0, 192, 118, 0.12);
+    --stock-down-bg: rgba(255, 59, 48, 0.12);
+    --stock-ref-bg: rgba(245, 166, 35, 0.12);
+
+    /* Brand accents */
+    --brand-primary: #2962ff;
+    --brand-primary-hover: #1e4bd8;
+    --brand-gradient: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+
+    /* Bootstrap theme overrides */
+    --bs-body-bg: var(--bg-base);
+    --bs-body-color: var(--text-primary);
+    --bs-border-color: var(--border-color);
+    --bs-card-bg: var(--bg-surface);
+}
+
+[data-bs-theme="light"],
+[data-theme="light"] {
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+    /* Backgrounds */
+    --bg-base: #f5f7fb;
+    --bg-surface: #ffffff;
+    --bg-surface-elevated: #f0f3fa;
+    --bg-card: #ffffff;
+    --bg-hover: rgba(0, 0, 0, 0.03);
+    --bg-active: rgba(0, 0, 0, 0.06);
+
+    /* Text Colors */
+    --text-primary: #121826;
+    --text-secondary: #4b5565;
+    --text-muted: #8893a7;
+
+    /* Borders */
+    --border-color: #e3e8ef;
+    --border-subtle: #edf1f7;
+
+    /* Vietnamese Stock Convention Colors */
+    --stock-ceil: #a811d6;      /* Tím trần */
+    --stock-floor: #0097a7;     /* Xanh lơ sàn */
+    --stock-up: #059669;        /* Xanh lá tăng */
+    --stock-down: #dc2626;      /* Đỏ giảm */
+    --stock-ref: #d97706;       /* Vàng tham chiếu */
+
+    /* Subtle backgrounds for badges */
+    --stock-ceil-bg: rgba(168, 17, 214, 0.09);
+    --stock-floor-bg: rgba(0, 151, 167, 0.09);
+    --stock-up-bg: rgba(5, 150, 105, 0.09);
+    --stock-down-bg: rgba(220, 38, 38, 0.09);
+    --stock-ref-bg: rgba(217, 119, 6, 0.09);
+
+    /* Brand accents */
+    --brand-primary: #1d4ed8;
+    --brand-primary-hover: #1e40af;
+    --brand-gradient: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+
+    /* Bootstrap theme overrides */
+    --bs-body-bg: var(--bg-base);
+    --bs-body-color: var(--text-primary);
+    --bs-border-color: var(--border-color);
+    --bs-card-bg: var(--bg-surface);
+}
+
+/* Base resets & typography */
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+/* Monospace for numbers */
+.num-font,
+.stock-num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Color utility classes for stocks */
+.stock-ceil {
+    color: var(--stock-ceil) !important;
+    font-weight: 600;
+}
+.stock-floor {
+    color: var(--stock-floor) !important;
+    font-weight: 600;
+}
+.stock-up {
+    color: var(--stock-up) !important;
+    font-weight: 600;
+}
+.stock-down {
+    color: var(--stock-down) !important;
+    font-weight: 600;
+}
+.stock-ref {
+    color: var(--stock-ref) !important;
+    font-weight: 600;
+}
+
+/* Stock Badges */
+.badge-ceil {
+    background-color: var(--stock-ceil-bg);
+    color: var(--stock-ceil);
+    border: 1px solid rgba(224, 64, 251, 0.3);
+}
+.badge-floor {
+    background-color: var(--stock-floor-bg);
+    color: var(--stock-floor);
+    border: 1px solid rgba(0, 229, 255, 0.3);
+}
+.badge-up {
+    background-color: var(--stock-up-bg);
+    color: var(--stock-up);
+    border: 1px solid rgba(0, 192, 118, 0.3);
+}
+.badge-down {
+    background-color: var(--stock-down-bg);
+    color: var(--stock-down);
+    border: 1px solid rgba(255, 59, 48, 0.3);
+}
+.badge-ref {
+    background-color: var(--stock-ref-bg);
+    color: var(--stock-ref);
+    border: 1px solid rgba(245, 166, 35, 0.3);
+}
+
+/* App Navbar */
+.fintech-navbar {
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
+    padding: 0.65rem 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+}
+
+.fintech-brand {
+    font-weight: 700;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+}
+
+.brand-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--brand-gradient);
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+}
+
+.fintech-nav-link {
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.92rem;
+    padding: 0.5rem 0.85rem !important;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.fintech-nav-link:hover,
+.fintech-nav-link.active {
+    color: var(--text-primary);
+    background-color: var(--bg-hover);
+}
+
+.nav-todo-badge {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.35rem;
+    background-color: rgba(245, 166, 35, 0.15);
+    color: var(--stock-ref);
+    border-radius: 4px;
+    margin-left: 0.25rem;
+}
+
+/* Market Overview Bar */
+.market-ticker-bar {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 1.5rem;
+}
+
+.ticker-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.ticker-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.ticker-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+}
+
+/* Stock Board Card & Table */
+.stock-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+}
+
+.stock-card-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.fintech-table {
+    margin-bottom: 0;
+    width: 100%;
+    color: var(--text-primary);
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.fintech-table thead th {
+    background-color: var(--bg-surface-elevated);
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 0.75rem 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.fintech-table tbody tr {
+    transition: background-color 0.12s ease;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.fintech-table tbody tr:hover {
+    background-color: var(--bg-hover) !important;
+}
+
+.fintech-table tbody td {
+    padding: 0.75rem 0.75rem;
+    font-size: 0.88rem;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.stock-code-badge {
+    font-weight: 700;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-color);
+    display: inline-block;
+}
+
+/* Legend bar */
+.stock-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    padding: 0.6rem 1rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.legend-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Filter buttons */
+.filter-btn-group .btn {
+    font-size: 0.82rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    font-weight: 500;
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+
+.filter-btn-group .btn.active,
+.filter-btn-group .btn:hover {
+    background-color: var(--brand-primary);
+    color: #ffffff;
+    border-color: var(--brand-primary);
+}
+
+/* Search input */
+.fintech-search-input {
+    background-color: var(--bg-base);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 0.88rem;
+    border-radius: 8px;
+    padding: 0.45rem 0.85rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.fintech-search-input:focus {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    border-color: var(--brand-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+    outline: none;
+}
+
+/* Footer */
+.fintech-footer {
+    background-color: var(--bg-surface);
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 3rem 0 1.5rem;
+    margin-top: 3.5rem;
+    font-size: 0.88rem;
+}
+
+.footer-heading {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+}
+
+.footer-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+    display: block;
+    margin-bottom: 0.45rem;
+}
+
+.footer-link:hover {
+    color: var(--text-primary);
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+}
+
+/* Theme Toggle Button */
+.btn-theme-toggle {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.btn-theme-toggle:hover {
+    background: var(--bg-hover);
+    color: var(--brand-primary);
+}
+
+/* Language selector */
+.btn-lang-selector {
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 0.35rem 0.65rem;
+}
+
+/* Error page styles */
+.error-hero {
+    padding: 4rem 1rem;
+    text-align: center;
+}
+
+.error-code {
+    font-size: 6rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    background: var(--brand-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+    margin-bottom: 1rem;
+}
+
+/* About page styles */
+.about-hero {
+    padding: 3.5rem 1rem;
+    text-align: center;
+    background: radial-gradient(circle at 50% 20%, rgba(37, 99, 235, 0.12), transparent 70%);
+}
+
+.feature-box {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.75rem;
+    height: 100%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: rgba(37, 99, 235, 0.15);
+    color: var(--brand-primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .ticker-value {
+        font-size: 1.05rem;
+    }
+    .stock-card-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .fintech-table thead th,
+    .fintech-table tbody td {
+        padding: 0.5rem 0.45rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* ==========================================================================
+   Phase 3 — Danh sách & chi tiết cổ phiếu, trang tài khoản
+   ========================================================================== */
+
+/* Filter panel */
+.filter-panel {
+    padding: 1rem 1.25rem;
+}
+
+.filter-panel .form-select,
+.filter-panel .form-control {
+    background-color: var(--bg-base);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+/* Sortable headers */
+.sort-link {
+    color: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.sort-link:hover {
+    color: var(--brand-primary);
+}
+
+.sort-link .bi {
+    font-size: 0.75rem;
+}
+
+/* Loading state khi tải kết quả bằng AJAX */
+#stockListResults {
+    transition: opacity 0.15s ease;
+}
+
+#stockListResults.is-loading {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Pagination */
+.fintech-pagination .page-link {
+    background-color: var(--bg-surface);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    min-width: 2rem;
+    text-align: center;
+}
+
+.fintech-pagination .page-link:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.fintech-pagination .page-item.active .page-link {
+    background-color: var(--brand-primary);
+    border-color: var(--brand-primary);
+    color: #ffffff;
+}
+
+.fintech-pagination .page-item.disabled .page-link {
+    background-color: var(--bg-surface);
+    color: var(--text-muted);
+}
+
+/* Recently viewed chips (Session) */
+.recent-stocks {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.recent-stock-chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    padding: 0.25rem 0.65rem;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    font-size: 0.82rem;
+    text-decoration: none;
+}
+
+.recent-stock-chip:hover {
+    border-color: var(--brand-primary);
+    color: var(--text-primary);
+}
+
+/* Stock detail */
+.detail-code-badge {
+    font-size: 1.35rem;
+    padding: 0.4rem 0.75rem;
+}
+
+.detail-price {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.price-chart {
+    width: 100%;
+    height: 380px;
+}
+
+.chart-status:empty {
+    display: none;
+}
+
+.chart-status {
+    padding-top: 0.5rem;
+    text-align: center;
+}
+
+.metric-list > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.55rem 1rem;
+    border-bottom: 1px solid var(--border-subtle);
+    font-size: 0.88rem;
+}
+
+.metric-list > div:last-child {
+    border-bottom: 0;
+}
+
+.metric-list dt {
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.metric-list dd {
+    margin: 0;
+    text-align: end;
+    font-weight: 600;
+}
+
+/* Account pages */
+.auth-wrapper {
+    max-width: 460px;
+    margin: 1rem auto 2rem;
+}
+
+.auth-card {
+    padding: 2rem;
+}
+
+.auth-card .form-control {
+    background-color: var(--bg-base);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.auth-card .form-control:focus {
+    border-color: var(--brand-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+}
+
+.auth-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    background: rgba(37, 99, 235, 0.15);
+    color: var(--brand-primary);
+}
+
+.field-validation-error {
+    color: var(--stock-down);
+    font-size: 0.8rem;
+}
+
+.input-validation-error {
+    border-color: var(--stock-down) !important;
+}
+
+@media (max-width: 576px) {
+    .price-chart {
+        height: 300px;
+    }
+    .detail-price {
+        font-size: 1.6rem;
+    }
+    .auth-card {
+        padding: 1.25rem;
+    }
+}
+
+/* ==========================================================================
+   DANH SÁCH AJAX, VALIDATION, SWEETALERT2 (dùng chung Admin / Investor)
+   ========================================================================== */
+
+#listResults.is-loading {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Tag helper luôn render khối tổng hợp lỗi; ẩn khi chưa có lỗi */
+.validation-summary-valid {
+    display: none;
+}
+
+.validation-summary-errors ul {
+    margin: 0;
+    padding-left: 1rem;
+}
+
+/* SweetAlert2 theo theme */
+.swal2-popup {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.swal2-title,
+.swal2-html-container {
+    color: var(--text-primary);
+}
+
+/* ==========================================================================
+   KHU INVESTOR (Phase 5)
+   ========================================================================== */
+
+.investor-nav {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.25rem;
+    overflow-x: auto;
+    padding: 0.35rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    scrollbar-width: thin;
+}
+
+.investor-nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.investor-nav-link:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-hover);
+}
+
+.investor-nav-link.active {
+    color: var(--brand-primary);
+    background-color: rgba(41, 98, 255, 0.15);
+    font-weight: 600;
+}
+
+.trade-estimate > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.3rem 0;
+    border-bottom: 1px dashed var(--border-subtle);
+}
+
+.trade-estimate dt {
+    font-weight: inherit;
+    color: var(--text-secondary);
+}
+
+.trade-estimate dd {
+    margin: 0;
+    text-align: right;
+}
+
+.allocation-chart {
+    position: relative;
+    height: 300px;
+}

@@ -1,0 +1,61 @@
+@model RegisterViewModel
+@{
+    ViewData["Title"] = Localizer["RegisterTitle"];
+}
+
+<div class="auth-wrapper">
+    <div class="stock-card auth-card">
+        <div class="text-center mb-4">
+            <span class="auth-icon mb-2"><i class="bi bi-person-plus"></i></span>
+            <h1 class="h4 fw-bold mb-1">@Localizer["RegisterTitle"]</h1>
+            <p class="text-secondary small mb-0">@Localizer["RegisterSubtitle"]</p>
+        </div>
+
+        <form asp-controller="Account" asp-action="Register" method="post" novalidate>
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger small py-2" role="alert"></div>
+
+            <div class="mb-3">
+                <label asp-for="FullName" class="form-label small"></label>
+                <input asp-for="FullName" class="form-control" autocomplete="name" autofocus />
+                <span asp-validation-for="FullName" class="field-validation-error"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label small"></label>
+                <input asp-for="Email" class="form-control" autocomplete="email" />
+                <span asp-validation-for="Email" class="field-validation-error"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label small"></label>
+                <input asp-for="Password" class="form-control" autocomplete="new-password" aria-describedby="passwordHelp" />
+                <div id="passwordHelp" class="form-text small">@Localizer["PasswordHint"]</div>
+                <span asp-validation-for="Password" class="field-validation-error"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ConfirmPassword" class="form-label small"></label>
+                <input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" />
+                <span asp-validation-for="ConfirmPassword" class="field-validation-error"></span>
+            </div>
+
+            <div class="alert alert-info small py-2 d-flex gap-2 align-items-start">
+                <i class="bi bi-wallet2"></i>
+                <span>@Localizer["RegisterGrantNotice"]</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+                <i class="bi bi-person-plus me-1"></i>@Localizer["NavRegister"]
+            </button>
+        </form>
+
+        <p class="text-center small text-secondary mt-4 mb-0">
+            @Localizer["HaveAccount"]
+            <a asp-action="Login">@Localizer["NavLogin"]</a>
+        </p>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

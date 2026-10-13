@@ -1,0 +1,46 @@
+@model PagedListViewModel<FinancialReportListItem, FinancialReportListQuery>
+@{
+    ViewData["Title"] = Localizer["AdminNavReports"];
+    var q = Model.Query;
+    var currentYear = DateTime.UtcNow.Year;
+}
+
+<div class="admin-page-header">
+    <div>
+        <h3 class="fw-bold mb-1"><i class="bi bi-file-earmark-bar-graph text-primary me-2"></i>@Localizer["AdminNavReports"]</h3>
+        <p class="text-secondary small mb-0">@Localizer["AdminReportsSubtitle"]</p>
+    </div>
+    <button type="button" class="btn btn-primary btn-sm" data-modal-url="@Url.Action("Create", new { stockId = q.StockId })">
+        <i class="bi bi-plus-lg me-1"></i>@Localizer["AdminAddReport"]
+    </button>
+</div>
+
+<form id="listFilterForm" class="stock-card filter-panel mb-3" method="get" asp-action="Index" role="search">
+    <div class="row g-3 align-items-end">
+        <div class="col-lg-4 col-md-6">
+            <label for="filterStock" class="form-label small text-secondary">@Localizer["FieldStockCode"]</label>
+            <select id="filterStock" name="stockId" class="form-select form-select-sm">
+                <option value="" selected="@(q.StockId is null)">@Localizer["FilterAll"]</option>
+                @foreach (var stock in Model.StockOptions)
+                {
+                    <option value="@stock.Id" selected="@(q.StockId == stock.Id)">@stock.StockCode</option>
+                }
+            </select>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <label for="filterYear" class="form-label small text-secondary">@Localizer["FieldYear"]</label>
+            <select id="filterYear" name="year" class="form-select form-select-sm">
+                <option value="" selected="@(q.Year is null)">@Localizer["FilterAll"]</option>
+                @for (var year = currentYear; year >= currentYear - 6; year--)
+                {
+                    <option value="@year" selected="@(q.Year == year)">@year</option>
+                }
+            </select>
+        </div>
+        <partial name="_FilterActions" model="Model.Query" />
+    </div>
+</form>
+
+<div id="listResults" aria-live="polite">
+    <partial name="_List" model="Model" />
+</div>

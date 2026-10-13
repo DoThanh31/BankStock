@@ -1,0 +1,6 @@
+@model PlaceOrderViewModel
+@* Lệnh Market: ô giá bị khóa (không gửi lên), hiển thị giá khớp hiện tại; lệnh Limit: nhập giá trong khoảng sàn–trần. *@
+<label asp-for="Price" class="form-label small"></label>
+<input asp-for="Price" type="number" min="1" step="any" class="form-control num-font"
+       value="@Model.Price?.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture)" />
+<span asp-validation-for="Price" class="field-validation-error"></span>

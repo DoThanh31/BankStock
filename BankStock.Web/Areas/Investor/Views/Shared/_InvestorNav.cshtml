@@ -1,0 +1,17 @@
+@* Thanh điều hướng các trang Investor; mục đang xem được tô sáng theo controller/action hiện tại. *@
+@{
+    var controller = ViewContext.RouteData.Values["controller"] as string;
+    var action = ViewContext.RouteData.Values["action"] as string;
+    string Active(string c, string? a = null) =>
+        string.Equals(c, controller, StringComparison.OrdinalIgnoreCase) && (a is null || string.Equals(a, action, StringComparison.OrdinalIgnoreCase))
+            ? "active" : string.Empty;
+}
+<nav class="investor-nav mb-3" aria-label="@Localizer["InvestorArea"]">
+    <a asp-area="Investor" asp-controller="Dashboard" asp-action="Index" class="investor-nav-link @Active("Dashboard")"><i class="bi bi-speedometer2"></i> @Localizer["NavDashboard"]</a>
+    <a asp-area="Investor" asp-controller="Trade" asp-action="Index" class="investor-nav-link @Active("Trade")"><i class="bi bi-arrow-left-right"></i> @Localizer["NavTrade"]</a>
+    <a asp-area="Investor" asp-controller="Portfolio" asp-action="Index" class="investor-nav-link @Active("Portfolio")"><i class="bi bi-pie-chart"></i> @Localizer["NavPortfolio"]</a>
+    <a asp-area="Investor" asp-controller="Orders" asp-action="Index" class="investor-nav-link @Active("Orders", "Index")"><i class="bi bi-journal-text"></i> @Localizer["NavOrders"]</a>
+    <a asp-area="Investor" asp-controller="Orders" asp-action="Trades" class="investor-nav-link @Active("Orders", "Trades")"><i class="bi bi-check2-all"></i> @Localizer["NavTrades"]</a>
+    <a asp-area="Investor" asp-controller="Wallet" asp-action="Index" class="investor-nav-link @Active("Wallet")"><i class="bi bi-wallet2"></i> @Localizer["NavWallet"]</a>
+    <a asp-area="Investor" asp-controller="Watchlist" asp-action="Index" class="investor-nav-link @Active("Watchlist")"><i class="bi bi-star"></i> @Localizer["NavWatchlist"]</a>
+</nav>

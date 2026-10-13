@@ -1,0 +1,57 @@
+@model BankFormViewModel
+
+<form asp-action="@(Model.IsNew ? "Create" : "Edit")" asp-route-id="@(Model.IsNew ? null : Model.Id.ToString())" method="post" data-ajax-form novalidate>
+    <div class="modal-header">
+        <h5 class="modal-title">
+            <i class="bi bi-bank2 text-primary me-2"></i>@(Model.IsNew ? Localizer["AdminAddBank"] : Localizer["AdminEditBank", Model.Code])
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@Localizer["Close"]"></button>
+    </div>
+    <div class="modal-body">
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger small py-2" role="alert"></div>
+
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label asp-for="Code" class="form-label small"></label>
+                <input asp-for="Code" class="form-control form-control-sm text-uppercase" maxlength="20" data-uppercase autocomplete="off" />
+                <span asp-validation-for="Code" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-8">
+                <label asp-for="ShortName" class="form-label small"></label>
+                <input asp-for="ShortName" class="form-control form-control-sm" />
+                <span asp-validation-for="ShortName" class="field-validation-error"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Name" class="form-label small"></label>
+                <input asp-for="Name" class="form-control form-control-sm" />
+                <span asp-validation-for="Name" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Founded" class="form-label small"></label>
+                <input asp-for="Founded" class="form-control form-control-sm" min="1800" max="2100" />
+                <span asp-validation-for="Founded" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-8">
+                <label asp-for="Headquarters" class="form-label small"></label>
+                <input asp-for="Headquarters" class="form-control form-control-sm" />
+                <span asp-validation-for="Headquarters" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Website" class="form-label small"></label>
+                <input asp-for="Website" class="form-control form-control-sm" placeholder="https://" />
+                <span asp-validation-for="Website" class="field-validation-error"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="LogoUrl" class="form-label small"></label>
+                <input asp-for="LogoUrl" class="form-control form-control-sm" placeholder="https://" />
+                <span asp-validation-for="LogoUrl" class="field-validation-error"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Description" class="form-label small"></label>
+                <textarea asp-for="Description" class="form-control form-control-sm" rows="3"></textarea>
+                <span asp-validation-for="Description" class="field-validation-error"></span>
+            </div>
+        </div>
+    </div>
+    <partial name="_FormFooter" />
+</form>

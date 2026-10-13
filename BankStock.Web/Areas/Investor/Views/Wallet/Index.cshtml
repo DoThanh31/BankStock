@@ -1,0 +1,75 @@
+@model WalletPageViewModel
+@{
+    ViewData["Title"] = Localizer["NavWallet"];
+    var summary = Model.Summary;
+    var q = Model.Transactions.Query;
+}
+
+<partial name="_InvestorNav" />
+
+<div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-3">
+    <div>
+        <h4 class="fw-bold mb-1"><i class="bi bi-wallet2 text-primary me-2"></i>@Localizer["WalletTitle"]</h4>
+        <p class="text-secondary small mb-0">@Localizer["WalletSubtitle"]</p>
+    </div>
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-lg-8">
+        <div class="row g-3 h-100">
+            <div class="col-md-4">
+                <div class="stock-card p-3 h-100">
+                    <div class="small text-secondary">@Localizer["AdminCashBalance"]</div>
+                    <div class="fs-4 fw-bold num-font stock-up" data-wallet="balance">@summary.Balance.ToString("N0")</div>
+                    <div class="small text-secondary">VNĐ</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stock-card p-3 h-100">
+                    <div class="small text-secondary">@Localizer["AdminBlockedBalance"]</div>
+                    <div class="fs-4 fw-bold num-font stock-ref" data-wallet="blockedBalance">@summary.BlockedBalance.ToString("N0")</div>
+                    <div class="small text-secondary">@Localizer["WalletBlockedHint"]</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stock-card p-3 h-100">
+                    <div class="small text-secondary">@Localizer["WalletTotalCash"]</div>
+                    <div class="fs-4 fw-bold num-font" data-wallet="total">@summary.Total.ToString("N0")</div>
+                    <div class="small text-secondary">VNĐ</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <partial name="_TransferForm" model="Model.Transfer" />
+    </div>
+</div>
+
+<h5 class="fw-bold mb-2">@Localizer["WalletHistory"]</h5>
+<form id="listFilterForm" class="stock-card filter-panel mb-3" method="get" asp-action="Index" role="search">
+    <div class="row g-3 align-items-end">
+        <div class="col-lg-4 col-md-6">
+            <label for="filterType" class="form-label small text-secondary">@Localizer["AdminTxType"]</label>
+            <select id="filterType" name="type" class="form-select form-select-sm">
+                <option value="" selected="@(q.Type is null)">@Localizer["FilterAll"]</option>
+                @foreach (var type in Enum.GetValues<WalletTransactionType>())
+                {
+                    <option value="@type" selected="@(q.Type == type)">@Localizer["Tx" + type]</option>
+                }
+            </select>
+        </div>
+        <div class="col-lg-4 d-none d-lg-block"></div>
+        <partial name="_FilterActions" model="q" />
+    </div>
+</form>
+
+<div id="listResults" aria-live="polite">
+    <partial name="_Transactions" model="Model.Transactions" />
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/ajax-list.js" asp-append-version="true"></script>
+    <script src="~/js/investor-wallet.js" asp-append-version="true"></script>
+}

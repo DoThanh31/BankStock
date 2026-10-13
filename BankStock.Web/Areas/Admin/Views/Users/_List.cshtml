@@ -1,0 +1,109 @@
+@model PagedListViewModel<UserAdminListItem, UserListQuery>
+@{
+    var items = Model.Items;
+    var currentUserId = ViewData["CurrentUserId"] as string;
+}
+
+<div class="stock-card">
+    <partial name="_ListHeader" model="@((items.TotalCount, items.FirstItemNumber, items.LastItemNumber, Model.Query.HasFilters))" />
+
+    <div class="table-responsive">
+        <table class="fintech-table">
+            <thead>
+                <tr>
+                    <th class="ps-3">@Localizer["FieldEmail"]</th>
+                    <th>@Localizer["FieldRole"]</th>
+                    <th>@Localizer["FieldStatus"]</th>
+                    <th class="text-end d-none d-md-table-cell">@Localizer["AdminWalletTotal"]</th>
+                    <th class="d-none d-lg-table-cell">@Localizer["AdminCreatedAt"]</th>
+                    <th class="text-end pe-3">@Localizer["ThAction"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in items.Items)
+                {
+                    var isSelf = user.Id == currentUserId;
+                    <tr>
+                        <td class="ps-3">
+                            <div class="fw-semibold">
+                                @user.FullName
+                                @if (isSelf)
+                                {
+                                    <span class="badge bg-primary-subtle text-primary-emphasis ms-1">@Localizer["AdminYou"]</span>
+                                }
+                            </div>
+                            <div class="small text-secondary">@user.Email</div>
+                        </td>
+                        <td>
+                            @foreach (var role in user.Roles)
+                            {
+                                <span class="badge @(role == AppRoles.Admin ? "bg-danger-subtle text-danger" : "bg-info-subtle text-info-emphasis") me-1">@Localizer["Role" + role]</span>
+                            }
+                        </td>
+                        <td>
+                            @if (!user.IsActive)
+                            {
+                                <span class="badge bg-danger-subtle text-danger"><i class="bi bi-lock-fill me-1"></i>@Localizer["UserStatusDisabled"]</span>
+                            }
+                            else if (user.IsLockedOut)
+                            {
+                                <span class="badge bg-warning-subtle text-warning-emphasis" title="@user.LockoutEnd?.ToLocalTime().ToString("g")"><i class="bi bi-hourglass-split me-1"></i>@Localizer["UserStatusLockedOut"]</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success-subtle text-success">@Localizer["UserStatusActive"]</span>
+                            }
+                        </td>
+                        <td class="text-end stock-num d-none d-md-table-cell">
+                            @if (user.WalletBalance is { } balance)
+                            {
+                                @((balance + (user.WalletBlockedBalance ?? 0)).ToString("N0"))
+                            }
+                            else
+                            {
+                                <span class="text-muted">—</span>
+                            }
+                        </td>
+                        <td class="small text-secondary d-none d-lg-table-cell">@user.CreatedAt.ToLocalTime().ToString("g")</td>
+                        <td class="text-end pe-3 text-nowrap">
+                            <button type="button" class="btn btn-outline-primary btn-sm py-0 px-2" title="@Localizer["AdminAssignRoles"]"
+                                    data-modal-url="@Url.Action("Roles", new { id = user.Id })">
+                                <i class="bi bi-person-gear"></i>
+                            </button>
+                            @if (!isSelf)
+                            {
+                                @if (user.IsActive && !user.IsLockedOut)
+                                {
+                                    <button type="button" class="btn btn-outline-danger btn-sm py-0 px-2" title="@Localizer["AdminLockUser"]"
+                                            data-confirm-post="@Url.Action("Lock", new { id = user.Id })"
+                                            data-confirm-text="@Localizer["ConfirmLockUser", user.Email]"
+                                            data-confirm-button="@Localizer["AdminLockUser"]">
+                                        <i class="bi bi-lock"></i>
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-outline-success btn-sm py-0 px-2" title="@Localizer["AdminUnlockUser"]"
+                                            data-confirm-post="@Url.Action("Unlock", new { id = user.Id })"
+                                            data-confirm-text="@Localizer["ConfirmUnlockUser", user.Email]"
+                                            data-confirm-button="@Localizer["AdminUnlockUser"]"
+                                            data-confirm-icon="question">
+                                        <i class="bi bi-unlock"></i>
+                                    </button>
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (items.TotalCount == 0)
+                {
+                    <partial name="_EmptyRow" model="6" />
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-end px-3 py-3">
+        <partial name="_Pagination" model="@(new PagerViewModel(items.PageIndex, items.TotalPages, page => Url.Action("Index", Model.Query.ToRouteValues(page))))" />
+    </div>
+</div>

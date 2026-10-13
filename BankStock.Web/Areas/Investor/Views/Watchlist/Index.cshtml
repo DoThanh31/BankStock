@@ -1,0 +1,49 @@
+@{
+    ViewData["Title"] = Localizer["NavWatchlist"];
+    ViewData["WatchlistSource"] = "vm.items";
+    ViewData["WatchlistRemove"] = "vm.remove";
+}
+
+<partial name="_InvestorNav" />
+
+@* ng-app chỉ bao khối này; bên trong chỉ có chuỗi resource tĩnh. *@
+<div ng-app="bankStockInvestor" ng-strict-di ng-controller="WatchlistController as vm" ng-cloak
+     data-watchlist-url="@Url.Content("~/api/v1/watchlist")"
+     data-stocks-url="@Url.Content("~/api/v1/stocks")"
+     data-trade-url="@Url.Action("Index", "Trade")"
+     data-detail-url="@Url.Action("Details", "Stocks", new { area = "", code = "__CODE__" })">
+
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-3">
+        <div>
+            <h4 class="fw-bold mb-1"><i class="bi bi-star text-warning me-2"></i>@Localizer["NavWatchlist"]</h4>
+            <p class="text-secondary small mb-0">@Localizer["WatchlistSubtitle"]</p>
+        </div>
+        <form class="d-flex gap-2" ng-submit="vm.add()" name="addForm" novalidate>
+            <label for="watchlistAdd" class="visually-hidden">@Localizer["FieldStockCode"]</label>
+            <select id="watchlistAdd" class="form-select form-select-sm" ng-model="vm.selectedCode" required>
+                <option value="">— @Localizer["WatchlistPick"] —</option>
+                <option ng-repeat="s in vm.availableStocks() track by s.stockCode" value="{{ s.stockCode }}">{{ s.stockCode }} · {{ s.bankShortName }}</option>
+            </select>
+            <button type="submit" class="btn btn-sm btn-primary text-nowrap" ng-disabled="!vm.selectedCode">
+                <i class="bi bi-plus-lg me-1"></i>@Localizer["WatchlistAdd"]
+            </button>
+        </form>
+    </div>
+
+    <div class="stock-card">
+        <div class="stock-card-header">
+            <div class="small text-secondary">{{ vm.items.length }} / @BankStock.Web.Services.TradingRules.MaxWatchlistItems</div>
+            <span class="spinner-border spinner-border-sm text-secondary" ng-show="vm.loading" role="status"></span>
+        </div>
+        <partial name="_WatchlistTable" />
+    </div>
+</div>
+
+@section Styles {
+    <style>[ng-cloak] { display: none !important; }</style>
+}
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/angular@1.8.3/angular.min.js"></script>
+    <script src="~/js/investor-app.js" asp-append-version="true"></script>
+}
