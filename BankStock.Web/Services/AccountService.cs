@@ -60,6 +60,18 @@ public class AccountService : IAccountService
         return (IdentityResult.Success, user);
     }
 
+    public async Task SetPreferredLanguageAsync(string userId, string culture, CancellationToken cancellationToken = default)
+    {
+        // Chỉ cập nhật một cột, không cần nạp entity; bỏ qua nếu giá trị không đổi.
+        var updated = await _context.Users
+            .Where(u => u.Id == userId && u.PreferredLanguage != culture)
+            .ExecuteUpdateAsync(s => s.SetProperty(u => u.PreferredLanguage, culture), cancellationToken);
+        if (updated > 0)
+        {
+            _logger.LogInformation("User {UserId} preferred language set to {Culture}.", userId, culture);
+        }
+    }
+
     public async Task<bool> EnsureWalletAsync(string userId, CancellationToken cancellationToken = default)
     {
         if (await _context.Wallets.AnyAsync(w => w.UserId == userId, cancellationToken))

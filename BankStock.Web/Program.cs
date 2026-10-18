@@ -6,11 +6,13 @@ using BankStock.Web.Filters;
 using BankStock.Web.Localization;
 using BankStock.Web.ModelBinding;
 using BankStock.Web.Models;
+using BankStock.Web.Security;
 using BankStock.Web.Services;
 using BankStock.Web.Validation;
 using Microsoft.AspNetCore.Identity;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
@@ -18,8 +20,18 @@ using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Production: cookie xác thực / session / antiforgery chỉ gửi qua HTTPS. Development chạy http://localhost nên theo request.
+var cookieSecurePolicy = builder.Environment.IsDevelopment() ? CookieSecurePolicy.SameAsRequest : CookieSecurePolicy.Always;
+
+// Không lộ tên web server trong header "Server".
+builder.WebHost.ConfigureKestrel(options => options.AddServerHeader = false);
+
 // Localization services
 builder.Services.AddLocalization();
+
+// Razor giữ nguyên chữ có dấu (tiếng Việt) thay vì mã hóa thành &#x...; — ký tự HTML đặc biệt (< > & ") vẫn luôn được escape.
+builder.Services.Configure<Microsoft.Extensions.WebEncoders.WebEncoderOptions>(options =>
+    options.TextEncoderSettings = new System.Text.Encodings.Web.TextEncoderSettings(System.Text.Unicode.UnicodeRanges.All));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews(options =>
@@ -31,6 +43,8 @@ builder.Services.AddControllersWithViews(options =>
         options.Filters.Add<LogActionFilter>();
         options.Filters.Add<GlobalExceptionFilter>();
         options.Filters.Add<PageSizeCookieFilter>();
+        // CSRF: mọi POST/PUT/DELETE của MVC lẫn API đều phải có token antiforgery (GET/HEAD/OPTIONS bỏ qua).
+        options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
     })
     .AddJsonOptions(options =>
     {
@@ -117,7 +131,7 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
     options.Cookie.SameSite = SameSiteMode.Lax;
-    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+    options.Cookie.SecurePolicy = cookieSecurePolicy;
     options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
 builder.Services.AddHttpContextAccessor();
@@ -181,7 +195,7 @@ builder.Services.Configure<SecurityStampValidatorOptions>(options =>
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.HttpOnly = true;
-    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+    options.Cookie.SecurePolicy = cookieSecurePolicy;
     options.Cookie.SameSite = SameSiteMode.Lax;
     // Mặc định cookie lấy PathBase (/en, /vi) làm Path; cố định "/" để đăng nhập dùng chung mọi tiền tố culture.
     options.Cookie.Path = AppCookies.RootPath;
@@ -208,7 +222,21 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 // Cookie antiforgery / TempData cũng mặc định theo PathBase → cố định "/" (xem UrlCultureMiddleware).
-builder.Services.AddAntiforgery(options => options.Cookie.Path = AppCookies.RootPath);
+builder.Services.AddAntiforgery(options =>
+{
+    options.Cookie.Path = AppCookies.RootPath;
+    options.Cookie.SecurePolicy = cookieSecurePolicy;
+});
+
+// HSTS (chỉ Production): trình duyệt nhớ chỉ dùng HTTPS trong 1 năm, kể cả subdomain.
+builder.Services.AddHsts(options =>
+{
+    options.MaxAge = TimeSpan.FromDays(365);
+    options.IncludeSubDomains = true;
+});
+
+// Rate limiting: đăng nhập / đăng ký / quên mật khẩu (theo IP) và /api (theo user hoặc IP).
+builder.Services.AddAppRateLimiting(builder.Configuration);
 builder.Services.Configure<Microsoft.AspNetCore.Mvc.CookieTempDataProviderOptions>(options => options.Cookie.Path = AppCookies.RootPath);
 
 var app = builder.Build();
@@ -216,6 +244,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 // Culture trên URL (/vi/..., /en/...): tách tiền tố thành PathBase trước mọi middleware khác.
 app.UseMiddleware<UrlCultureMiddleware>();
+
+// Header bảo mật (CSP, nosniff, X-Frame-Options...) cho mọi response, kể cả trang lỗi và file tĩnh.
+app.UseMiddleware<SecurityHeadersMiddleware>();
 
 // /api trả lỗi dạng ProblemDetails (JSON); trang MVC giữ trang lỗi HTML thân thiện.
 if (!app.Environment.IsDevelopment())
@@ -264,6 +295,8 @@ app.UseRouting();
 app.UseCors();
 
 app.UseAuthentication();
+// Sau authentication để giới hạn /api theo UserId; sau routing để đọc [EnableRateLimiting] của endpoint.
+app.UseRateLimiter();
 app.UseAuthorization();
 app.UseSession();
 

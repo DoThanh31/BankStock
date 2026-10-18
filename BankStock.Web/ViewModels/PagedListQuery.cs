@@ -15,7 +15,7 @@ public class PagedListQuery : IPageSizeQuery
     public const int MaxPageSize = 100;
     public static readonly int[] AllowedPageSizes = [10, 20, 50];
 
-    [StringLength(100)]
+    [StringLength(100, ErrorMessage = "ValMaxLength")]
     [Display(Name = "FieldSearch")]
     public string? Q { get; set; }
 

@@ -66,7 +66,7 @@
         <div class="d-flex flex-wrap align-items-center gap-2">
             <!-- Bank Group Filter -->
             <div class="btn-group filter-btn-group" role="group">
-                <button type="button" class="btn btn-outline-secondary active" data-group-filter="all">@Localizer["FilterAll"]</button>
+                <button type="button" class="btn btn-outline-secondary active" data-group-filter="all">@Localizer["FilterAllStocks"]</button>
                 <button type="button" class="btn btn-outline-secondary" data-group-filter="Big4">@Localizer["FilterBig4"]</button>
                 <button type="button" class="btn btn-outline-secondary" data-group-filter="PrivateJSC">@Localizer["FilterPrivate"]</button>
             </div>
@@ -172,7 +172,7 @@
                                 <a asp-controller="Stocks" asp-action="Details" asp-route-code="@stock.StockCode" class="btn btn-outline-primary btn-sm py-0 px-2" title="@Localizer["BtnDetail"]">
                                     <i class="bi bi-graph-up"></i>
                                 </a>
-                                <a href="#" class="btn btn-outline-success btn-sm py-0 px-2" title="TODO: Phase 5 (Đặt lệnh)">
+                                <a asp-area="Investor" asp-controller="Trade" asp-action="Index" asp-route-code="@stock.StockCode" class="btn btn-outline-success btn-sm py-0 px-2" title="@Localizer["BtnTrade"]">
                                     <i class="bi bi-cart-plus"></i>
                                 </a>
                             </div>
@@ -194,7 +194,7 @@
 
 <!-- Stock Market Color Convention Legend -->
 <div class="stock-legend">
-    <span class="fw-semibold text-primary-emphasis me-2"><i class="bi bi-palette me-1"></i>Quy ước màu sàn VN:</span>
+    <span class="fw-semibold text-primary-emphasis me-2"><i class="bi bi-palette me-1"></i>@Localizer["LegendTitle"]</span>
     <span class="legend-chip">
         <span class="legend-dot" style="background-color: var(--stock-ceil);"></span>
         <span class="stock-ceil">@Localizer["LegendCeiling"]</span>

@@ -136,6 +136,9 @@
     <value>Tìm mã CK hoặc tên ngân hàng (VCB, MBB, Techcombank...)</value>
   </data>
   <data name="FilterAll" xml:space="preserve">
+    <value>Tất cả</value>
+  </data>
+  <data name="FilterAllStocks" xml:space="preserve">
     <value>Tất cả mã</value>
   </data>
   <data name="FilterBig4" xml:space="preserve">
@@ -250,12 +253,6 @@
   </data>
   <data name="AboutBanksDesc" xml:space="preserve">
     <value>Hệ thống hỗ trợ theo dõi đầy đủ cả nhóm Ngân hàng Quốc doanh Big 4 (VCB, BID, CTG) và các Ngân hàng TMCP tư nhân năng động (TCB, MBB, VPB, ACB, STB, HDB, TPB).</value>
-  </data>
-  <data name="AboutTechTitle" xml:space="preserve">
-    <value>Công nghệ &amp; Kiến trúc</value>
-  </data>
-  <data name="AboutTechDesc" xml:space="preserve">
-    <value>Phát triển trên nền tảng .NET 8, ASP.NET Core MVC, Entity Framework Core 8, kiến trúc đa tầng (N-tier), bảo mật Identity với phân quyền chặt chẽ.</value>
   </data>
 
   <!-- Error Pages -->
@@ -478,6 +475,9 @@
     <value>Áp dụng</value>
   </data>
   <data name="ShowingRange" xml:space="preserve">
+    <value>Hiển thị {0}–{1} trên tổng {2}</value>
+  </data>
+  <data name="ShowingRangeStocks" xml:space="preserve">
     <value>Hiển thị {0}–{1} trên tổng {2} mã</value>
   </data>
   <data name="FiltersActive" xml:space="preserve">
@@ -503,6 +503,15 @@
   </data>
   <data name="ChartLoadError" xml:space="preserve">
     <value>Không tải được dữ liệu biểu đồ. Vui lòng thử lại.</value>
+  </data>
+  <data name="ChartTypeLabel" xml:space="preserve">
+    <value>Loại biểu đồ</value>
+  </data>
+  <data name="ChartTypeCandle" xml:space="preserve">
+    <value>Nến</value>
+  </data>
+  <data name="ChartTypeArea" xml:space="preserve">
+    <value>Miền</value>
   </data>
   <data name="KeyMetrics" xml:space="preserve">
     <value>Chỉ số cơ bản</value>
@@ -1541,5 +1550,113 @@
   </data>
   <data name="ConfirmClearDrafts" xml:space="preserve">
     <value>Xóa toàn bộ lệnh trong giỏ lệnh nháp?</value>
+  </data>
+  <data name="AboutBadge" xml:space="preserve">
+    <value>Giới thiệu nền tảng</value>
+  </data>
+  <data name="AboutStatBanks" xml:space="preserve">
+    <value>Ngân hàng hàng đầu</value>
+  </data>
+  <data name="AboutStatCapital" xml:space="preserve">
+    <value>Vốn ban đầu trải nghiệm</value>
+  </data>
+  <data name="AboutStatFee" xml:space="preserve">
+    <value>Phí giao dịch ưu đãi</value>
+  </data>
+  <data name="AboutStatSimulated" xml:space="preserve">
+    <value>Dữ liệu mô phỏng bảo mật</value>
+  </data>
+  <data name="LegendTitle" xml:space="preserve">
+    <value>Quy ước màu sàn VN:</value>
+  </data>
+  <data name="FooterAddress" xml:space="preserve">
+    <value>Hà Nội, Việt Nam</value>
+  </data>
+  <data name="FooterMarketStatus" xml:space="preserve">
+    <value>VN-Market: đang hoạt động (mô phỏng)</value>
+  </data>
+  <data name="NavToggle" xml:space="preserve">
+    <value>Mở / đóng menu</value>
+  </data>
+  <data name="SidebarToggle" xml:space="preserve">
+    <value>Mở / đóng thanh bên</value>
+  </data>
+  <data name="BreadcrumbLabel" xml:space="preserve">
+    <value>Đường dẫn trang</value>
+  </data>
+  <data name="ThemeSwitchToDark" xml:space="preserve">
+    <value>Chuyển sang chế độ Tối (Dark)</value>
+  </data>
+  <data name="ThemeSwitchToLight" xml:space="preserve">
+    <value>Chuyển sang chế độ Sáng (Light)</value>
+  </data>
+  <data name="LanguageSwitch" xml:space="preserve">
+    <value>Đổi ngôn ngữ</value>
+  </data>
+  <data name="Error429Title" xml:space="preserve">
+    <value>Quá nhiều yêu cầu</value>
+  </data>
+  <data name="Error429Message" xml:space="preserve">
+    <value>Bạn đã gửi quá nhiều yêu cầu trong thời gian ngắn. Vui lòng đợi khoảng một phút rồi thử lại.</value>
+  </data>
+  <data name="PrivacyTitle" xml:space="preserve">
+    <value>Quyền riêng tư &amp; cookie</value>
+  </data>
+  <data name="PrivacyIntro" xml:space="preserve">
+    <value>BankStock là hệ thống giả lập phục vụ học tập: không giao dịch tiền thật, không chia sẻ dữ liệu cho bên thứ ba. Mật khẩu được băm bằng ASP.NET Core Identity (PBKDF2), không lưu dạng văn bản.</value>
+  </data>
+  <data name="PrivacyCookiesTitle" xml:space="preserve">
+    <value>Cookie BankStock sử dụng</value>
+  </data>
+  <data name="ThCookieName" xml:space="preserve">
+    <value>Cookie</value>
+  </data>
+  <data name="ThCookiePurpose" xml:space="preserve">
+    <value>Mục đích</value>
+  </data>
+  <data name="ThCookieLifetime" xml:space="preserve">
+    <value>Thời hạn</value>
+  </data>
+  <data name="CookiePurposeAuth" xml:space="preserve">
+    <value>Duy trì phiên đăng nhập (HttpOnly, SameSite=Lax).</value>
+  </data>
+  <data name="CookiePurposeSession" xml:space="preserve">
+    <value>Mã phiên làm việc: mã cổ phiếu vừa xem, bộ lọc danh sách, giỏ lệnh nháp (dữ liệu lưu phía server).</value>
+  </data>
+  <data name="CookiePurposeAntiforgery" xml:space="preserve">
+    <value>Chống giả mạo yêu cầu (CSRF) cho mọi form và yêu cầu AJAX ghi dữ liệu.</value>
+  </data>
+  <data name="CookiePurposeCulture" xml:space="preserve">
+    <value>Ngôn ngữ giao diện đã chọn.</value>
+  </data>
+  <data name="CookiePurposeTheme" xml:space="preserve">
+    <value>Chế độ giao diện Tối / Sáng.</value>
+  </data>
+  <data name="CookiePurposePageSize" xml:space="preserve">
+    <value>Số dòng mỗi trang đã chọn ở các bảng danh sách.</value>
+  </data>
+  <data name="CookiePurposeRememberEmail" xml:space="preserve">
+    <value>Email đăng nhập (chỉ khi chọn "Ghi nhớ đăng nhập").</value>
+  </data>
+  <data name="CookieLifetimeAuth" xml:space="preserve">
+    <value>Đến khi đóng trình duyệt (tối đa 2 giờ không hoạt động); 14 ngày nếu ghi nhớ đăng nhập</value>
+  </data>
+  <data name="CookieLifetimeSession" xml:space="preserve">
+    <value>30 phút không hoạt động</value>
+  </data>
+  <data name="CookieLifetimeBrowser" xml:space="preserve">
+    <value>Đến khi đóng trình duyệt</value>
+  </data>
+  <data name="CookieLifetimeYear" xml:space="preserve">
+    <value>1 năm</value>
+  </data>
+  <data name="CookieLifetimeRemember" xml:space="preserve">
+    <value>14 ngày</value>
+  </data>
+  <data name="PrivacySecurityNote" xml:space="preserve">
+    <value>Các trang được bảo vệ bằng HTTPS/HSTS, Content-Security-Policy, chống CSRF và giới hạn tần suất đăng nhập / API.</value>
+  </data>
+  <data name="NavInvestor" xml:space="preserve">
+    <value>Đầu tư</value>
   </data>
 </root>

@@ -16,7 +16,7 @@
 <form id="listFilterForm" class="stock-card filter-panel mb-3" method="get" asp-action="Index" role="search">
     <div class="row g-3 align-items-end">
         <partial name="_OrderFilterFields" model="@((Model.Query, Model.StockOptions))" />
-        <div class="col-lg-3 d-none d-lg-block"></div>
+        <div class="col-lg-2 d-none d-lg-block"></div>
         <partial name="_FilterActions" model="Model.Query" />
     </div>
 </form>

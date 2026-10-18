@@ -7,7 +7,7 @@
 <div class="col-lg-2 col-md-6 col-6">
     <label for="filterStock" class="form-label small text-secondary">@Localizer["FieldStockCode"]</label>
     <select id="filterStock" name="stockId" class="form-select form-select-sm">
-        <option value="" selected="@(q.StockId is null)">@Localizer["FilterAll"]</option>
+        <option value="" selected="@(q.StockId is null)">@Localizer["FilterAllStocks"]</option>
         @foreach (var stock in Model.StockOptions)
         {
             <option value="@stock.Id" selected="@(q.StockId == stock.Id)">@stock.StockCode</option>
@@ -24,7 +24,7 @@
         }
     </select>
 </div>
-<div class="col-lg-1 col-md-3 col-6">
+<div class="col-lg-2 col-md-3 col-6">
     <label for="filterType" class="form-label small text-secondary">@Localizer["FieldOrderType"]</label>
     <select id="filterType" name="type" class="form-select form-select-sm">
         <option value="" selected="@(q.Type is null)">@Localizer["FilterAll"]</option>

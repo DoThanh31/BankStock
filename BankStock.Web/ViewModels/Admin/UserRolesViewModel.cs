@@ -5,7 +5,7 @@ namespace BankStock.Web.ViewModels.Admin;
 /// <summary>Form gán quyền: chỉ hai role cố định của hệ thống.</summary>
 public class UserRolesViewModel
 {
-    [Required]
+    [Required(ErrorMessage = "ValRequired")]
     public string UserId { get; set; } = string.Empty;
 
     public string Email { get; set; } = string.Empty;

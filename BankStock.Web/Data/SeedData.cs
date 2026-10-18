@@ -1,4 +1,5 @@
 using BankStock.Web.Models;
+using BankStock.Web.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -91,8 +92,8 @@ public static class SeedData
                         continue; 
 
                     decimal refPrice = currentPrice;
-                    decimal ceiling = refPrice * 1.07m;
-                    decimal floor = refPrice * 0.93m;
+                    // Trần/sàn theo biên độ của sàn và làm tròn theo bước giá (cùng quy tắc với khu Admin).
+                    var (ceiling, floor) = PriceRules.CalculateBand(stock.Exchange, refPrice);
 
                     decimal open = refPrice + random.Next(-500, 500);
                     if (open > ceiling) open = ceiling;

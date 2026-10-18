@@ -8,14 +8,15 @@ namespace BankStock.Web.Dtos;
 
 /// <summary>
 /// Body của POST /api/v1/orders. <c>Price</c> bắt buộc với lệnh Limit, bị bỏ qua với lệnh Market.
-/// Service kiểm tra lại toàn bộ (lô, biên độ giá, đủ tiền / cổ phiếu).
+/// Service kiểm tra lại toàn bộ (lô, biên độ giá, đủ tiền / cổ phiếu). <c>[Display]</c> dùng cùng khóa resource với
+/// <see cref="ViewModels.Investor.PlaceOrderViewModel"/> để lỗi validation của API hiện tên trường theo ngôn ngữ.
 /// </summary>
 public record PlaceOrderRequest(
-    [Required(ErrorMessage = "ValRequired"), RegularExpression("^[A-Za-z]{3}$", ErrorMessage = "ValStockCode")] string StockCode,
-    [EnumDataType(typeof(OrderType), ErrorMessage = "ValSelectRequired")] OrderType Type,
-    [EnumDataType(typeof(OrderMode), ErrorMessage = "ValSelectRequired")] OrderMode Mode,
-    [Range(TradingRules.LotSize, TradingRules.MaxOrderQuantity, ErrorMessage = "ValQuantityRange"), LotSize(TradingRules.LotSize, ErrorMessage = "ValLotSize")] int Quantity,
-    [Range(1, 10_000_000, ErrorMessage = "ValRange")] decimal? Price) : IValidatableObject
+    [Display(Name = "FieldStockCode"), Required(ErrorMessage = "ValRequired"), RegularExpression("^[A-Za-z]{3}$", ErrorMessage = "ValStockCode")] string StockCode,
+    [Display(Name = "FieldOrderType"), EnumDataType(typeof(OrderType), ErrorMessage = "ValSelectRequired")] OrderType Type,
+    [Display(Name = "FieldOrderMode"), EnumDataType(typeof(OrderMode), ErrorMessage = "ValSelectRequired")] OrderMode Mode,
+    [Display(Name = "FieldQuantity"), Range(TradingRules.LotSize, TradingRules.MaxOrderQuantity, ErrorMessage = "ValQuantityRange"), LotSize(TradingRules.LotSize, ErrorMessage = "ValLotSize")] int Quantity,
+    [Display(Name = "FieldOrderPrice"), Range(1, 10_000_000, ErrorMessage = "ValRange")] decimal? Price) : IValidatableObject
 {
     public PlaceOrderCommand ToCommand() =>
         new(StockCode.ToUpperInvariant(), Type, Mode, Quantity, Mode == OrderMode.Limit ? Price : null);

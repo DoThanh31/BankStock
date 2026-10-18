@@ -1,7 +1,9 @@
 using System.Security.Claims;
+using BankStock.Web.Security;
 using BankStock.Web.Services;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.Extensions.Localization;
 
 namespace BankStock.Web.Controllers.Api;
@@ -9,10 +11,12 @@ namespace BankStock.Web.Controllers.Api;
 /// <summary>
 /// Controller nền của REST API (/api/v1): JSON, lỗi trả <see cref="ProblemDetails"/>, CORS theo whitelist.
 /// Xác thực bằng cookie nên mọi thao tác ghi (POST/PUT/DELETE) bắt buộc header RequestVerificationToken (chống CSRF).
+/// Giới hạn tần suất theo policy <see cref="RateLimitPolicies.Api"/> (429 + ProblemDetails khi vượt).
 /// </summary>
 [ApiController]
 [AutoValidateAntiforgeryToken]
 [EnableCors(ApiDefaults.CorsPolicy)]
+[EnableRateLimiting(RateLimitPolicies.Api)]
 [Produces("application/json")]
 public abstract class ApiControllerBase : ControllerBase
 {

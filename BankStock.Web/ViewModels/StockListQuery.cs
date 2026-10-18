@@ -19,7 +19,7 @@ public class StockListQuery : IPageSizeQuery
     public const int MaxPageSize = 100;
     public static readonly int[] AllowedPageSizes = [5, 10, 20];
 
-    [StringLength(50)]
+    [StringLength(50, ErrorMessage = "ValMaxLength")]
     [Display(Name = "FieldSearch")]
     public string? Q { get; set; }
 
@@ -32,7 +32,7 @@ public class StockListQuery : IPageSizeQuery
     [Display(Name = "FilterCasaOver30")]
     public bool CasaOver30 { get; set; }
 
-    [Range(0, 100)]
+    [Range(0, 100, ErrorMessage = "ValRange")]
     [Display(Name = "FilterMinDividend")]
     public decimal? MinDividend { get; set; }
 
@@ -40,10 +40,10 @@ public class StockListQuery : IPageSizeQuery
 
     public SortDirection Dir { get; set; } = SortDirection.Asc;
 
-    [Range(1, int.MaxValue)]
+    [Range(1, int.MaxValue, ErrorMessage = "ValRange")]
     public int Page { get; set; } = 1;
 
-    [Range(1, MaxPageSize)]
+    [Range(1, MaxPageSize, ErrorMessage = "ValRange")]
     public int PageSize { get; set; } = DefaultPageSize;
 
     public bool HasFilters => !string.IsNullOrWhiteSpace(Q) || Group.HasValue || PeUnder10 || CasaOver30 || MinDividend.HasValue;

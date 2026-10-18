@@ -5,7 +5,7 @@ namespace BankStock.Web.ViewModels.Admin;
 public class AuditLogListQuery : PagedListQuery
 {
     // Không đặt tên "Action" vì trùng route value {action} của MVC.
-    [StringLength(100)]
+    [StringLength(100, ErrorMessage = "ValMaxLength")]
     [Display(Name = "FieldAuditAction")]
     public string? LogAction { get; set; }
 

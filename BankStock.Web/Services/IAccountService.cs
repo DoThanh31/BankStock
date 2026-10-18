@@ -15,4 +15,7 @@ public interface IAccountService
     /// Tạo ví + InitialGrant nếu user chưa có ví (vd. Admin gán thêm role Investor). Trả về true nếu vừa tạo.
     /// </summary>
     Task<bool> EnsureWalletAsync(string userId, CancellationToken cancellationToken = default);
+
+    /// <summary>Lưu ngôn ngữ ưa thích (vi-VN / en-US) vào hồ sơ để áp lại sau mỗi lần đăng nhập.</summary>
+    Task SetPreferredLanguageAsync(string userId, string culture, CancellationToken cancellationToken = default);
 }

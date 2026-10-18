@@ -18,7 +18,7 @@
         <div class="small text-secondary">
             @if (stocks.TotalCount > 0)
             {
-                @Localizer["ShowingRange", stocks.FirstItemNumber, stocks.LastItemNumber, stocks.TotalCount]
+                @Localizer["ShowingRangeStocks", stocks.FirstItemNumber, stocks.LastItemNumber, stocks.TotalCount]
             }
         </div>
         @if (q.HasFilters)

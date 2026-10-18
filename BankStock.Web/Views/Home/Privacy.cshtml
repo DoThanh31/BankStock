@@ -1,6 +1,42 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
+@{
+    ViewData["Title"] = Localizer["PrivacyTitle"];
+    var cookies = new[]
+    {
+        (Name: ".AspNetCore.Identity.Application", PurposeKey: "CookiePurposeAuth", LifetimeKey: "CookieLifetimeAuth"),
+        (Name: AppCookies.Session, PurposeKey: "CookiePurposeSession", LifetimeKey: "CookieLifetimeSession"),
+        (Name: ".AspNetCore.Antiforgery.*", PurposeKey: "CookiePurposeAntiforgery", LifetimeKey: "CookieLifetimeBrowser"),
+        (Name: ".AspNetCore.Culture", PurposeKey: "CookiePurposeCulture", LifetimeKey: "CookieLifetimeYear"),
+        (Name: AppCookies.Theme, PurposeKey: "CookiePurposeTheme", LifetimeKey: "CookieLifetimeYear"),
+        (Name: AppCookies.PageSize, PurposeKey: "CookiePurposePageSize", LifetimeKey: "CookieLifetimeYear"),
+        (Name: AppCookies.RememberEmail, PurposeKey: "CookiePurposeRememberEmail", LifetimeKey: "CookieLifetimeRemember")
+    };
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="stock-card p-4 p-lg-5">
+    <h1 class="h3 fw-bold mb-3"><i class="bi bi-shield-check text-primary me-2"></i>@Localizer["PrivacyTitle"]</h1>
+    <p class="text-secondary">@Localizer["PrivacyIntro"]</p>
+
+    <h2 class="h5 fw-bold mt-4 mb-3">@Localizer["PrivacyCookiesTitle"]</h2>
+    <div class="table-responsive">
+        <table class="fintech-table">
+            <thead>
+                <tr>
+                    <th class="ps-3">@Localizer["ThCookieName"]</th>
+                    <th>@Localizer["ThCookiePurpose"]</th>
+                    <th class="pe-3">@Localizer["ThCookieLifetime"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cookie in cookies)
+                {
+                    <tr>
+                        <td class="ps-3"><code>@cookie.Name</code></td>
+                        <td>@Localizer[cookie.PurposeKey]</td>
+                        <td class="pe-3 text-nowrap">@Localizer[cookie.LifetimeKey]</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <p class="text-secondary small mt-3 mb-0">@Localizer["PrivacySecurityNote"]</p>
+</div>

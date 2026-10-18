@@ -12,7 +12,7 @@
 
 <form id="listFilterForm" class="stock-card filter-panel mb-3" method="get" asp-action="Index" role="search">
     <div class="row g-3 align-items-end">
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-2 col-md-6">
             <label for="filterQ" class="form-label small text-secondary">@Localizer["FieldSearch"]</label>
             <input type="search" id="filterQ" name="q" value="@Model.Query.Q" maxlength="100" class="form-control form-control-sm"
                    placeholder="@Localizer["AdminOrderSearchPlaceholder"]" autocomplete="off" />

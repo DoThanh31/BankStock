@@ -8,7 +8,6 @@
 
     var requestCulture = Context.Features.Get<IRequestCultureFeature>();
     var currentCulture = requestCulture?.RequestCulture.UICulture.Name ?? "vi-VN";
-    var returnUrl = string.Concat(Context.Request.Path, Context.Request.QueryString);
     var currentController = ViewContext.RouteData.Values["controller"] as string;
     string NavActive(string controller) => string.Equals(controller, currentController, StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
 }
@@ -20,19 +19,11 @@
     <title>@ViewData["Title"] - @Localizer["AdminDashboard"] - BankStock</title>
     
     <!-- Zero-flash theme bootstrapper -->
-    <script>
-        (function() {
-            var match = document.cookie.match(/(?:^|; )theme=([^;]*)/);
-            var theme = match ? decodeURIComponent(match[1]) : '@currentTheme';
-            if (theme !== 'light' && theme !== 'dark') theme = 'dark';
-            document.documentElement.setAttribute('data-bs-theme', theme);
-            document.documentElement.setAttribute('data-theme', theme);
-        })();
-    </script>
+    <script src="~/js/theme-init.js" asp-append-version="true"></script>
 
     <!-- Bootstrap 5 & Bootstrap Icons -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" integrity="sha384-XGjxtQfXaH2tnPFa9x+ruJTuLE3Aa6LhHSWRr1XeTyhezb4abCG4ccI5AkVDxqC+" crossorigin="anonymous" />
     
     <!-- Base Theme & Admin CSS -->
     <link rel="stylesheet" href="~/css/theme.css" asp-append-version="true" />
@@ -131,7 +122,7 @@
             <!-- Topbar -->
             <header class="admin-topbar">
                 <div class="d-flex align-items-center gap-3">
-                    <button class="btn btn-sm btn-outline-secondary d-lg-none" id="sidebarToggleBtn" type="button" aria-label="Toggle Sidebar">
+                    <button class="btn btn-sm btn-outline-secondary d-lg-none" id="sidebarToggleBtn" type="button" aria-label="@Localizer["SidebarToggle"]">
                         <i class="bi bi-list fs-5"></i>
                     </button>
                     <span class="fw-bold d-none d-sm-inline-block">@ViewData["Title"]</span>
@@ -139,32 +130,14 @@
 
                 <div class="d-flex align-items-center gap-2">
                     <!-- Theme Toggle -->
-                    <button type="button" class="btn-theme-toggle" data-action="toggle-theme" title="@Localizer["NavThemeToggle"]">
+                    <button type="button" class="btn-theme-toggle" data-action="toggle-theme" title="@Localizer["NavThemeToggle"]"
+                            data-title-to-dark="@Localizer["ThemeSwitchToDark"]" data-title-to-light="@Localizer["ThemeSwitchToLight"]">
                         <i class="bi bi-sun-fill"></i>
                     </button>
 
                     <!-- Language Selector -->
-                    <form asp-area="" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" class="d-inline">
-                        @Html.AntiForgeryToken()
-                        <div class="dropdown">
-                            <button class="btn btn-lang-selector dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-translate me-1"></i>
-                                @(currentCulture.StartsWith("vi") ? "VI" : "EN")
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end shadow-sm">
-                                <li>
-                                    <button type="submit" name="culture" value="vi-VN" class="dropdown-item @(currentCulture.StartsWith("vi") ? "active" : "")">
-                                        🇻🇳 @Localizer["LanguageVi"]
-                                    </button>
-                                </li>
-                                <li>
-                                    <button type="submit" name="culture" value="en-US" class="dropdown-item @(currentCulture.StartsWith("en") ? "active" : "")">
-                                        🇬🇧 @Localizer["LanguageEn"]
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                    </form>
+
+                    <partial name="_Language" />
 
                     <!-- Admin Profile Dropdown -->
                     <div class="dropdown ms-2">
@@ -213,7 +186,7 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/js/validation-extensions.js" asp-append-version="true"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.all.min.js" integrity="sha384-YB/DdIkloKoRpclWB8bNcYXWakt57USgtQPDzvnIDHYU0lasD5eWlXVo1S4ODukY" crossorigin="anonymous"></script>
     <script src="~/js/theme.js" asp-append-version="true"></script>
     <script src="~/js/admin.js" asp-append-version="true"></script>
     <script src="~/js/ui-common.js" asp-append-version="true"></script>

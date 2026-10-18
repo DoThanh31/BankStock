@@ -6,7 +6,7 @@
     const decimal billion = 1_000_000_000m;
 }
 
-<nav aria-label="breadcrumb" class="mb-3">
+<nav aria-label="@Localizer["BreadcrumbLabel"]" class="mb-3">
     <ol class="breadcrumb small mb-0">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">@Localizer["NavPriceBoard"]</a></li>
         <li class="breadcrumb-item"><a asp-controller="Stocks" asp-action="Index">@Localizer["StockListTitle"]</a></li>
@@ -83,11 +83,17 @@
         <div class="stock-card h-100">
             <div class="stock-card-header">
                 <h2 class="h6 fw-bold mb-0"><i class="bi bi-bar-chart-line text-primary me-2"></i>@Localizer["PriceChartTitle"]</h2>
-                <div class="btn-group btn-group-sm filter-btn-group" role="group" aria-label="@Localizer["PriceChartTitle"]" id="timeframeTabs">
-                    @foreach (var tf in PriceTimeframes.Codes)
-                    {
-                        <button type="button" class="btn btn-outline-secondary @(tf == PriceTimeframes.Default ? "active" : "")" data-timeframe="@tf" aria-pressed="@(tf == PriceTimeframes.Default ? "true" : "false")">@tf</button>
-                    }
+                <div class="chart-toolbar d-flex flex-wrap gap-2">
+                    <div class="btn-group btn-group-sm filter-btn-group" role="group" aria-label="@Localizer["ChartTypeLabel"]" id="chartTypeTabs">
+                        <button type="button" class="btn btn-outline-secondary active" data-chart-type="candle" aria-pressed="true"><i class="bi bi-bar-chart-fill me-1"></i>@Localizer["ChartTypeCandle"]</button>
+                        <button type="button" class="btn btn-outline-secondary" data-chart-type="area" aria-pressed="false"><i class="bi bi-graph-up me-1"></i>@Localizer["ChartTypeArea"]</button>
+                    </div>
+                    <div class="btn-group btn-group-sm filter-btn-group" role="group" aria-label="@Localizer["PriceChartTitle"]" id="timeframeTabs">
+                        @foreach (var tf in PriceTimeframes.Codes)
+                        {
+                            <button type="button" class="btn btn-outline-secondary @(tf == PriceTimeframes.Default ? "active" : "")" data-timeframe="@tf" aria-pressed="@(tf == PriceTimeframes.Default ? "true" : "false")">@tf</button>
+                        }
+                    </div>
                 </div>
             </div>
             <div class="p-2 p-lg-3">
@@ -176,7 +182,7 @@
                 <div><dt>@Localizer["BankFounded"]</dt><dd class="num-font">@(Model.Founded?.ToString() ?? "—")</dd></div>
                 <div><dt>@Localizer["BankHeadquarters"]</dt><dd>@(Model.Headquarters ?? "—")</dd></div>
                 <div>
-                    <dt>Website</dt>
+                    <dt>@Localizer["FieldWebsite"]</dt>
                     <dd>
                         @if (Uri.TryCreate(Model.Website, UriKind.Absolute, out var site) && (site.Scheme == Uri.UriSchemeHttp || site.Scheme == Uri.UriSchemeHttps))
                         {
@@ -198,7 +204,7 @@
 </div>
 
 @section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js" integrity="sha384-stKllnUqA9AD0gsKCuUtf5XlqAW7PwIgDagoNsTWkjkBmJ/GZ/uHTgEBxdLV2VSK" crossorigin="anonymous"></script>
     <script src="~/js/stock-detail.js" asp-append-version="true"></script>
     <script src="~/js/watchlist-toggle.js" asp-append-version="true"></script>
 }

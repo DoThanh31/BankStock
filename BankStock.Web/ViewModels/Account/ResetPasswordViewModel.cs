@@ -23,6 +23,6 @@ public class ResetPasswordViewModel
     [Display(Name = "FieldConfirmPassword")]
     public string ConfirmPassword { get; set; } = string.Empty;
 
-    [Required]
+    [Required(ErrorMessage = "ValRequired")]
     public string Code { get; set; } = string.Empty;
 }

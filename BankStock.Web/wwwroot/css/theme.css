@@ -532,6 +532,10 @@ main {
         flex-direction: column;
         align-items: stretch;
     }
+    /* Nhóm "Nến | Miền" và 1D/1W/1M/1Y xếp chồng, mỗi nhóm giãn hết chiều ngang */
+    .chart-toolbar {
+        flex-direction: column;
+    }
     .fintech-table thead th,
     .fintech-table tbody td {
         padding: 0.5rem 0.45rem;
@@ -829,4 +833,25 @@ main {
 .allocation-chart {
     position: relative;
     height: 300px;
+}
+
+/* AngularJS chạy chế độ ng-csp (không tự chèn <style>) nên khai báo ng-cloak ở đây. */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], .ng-cloak, .ng-hide:not(.ng-hide-animate) {
+    display: none !important;
+}
+
+/* Navbar: nhãn menu không xuống dòng; ở lg (992–1199px) rút gọn email người dùng để menu không tràn ngang. */
+.fintech-nav-link {
+    white-space: nowrap;
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .nav-user-name {
+        display: inline-block;
+        max-width: 9rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        vertical-align: bottom;
+    }
 }

@@ -2,12 +2,15 @@ using System.Globalization;
 using System.Security.Claims;
 using System.Text;
 using BankStock.Web.Dtos;
+using BankStock.Web.Localization;
 using BankStock.Web.Models;
+using BankStock.Web.Security;
 using BankStock.Web.Services;
 using BankStock.Web.ViewModels.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Localization;
 
@@ -69,6 +72,7 @@ public class AccountController : Controller
     }
 
     [HttpPost]
+    [EnableRateLimiting(RateLimitPolicies.Auth)]
     [AllowAnonymous]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl, CancellationToken cancellationToken)
@@ -100,6 +104,8 @@ public class AccountController : Controller
             await _auditLog.LogAsync("Login", user.Id, nameof(ApplicationUser), user.Id, null, cancellationToken);
             StartFreshSession();
             RememberLoginEmail(model);
+            // Ngôn ngữ đã chọn ở lần trước (lưu trong hồ sơ) được áp lại cho trình duyệt này.
+            CultureCookie.Write(HttpContext, user.PreferredLanguage);
 
             if (string.IsNullOrEmpty(returnUrl) && await _userManager.IsInRoleAsync(user, AppRoles.Admin))
             {
@@ -133,6 +139,7 @@ public class AccountController : Controller
     }
 
     [HttpPost]
+    [EnableRateLimiting(RateLimitPolicies.Auth)]
     [AllowAnonymous]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Register(RegisterViewModel model, CancellationToken cancellationToken)
@@ -174,6 +181,7 @@ public class AccountController : Controller
     public IActionResult ForgotPassword() => View(new ForgotPasswordViewModel());
 
     [HttpPost]
+    [EnableRateLimiting(RateLimitPolicies.Auth)]
     [AllowAnonymous]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model, CancellationToken cancellationToken)
@@ -225,6 +233,7 @@ public class AccountController : Controller
     }
 
     [HttpPost]
+    [EnableRateLimiting(RateLimitPolicies.Auth)]
     [AllowAnonymous]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model, CancellationToken cancellationToken)

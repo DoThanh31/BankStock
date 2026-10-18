@@ -7,7 +7,7 @@
 <partial name="_InvestorNav" />
 
 @* ng-app chỉ bao khối này; bên trong chỉ có chuỗi resource tĩnh. *@
-<div ng-app="bankStockInvestor" ng-strict-di ng-controller="WatchlistController as vm" ng-cloak
+<div ng-app="bankStockInvestor" ng-strict-di ng-csp ng-controller="WatchlistController as vm" ng-cloak
      data-watchlist-url="@Url.Content("~/api/v1/watchlist")"
      data-stocks-url="@Url.Content("~/api/v1/stocks")"
      data-trade-url="@Url.Action("Index", "Trade")"
@@ -44,6 +44,6 @@
 }
 
 @section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/angular@1.8.3/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/angular@1.8.3/angular.min.js" integrity="sha384-quGekMf1ic6tIOn1GgLl0Pzra4ZkFyTcaDW3hZRjORqPQe3HnTKGl+lNPpuh7Lwv" crossorigin="anonymous"></script>
     <script src="~/js/investor-app.js" asp-append-version="true"></script>
 }

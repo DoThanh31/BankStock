@@ -1,16 +1,16 @@
 @model BankStock.Web.Models.ErrorViewModel
 @{
     var statusCode = Model.StatusCode ?? 404;
-    var is404 = statusCode == 404;
-    var is500 = statusCode == 500;
-    
-    var title = is404 
-        ? Localizer["Error404Title"].Value 
-        : (is500 ? Localizer["Error500Title"].Value : Localizer["ErrorDefaultTitle"].Value);
-    
-    var message = is404 
-        ? Localizer["Error404Message"].Value 
-        : (is500 ? Localizer["Error500Message"].Value : Localizer["ErrorDefaultMessage"].Value);
+    // Mã có thông báo riêng (404, 429, 500); mã khác dùng thông báo chung.
+    var (titleKey, messageKey) = statusCode switch
+    {
+        404 => ("Error404Title", "Error404Message"),
+        429 => ("Error429Title", "Error429Message"),
+        500 => ("Error500Title", "Error500Message"),
+        _ => ("ErrorDefaultTitle", "ErrorDefaultMessage")
+    };
+    var title = Localizer[titleKey].Value;
+    var message = Localizer[messageKey].Value;
 
     ViewData["Title"] = $"{statusCode} - {title}";
 }

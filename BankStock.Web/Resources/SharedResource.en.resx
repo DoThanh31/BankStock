@@ -136,7 +136,10 @@
     <value>Search ticker or bank name (VCB, MBB, Techcombank...)</value>
   </data>
   <data name="FilterAll" xml:space="preserve">
-    <value>All Tickers</value>
+    <value>All</value>
+  </data>
+  <data name="FilterAllStocks" xml:space="preserve">
+    <value>All tickers</value>
   </data>
   <data name="FilterBig4" xml:space="preserve">
     <value>Big 4 State-owned</value>
@@ -250,12 +253,6 @@
   </data>
   <data name="AboutBanksDesc" xml:space="preserve">
     <value>Full coverage of Big 4 state-owned banks (VCB, BID, CTG) as well as leading private joint-stock commercial banks (TCB, MBB, VPB, ACB, STB, HDB, TPB).</value>
-  </data>
-  <data name="AboutTechTitle" xml:space="preserve">
-    <value>Technology &amp; Architecture</value>
-  </data>
-  <data name="AboutTechDesc" xml:space="preserve">
-    <value>Engineered with .NET 8, ASP.NET Core MVC, Entity Framework Core 8, N-tier architecture, robust ASP.NET Identity with granular role authorization.</value>
   </data>
 
   <!-- Error Pages -->
@@ -478,6 +475,9 @@
     <value>Apply</value>
   </data>
   <data name="ShowingRange" xml:space="preserve">
+    <value>Showing {0}–{1} of {2}</value>
+  </data>
+  <data name="ShowingRangeStocks" xml:space="preserve">
     <value>Showing {0}–{1} of {2} stocks</value>
   </data>
   <data name="FiltersActive" xml:space="preserve">
@@ -503,6 +503,15 @@
   </data>
   <data name="ChartLoadError" xml:space="preserve">
     <value>Could not load chart data. Please try again.</value>
+  </data>
+  <data name="ChartTypeLabel" xml:space="preserve">
+    <value>Chart type</value>
+  </data>
+  <data name="ChartTypeCandle" xml:space="preserve">
+    <value>Candles</value>
+  </data>
+  <data name="ChartTypeArea" xml:space="preserve">
+    <value>Area</value>
   </data>
   <data name="KeyMetrics" xml:space="preserve">
     <value>Key metrics</value>
@@ -1541,5 +1550,113 @@
   </data>
   <data name="ConfirmClearDrafts" xml:space="preserve">
     <value>Remove all draft orders?</value>
+  </data>
+  <data name="AboutBadge" xml:space="preserve">
+    <value>About the platform</value>
+  </data>
+  <data name="AboutStatBanks" xml:space="preserve">
+    <value>Leading banks</value>
+  </data>
+  <data name="AboutStatCapital" xml:space="preserve">
+    <value>Starting virtual capital</value>
+  </data>
+  <data name="AboutStatFee" xml:space="preserve">
+    <value>Low trading fee</value>
+  </data>
+  <data name="AboutStatSimulated" xml:space="preserve">
+    <value>Simulated, secure data</value>
+  </data>
+  <data name="LegendTitle" xml:space="preserve">
+    <value>Vietnam exchange colour code:</value>
+  </data>
+  <data name="FooterAddress" xml:space="preserve">
+    <value>Hanoi, Vietnam</value>
+  </data>
+  <data name="FooterMarketStatus" xml:space="preserve">
+    <value>VN-Market: online (simulated)</value>
+  </data>
+  <data name="NavToggle" xml:space="preserve">
+    <value>Toggle navigation</value>
+  </data>
+  <data name="SidebarToggle" xml:space="preserve">
+    <value>Toggle sidebar</value>
+  </data>
+  <data name="BreadcrumbLabel" xml:space="preserve">
+    <value>Breadcrumb</value>
+  </data>
+  <data name="ThemeSwitchToDark" xml:space="preserve">
+    <value>Switch to dark mode</value>
+  </data>
+  <data name="ThemeSwitchToLight" xml:space="preserve">
+    <value>Switch to light mode</value>
+  </data>
+  <data name="LanguageSwitch" xml:space="preserve">
+    <value>Change language</value>
+  </data>
+  <data name="Error429Title" xml:space="preserve">
+    <value>Too many requests</value>
+  </data>
+  <data name="Error429Message" xml:space="preserve">
+    <value>You have sent too many requests in a short time. Please wait about a minute and try again.</value>
+  </data>
+  <data name="PrivacyTitle" xml:space="preserve">
+    <value>Privacy &amp; cookies</value>
+  </data>
+  <data name="PrivacyIntro" xml:space="preserve">
+    <value>BankStock is a simulation built for learning: no real money is traded and no data is shared with third parties. Passwords are hashed by ASP.NET Core Identity (PBKDF2) and never stored in plain text.</value>
+  </data>
+  <data name="PrivacyCookiesTitle" xml:space="preserve">
+    <value>Cookies used by BankStock</value>
+  </data>
+  <data name="ThCookieName" xml:space="preserve">
+    <value>Cookie</value>
+  </data>
+  <data name="ThCookiePurpose" xml:space="preserve">
+    <value>Purpose</value>
+  </data>
+  <data name="ThCookieLifetime" xml:space="preserve">
+    <value>Lifetime</value>
+  </data>
+  <data name="CookiePurposeAuth" xml:space="preserve">
+    <value>Keeps you signed in (HttpOnly, SameSite=Lax).</value>
+  </data>
+  <data name="CookiePurposeSession" xml:space="preserve">
+    <value>Session id: recently viewed stocks, list filters, draft orders (data is stored on the server).</value>
+  </data>
+  <data name="CookiePurposeAntiforgery" xml:space="preserve">
+    <value>Cross-site request forgery (CSRF) protection for every form and AJAX write request.</value>
+  </data>
+  <data name="CookiePurposeCulture" xml:space="preserve">
+    <value>Your selected interface language.</value>
+  </data>
+  <data name="CookiePurposeTheme" xml:space="preserve">
+    <value>Dark / light theme.</value>
+  </data>
+  <data name="CookiePurposePageSize" xml:space="preserve">
+    <value>Rows per page you chose on list pages.</value>
+  </data>
+  <data name="CookiePurposeRememberEmail" xml:space="preserve">
+    <value>Your sign-in email (only when "Remember me" is checked).</value>
+  </data>
+  <data name="CookieLifetimeAuth" xml:space="preserve">
+    <value>Until the browser closes (max 2 hours idle); 14 days with "Remember me"</value>
+  </data>
+  <data name="CookieLifetimeSession" xml:space="preserve">
+    <value>30 minutes idle</value>
+  </data>
+  <data name="CookieLifetimeBrowser" xml:space="preserve">
+    <value>Until the browser closes</value>
+  </data>
+  <data name="CookieLifetimeYear" xml:space="preserve">
+    <value>1 year</value>
+  </data>
+  <data name="CookieLifetimeRemember" xml:space="preserve">
+    <value>14 days</value>
+  </data>
+  <data name="PrivacySecurityNote" xml:space="preserve">
+    <value>Pages are protected by HTTPS/HSTS, Content-Security-Policy, CSRF protection and rate limiting for sign-in and the API.</value>
+  </data>
+  <data name="NavInvestor" xml:space="preserve">
+    <value>Investing</value>
   </data>
 </root>

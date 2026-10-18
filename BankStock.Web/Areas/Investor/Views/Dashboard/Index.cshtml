@@ -4,8 +4,9 @@
 
 <partial name="_InvestorNav" />
 
-@* ng-app chỉ bao khối này; bên trong chỉ có chuỗi resource tĩnh, dữ liệu người dùng đi qua API + binding của AngularJS. *@
-<div ng-app="bankStockInvestor" ng-strict-di ng-controller="DashboardController as vm" ng-cloak
+@* ng-app chỉ bao khối này; bên trong chỉ có chuỗi resource tĩnh, dữ liệu người dùng đi qua API + binding của AngularJS.
+   ng-csp: AngularJS không dùng eval / không chèn <style> → tương thích Content-Security-Policy. *@
+<div ng-app="bankStockInvestor" ng-strict-di ng-csp ng-controller="DashboardController as vm" ng-cloak
      data-summary-url="@Url.Content("~/api/v1/portfolio/summary")"
      data-watchlist-url="@Url.Content("~/api/v1/watchlist")"
      data-trade-url="@Url.Action("Index", "Trade")"
@@ -113,7 +114,7 @@
 }
 
 @section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/angular@1.8.3/angular.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/angular@1.8.3/angular.min.js" integrity="sha384-quGekMf1ic6tIOn1GgLl0Pzra4ZkFyTcaDW3hZRjORqPQe3HnTKGl+lNPpuh7Lwv" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" integrity="sha384-9nhczxUqK87bcKHh20fSQcTGD4qq5GhayNYSYWqwBkINBhOfQLg/P5HG5lF1urn4" crossorigin="anonymous"></script>
     <script src="~/js/investor-app.js" asp-append-version="true"></script>
 }

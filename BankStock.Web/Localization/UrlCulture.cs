@@ -28,6 +28,10 @@ public static class UrlCulture
     public static string? SegmentOf(string? culture) =>
         CultureBySegment.FirstOrDefault(pair => string.Equals(pair.Value, culture, StringComparison.OrdinalIgnoreCase)).Key;
 
+    /// <summary>Tên chuẩn ("vi-VN"/"en-US") của culture được hỗ trợ (không phân biệt hoa thường); null nếu không hỗ trợ.</summary>
+    public static string? Canonical(string? culture) =>
+        SupportedCultures.FirstOrDefault(c => string.Equals(c, culture, StringComparison.OrdinalIgnoreCase));
+
     /// <summary>Culture lấy từ URL của request (null nếu URL không có tiền tố culture).</summary>
     public static string? FromRequest(HttpContext context) => context.Items[ItemKey] as string;
 }

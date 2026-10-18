@@ -1,0 +1,43 @@
+@using BankStock.Web.Localization
+@using Microsoft.AspNetCore.Diagnostics
+@using Microsoft.AspNetCore.Localization
+@* Nút đổi ngôn ngữ dùng chung (_Layout, _LayoutAdmin): POST SetLanguage (antiforgery) → ghi cookie, lưu hồ sơ nếu đã đăng nhập,
+   rồi quay lại đúng trang hiện tại (giữ query string; đang ở /en/... thì sang /vi/...). Không cần JavaScript. *@
+@{
+    var current = Context.Features.Get<IRequestCultureFeature>()?.RequestCulture.UICulture.Name ?? UrlCulture.DefaultCulture;
+    // Trang lỗi 404 (re-execute) thì quay lại URL gốc người dùng đã gõ, không phải /Home/StatusCodeError.
+    var reExecute = Context.Features.Get<IStatusCodeReExecuteFeature>();
+    var returnUrl = reExecute is null
+        ? string.Concat(Context.Request.Path, Context.Request.QueryString)
+        : string.Concat(reExecute.OriginalPath, reExecute.OriginalQueryString);
+    var languages = new[]
+    {
+        (Culture: "vi-VN", Code: "VI", Flag: "🇻🇳", NameKey: "LanguageVi"),
+        (Culture: "en-US", Code: "EN", Flag: "🇬🇧", NameKey: "LanguageEn")
+    };
+    var active = languages.FirstOrDefault(l => string.Equals(l.Culture, current, StringComparison.OrdinalIgnoreCase), languages[0]);
+}
+<form asp-area="" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" class="d-inline">
+    <div class="dropdown">
+        <button class="btn btn-lang-selector dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                title="@Localizer["LanguageSwitch"]" aria-label="@Localizer["LanguageSwitch"]: @Localizer[active.NameKey]">
+            <i class="bi bi-translate me-1"></i>@active.Code
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+            @foreach (var language in languages)
+            {
+                var isActive = language.Culture == active.Culture;
+                <li>
+                    <button type="submit" name="culture" value="@language.Culture" lang="@language.Culture"
+                            class="dropdown-item d-flex align-items-center gap-2 @(isActive ? "active" : "")" aria-current="@(isActive ? "true" : null)">
+                        <span aria-hidden="true">@language.Flag</span>@Localizer[language.NameKey]
+                        @if (isActive)
+                        {
+                            <i class="bi bi-check2 ms-auto" aria-hidden="true"></i>
+                        }
+                    </button>
+                </li>
+            }
+        </ul>
+    </div>
+</form>

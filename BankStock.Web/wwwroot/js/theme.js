@@ -39,10 +39,10 @@
             if (icon) {
                 if (theme === 'light') {
                     icon.className = 'bi bi-moon-stars-fill';
-                    btn.setAttribute('title', 'Chuyển sang chế độ Tối (Dark)');
+                    btn.setAttribute('title', btn.getAttribute('data-title-to-dark') || btn.title);
                 } else {
                     icon.className = 'bi bi-sun-fill';
-                    btn.setAttribute('title', 'Chuyển sang chế độ Sáng (Light)');
+                    btn.setAttribute('title', btn.getAttribute('data-title-to-light') || btn.title);
                 }
             }
         });
